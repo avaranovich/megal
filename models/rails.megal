@@ -1,0 +1,50 @@
+import mvc .
+// import stdlib.
+
+Language Ruby .
+Technology Rails .
+
+// Folder "http://101companies.org/resources/contributions/rails/app" .
+extern Folder app // BTW, folder ends with "app" .
+Folder models @ app .
+Folder views @ app .
+Folder controllers @ app .
+models partOf app .
+views partOf app .
+controllers partOf app .
+
+Checker URIendsWith . // One arg of type Folder, Another of type String
+(app, "app") conformsTo URIendsWith .
+(models, "models") conformsTo URIendsWith .
+...
+
+Language+ Ruby_design_pattern . // Set of sets???
+local Language Rails_MVC .
+Rails_MVC subsetOf Ruby .
+external Specification Rails_MVC_spec .
+Rails_MVC_spec representationOf Rails_MVC .
+app conformsTo Rails_MVC_spec .
+
+Ruby_design_pattern representationOf Design_pattern .
+Rails_MVC elementOf Ruby_design_pattern . // ???
+
+extern Artifact Rails_MVC_checker . // Argument is of type Folder
+Rails_MVC_checker representationOf Rails_MVC .
+app conformsTo Rails_MVC_checker .
+// models conformsTo Rails_model_checker .
+
+File+ mfiles @ app.
+File+ vfiles @ app.
+File+ cfiles @ app.
+mfiles shallowPartOf model.
+vfiles shallowPartOf view.
+cfiles shallowPartOf ctrlfiles.
+mfiles elementOf Ruby .
+vfiles elementOf Ruby .
+cfiles elementOf Ruby .
+
+File+ files @ app.
+files deepPartOf app .
+files elementOf Ruby .
+
+app dependsOn Ruby .

@@ -1,0 +1,3 @@
+Java : Language .
+extern JavaProgram : File .
+JavaProgram elementOf Java .

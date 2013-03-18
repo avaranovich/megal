@@ -1,0 +1,12 @@
+/* 
+
+An example with only intern(al) entities. 
+This means that resolution would never been carried out.
+In the example, this is not appropriate for Java as it is "globally" resolvable.
+Also, the "Java program" is better extern(al) to be resolved possibly later.
+
+*/
+
+intern Java : Language .
+intern "Java program" : File .
+"Java program" elementOf Java .

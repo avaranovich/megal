@@ -1,0 +1,12 @@
+/* 
+
+An example with only extern(al) entities. 
+This means that resolution would need to be carried out.
+In the example, this is not appropriate for Java as it is "globally" resolvable.
+However, the "Java program" is extern(al) for good; it needs resolution.
+
+*/
+
+extern Java : Language .
+extern "Java program" : File .
+"Java program" elementOf Java .
