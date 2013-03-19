@@ -26,7 +26,7 @@ public class EDecl extends Decl {
 	
 	/**
 	 * Lookups the entity for the entity declaration.
-	 * @return The entity assosiated with the given entity declaration.
+	 * @return The entity associated with the given entity declaration.
 	 */
 	public Entity getEntity(){
 		Entity entity = null;
