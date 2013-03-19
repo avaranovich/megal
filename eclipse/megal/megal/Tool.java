@@ -42,13 +42,27 @@ public class Tool {
 		}		
 	}
 	
+	private static void resolve(Model model, Log log){
+		new Resolution(model, log);
+	}
+	
 	public static void main(String[] args) throws IOException {
 		String home = args[0];
 		String input = args[1];
+		
+		//configuration file path
+		String config = args[3];
+		
+		// load the config file
+		// pululate the tool registry
+		ConfigRegistry registry = ConfigRegistry.fromFile(config);
+		
 		Model model = new Model();
 		Log log = new Log();
 		parse(home+File.separator+"megal"+File.separator+"prelude.megal",model,log);
 		parse(input,model,log);
+		
+		resolve(model, log);
 		
 		// Write log back next to input file
 		String output = input.replaceFirst(".megal", ".log");

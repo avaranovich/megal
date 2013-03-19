@@ -2,9 +2,8 @@ package megal.entities;
 
 import megal.model.EDecl;
 
-public class Concept extends Entity {
-
-	public Concept(EDecl edecl) {
+public class File extends Entity {
+	public File(EDecl edecl){
 		super(edecl);
 	}
 	

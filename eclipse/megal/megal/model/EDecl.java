@@ -33,7 +33,7 @@ public class EDecl extends Decl {
 			Object[] params = {this};
 			Class[] types = {this.getClass()};
 			try {
-				entity = (Entity)Class.forName(type.getName()).getConstructor(types).newInstance(params);
+				entity = (Entity)Class.forName("megal.entities." + type.getName()).getConstructor(types).newInstance(params);
 				
 			} catch (IllegalArgumentException e) {
 				e.printStackTrace();

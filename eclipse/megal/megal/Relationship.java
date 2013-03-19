@@ -29,6 +29,11 @@ public class Relationship {
 	 * as we may not know how to check the relationship.
 	 */
 	public boolean evaluate(EDecl first, EDecl second) {
+		//http://101companies.org/resources/languages/Java
+		//String res = second.getEntity().getResource(); 
+		
+		//  -> JavaChecker
+		//Tool tool = lookup(res);
 		return true;
 	}
 }

@@ -34,8 +34,8 @@ public abstract class Entity {
 		String base = "http://101companies.org/resources/";
 		String typeName = getEdecl().getType().getName();
 		
-		if (typeName == "Language") return base + "languages/" + getEdecl().getName();;
-		if (typeName == "Technology") return base + "technologies/" + getEdecl().getName();;
+		if (typeName.equals("Language")) return base + "languages/" + getEdecl().getName();;
+		if (typeName.equals("Technology")) return base + "technologies/" + getEdecl().getName();;
 		
 		return "";
 	}
