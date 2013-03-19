@@ -8,5 +8,5 @@ Also, the "Java program" is better extern(al) to be resolved possibly later.
 */
 
 intern Java : Language .
-intern "Java program" : File .
-"Java program" elementOf Java .
+intern JavaProgram : File .
+JavaProgram elementOf Java .

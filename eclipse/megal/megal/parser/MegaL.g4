@@ -37,17 +37,19 @@ edecl returns [EDecl d] :
     { Modifier m = null; }
 	( modifier { m = $modifier.m; } )? 
 	ename 
+	uqref
+	parent
 	':'
-	etype 
-	{ $d = new EDecl(m, $etype.t, $ename.n); }
+	etype
+	{ $d = new EDecl(m, $etype.t, $ename.n, $uqref.s, $parent.n); }
 	; 
 	
 // Relationship declarations
 rdecl returns [RDecl d]:
-	left=name 
-	ID 
-	right=name 
-	{ $d = new RDecl($ID.text, $left.n, $right.n); }
+	left=ename 
+	rname
+	right=ename 
+	{ $d = new RDecl($rname.n, $left.n, $right.n); }
 	;
 
 // Modifiers for entities
@@ -59,49 +61,63 @@ modifier returns [Modifier m] :
 // Entity types for entity declarations
 etype returns [EType t] :
 	{ EType.Cardinality c = EType.Cardinality.None; }
-	ID 
+	etypename
 	( '+' { c = EType.Cardinality.Plus; }
 	| '*' { c = EType.Cardinality.Star; }
 	)?
-	{ $t = new EType($ID.text, c); }
+	{ $t = new EType($etypename.n, c); }
 	;
 
-// Entity names are either IDs or STRINGs.
-ename returns [List<String> n] :
-	{ List<String> n = new LinkedList<String>(); }
-	n1=name
-	{ n.add($n1.n); }
+// Entity names
+ename returns [String n] :
+	ID { $n = $ID.text; }
+	;
+
+// Relationship names
+rname returns [String n] :
+	ID { $n = $ID.text; }
+	;
+
+// Entity type names
+etypename returns [String n] :
+	ID { $n = $ID.text; }
+	;
+
+// Unqualified references for entities
+uqref returns [String s] :
+	{ $s = null; }
+	(
+	'['
+	STRING { $s = $STRING.text.substring(1,$STRING.text.length()-2); }
+	']'
+	)?
+	;
+	
+// Parent context in entity declarations
+parent returns [String n] :
+	{ $n = null; }
 	(
 	'@'
-	n2=name
-	{ n.add($n2.n); }
-	)*
-	;
-
-// Names
-name returns [String n] :
-	(
-	  ID { $n = $ID.text; }
-	| STRING { $n = $STRING.text.substring(1,$STRING.text.length()-2); }
-	)
+	ename { $n = $ename.n; }
+	)?
 	;
 
 // Entity type declarations
 etdecl returns [ETDecl d] :
-	subtype=ID
+	subtype=etypename
 	'<'
-	supertype=ID
-	{ $d = new ETDecl($subtype.text, $supertype.text); } 
+	supertype=etypename
+	{ $d = new ETDecl($subtype.n, $supertype.n); } 
 	;
 
 // Relationship type declarations
 rtdecl returns [RTDecl d] :
-	r=ID
+	r=rname
 	'<'
-	arg1=ID
+	arg1=etypename
 	'*'
-	arg2=ID
-	{ $d = new RTDecl($r.text, $arg1.text, $arg2.text); } 
+	arg2=etypename
+	{ $d = new RTDecl($r.n, $arg1.n, $arg2.n); } 
 	;
 
 // IDs as in names of entity or relationship type

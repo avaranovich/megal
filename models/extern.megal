@@ -8,5 +8,5 @@ However, the "Java program" is extern(al) for good; it needs resolution.
 */
 
 extern Java : Language .
-extern "Java program" : File .
-"Java program" elementOf Java .
+extern JavaProgram : File .
+JavaProgram elementOf Java .

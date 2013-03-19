@@ -9,16 +9,22 @@ import megal.entities.Entity;
 public class EDecl extends Decl {
 	private Modifier modifier;
 	private EType type;
-	private List<String> name;
-	public EDecl(Modifier modifier, EType type, List<String> name) {
+	private String name;
+	private String uqref;
+	private String parent;
+	public EDecl(Modifier modifier, EType type, String name, String uqref, String parent) {
 		this.modifier = modifier;
 		this.type = type;
 		this.name = name;
+		this.uqref = uqref;
+		this.parent = parent;
 	}
 	public Modifier getModifier() { return modifier; }
 	public EType getType() { return type; }
-	public List<String> getName() { return name; }
-
+	public String getName() { return name; }
+	public String getUref() { return uqref; }
+	public String getParent() { return parent; }
+	
 	public Entity getEntity(){
 		Entity entity = null;
 		

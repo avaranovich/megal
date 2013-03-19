@@ -4,5 +4,6 @@ public enum ProblemCode {
 	undefinedEntity,
 	undefinedRelationship,
 	undefinedEntityType,
-	undefinedRelationshipType
+	undefinedRelationshipType,
+	doubleDefinition
 }
