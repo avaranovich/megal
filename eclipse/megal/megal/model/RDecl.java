@@ -1,15 +1,15 @@
 package megal.model;
 
 public class RDecl extends Decl {
-	private String name;
-	private String left;
-	private String right;
+	private RTRef rel;
+	private ERef left;
+	private ERef right;
 	public RDecl(String name, String left, String right) {
-		this.name = name;
-		this.left = left;
-		this.right = right;
+		this.rel = new RTRef(name);
+		this.left = new ERef(left);
+		this.right = new ERef(right);
 	}
-	public String getName() { return name; }
-	public String getLeft() { return left; }
-	public String getRight() { return right; }
+	public RTRef getRel() { return rel; }
+	public ERef getLeft() { return left; }
+	public ERef getRight() { return right; }
 }
