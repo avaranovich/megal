@@ -3,11 +3,9 @@ package megal.entities;
 import megal.Entity;
 import megal.model.EDecl;
 
-public class Language implements Entity {
+public class Language extends Entity {
 
-	public boolean tryResolve(EDecl entity) {
-		// TODO Auto-generated method stub
-		return false;
+	public Language(EDecl edecl) {
+		super(edecl);
 	}
-
 }

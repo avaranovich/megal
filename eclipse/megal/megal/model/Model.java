@@ -13,9 +13,13 @@ public class Model {
 			decls = new LinkedList<Decl>();
 		return decls;
 	}
+	
 	public void resolve(String entity, Object resource) {
-		// TODO
+		EDecl e = this.getEDecl(entity);
+		boolean inResolved = e.getEntity().resolve();
+		//TODO: check if it was successfully resolved
 	}
+	
 	public EDecl getEDecl(String name) {
 		// TODO
 		return null;

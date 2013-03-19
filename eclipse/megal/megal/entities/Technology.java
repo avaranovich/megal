@@ -3,11 +3,15 @@ package megal.entities;
 import megal.Entity;
 import megal.model.EDecl;
 
-public class Technology implements Entity {
+public class Technology extends Entity {
 
-	public boolean tryResolve(EDecl entity) {
-		// TODO Auto-generated method stub
-		return false;
+	public Technology(EDecl edecl) {
+		super(edecl);
 	}
-
+	
+	@Override
+	public boolean resolve(){
+		//TODO: add resolution code
+		return false;
+	}  
 }
