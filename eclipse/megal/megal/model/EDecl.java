@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.util.List;
 
-import megal.Entity;
+import megal.entities.Entity;
 
 public class EDecl extends Decl {
 	private Modifier modifier;

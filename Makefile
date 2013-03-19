@@ -22,7 +22,6 @@ test: build
 	make models/extern.tool
 	make models/intern.tool
 	make models/mvc.tool
-	make models/prelude.tool
 
 # Helper for ANTLR download
 ${antlrjar}:
@@ -56,6 +55,7 @@ ${tool}/megal/Tool.class: ${tool}/megal/parser/*.java Makefile download
 	java \
 		-cp "${tool}:${antlrjar}:${gsonjar}" \
 		megal.Tool \
+		${tool} \
 		$*.megal
 	diff $*.json $*.log
 

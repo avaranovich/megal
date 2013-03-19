@@ -13,10 +13,13 @@ import java.util.LinkedList;
 package megal.parser;
 }
 
-model returns [Model m] :
- { $m = new Model(); }
+@parser::members {
+	public Model root;
+}
+
+model :
  ( decl
-   { $m.getDecls().add($decl.d); }
+   { root.getDecls().add($decl.d); }
  )*
  ;
 

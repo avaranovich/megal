@@ -16,7 +16,7 @@ public class Model {
 	
 	public void resolve(String entity, Object resource) {
 		EDecl e = this.getEDecl(entity);
-		boolean inResolved = e.getEntity().resolve();
+		boolean isResolved = e.getEntity().resolve();
 		//TODO: check if it was successfully resolved
 	}
 	

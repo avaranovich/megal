@@ -1,4 +1,4 @@
-package megal;
+package megal.entities;
 
 import java.net.HttpURLConnection;
 import java.net.URI;

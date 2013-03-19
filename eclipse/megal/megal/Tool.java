@@ -1,15 +1,16 @@
 package megal;
 
+import megal.logging.Log;
 import megal.model.*;
 import megal.analysis.*;
 import megal.parser.MegaLMyLexer;
 import megal.parser.MegaLParser;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-
 import org.antlr.v4.runtime.*;
-
 import com.google.gson.Gson;
 
 /**
@@ -17,10 +18,8 @@ import com.google.gson.Gson;
  * Any sort of issue is to report with a non-zero exit code.
  */
 public class Tool {
-	public static void main(String[] args) throws IOException {
-		String input = args[0];
-		Log log = new Log();
-		Model m = null;
+	
+	public static void parse(String input, Model model, Log log) {
 		try {
 			try {
 				FileInputStream stream = new FileInputStream(input);
@@ -28,21 +27,28 @@ public class Tool {
 				MegaLMyLexer lexer = new MegaLMyLexer(antlr);
 				CommonTokenStream tokens = new CommonTokenStream(lexer);
 				MegaLParser parser = new MegaLParser(tokens);
-				MegaLParser.ModelContext ctx = parser.model();
+				parser.root = model;
+				parser.model();
 				log.lexerErrors += lexer.getNumberOfErrors();
 				log.parserErrors += parser.getNumberOfSyntaxErrors();
-				m = ctx.m;
-				if (m == null)
-					log.fatalErrors++;
 			} catch (IOException e) {
 				e.printStackTrace();
 				log.fatalErrors++;
 			}
-			TypeNames.check(m);
+			TypeNames.check(model,log);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.fatalErrors++;
-		}
+		}		
+	}
+	
+	public static void main(String[] args) throws IOException {
+		String home = args[0];
+		String input = args[1];
+		Model model = new Model();
+		Log log = new Log();
+		parse(home+File.separator+"megal"+File.separator+"prelude.megal",model,log);
+		parse(input,model,log);
 		
 		// Write log back next to input file
 		String output = input.replaceFirst(".megal", ".log");
