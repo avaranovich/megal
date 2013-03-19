@@ -1,7 +1,8 @@
 package megal;
 
-import megal.logging.Log;
 import megal.model.*;
+import megal.logging.Log;
+import static megal.Context.*;
 import megal.analysis.*;
 import megal.parser.MegaLMyLexer;
 import megal.parser.MegaLParser;
@@ -19,7 +20,7 @@ import com.google.gson.Gson;
  */
 public class Tool {
 	
-	public static void parse(String input, Model model, Log log) {
+	public static void parse(String input) {
 		try {
 			try {
 				FileInputStream stream = new FileInputStream(input);
@@ -27,10 +28,10 @@ public class Tool {
 				MegaLMyLexer lexer = new MegaLMyLexer(antlr);
 				CommonTokenStream tokens = new CommonTokenStream(lexer);
 				MegaLParser parser = new MegaLParser(tokens);
-				parser.root = model;
+				parser.root = Context.model;
 				parser.model();
-				log.lexerErrors += lexer.getNumberOfErrors();
-				log.parserErrors += parser.getNumberOfSyntaxErrors();
+				Context.log.lexerErrors += lexer.getNumberOfErrors();
+				Context.log.parserErrors += parser.getNumberOfSyntaxErrors();
 			} catch (IOException e) {
 				e.printStackTrace();
 				log.fatalErrors++;
@@ -57,14 +58,10 @@ public class Tool {
 		// populate the tool registry
 		ConfigRegistry registry = ConfigRegistry.fromFile(config);
 		
-		Model model = new Model();
-		Log log = new Log();
-		parse(home+File.separator+"megal"+File.separator+"prelude.megal",model,log);
-		parse(input,model,log);
+		parse(home+File.separator+"megal"+File.separator+"prelude.megal");
+		parse(input);
 		
 		// Run various analyses
-		Context.model = model;
-		Context.log = log;
 		new EDecls();
 		new ETypeDecls();
 		new ERefs();
@@ -76,7 +73,7 @@ public class Tool {
 		if (input!=output) {
 			PrintStream ps = new PrintStream(output);
 			Gson gson = new Gson();
-			ps.println(gson.toJson(log));
+			ps.println(gson.toJson(Context.log));
 			ps.close();
 		}
 				

@@ -9,8 +9,8 @@ import java.util.Map;
  * Analyses semi-persist results in this context class.
  */
 public final class Context {
-	public static Model model;
-	public static Log log;
+	public static Model model = new Model();
+	public static Log log = new Log();
 	public static Map<String,EDecl> edecls = new HashMap<String,EDecl>();
 	public static Map<String,ETypeDecl> etdecls = new HashMap<String,ETypeDecl>();
 

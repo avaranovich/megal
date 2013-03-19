@@ -18,6 +18,9 @@ public class ResolutionTest {
 	
 	@Before
 	public void setUp() throws Exception {
+		//
+		// This code needs to be factored/abstracted.
+		//
 		Model model = new Model();
 		Log log = new Log();
 		Context.model = model;
@@ -27,8 +30,8 @@ public class ResolutionTest {
 	    System.out.println("Current dir:" + home);
 		
 		String input = "../../models/java.megal";
-		Tool.parse(home+File.separator+"megal"+File.separator+"prelude.megal",model,log);
-		Tool.parse(input,model,log);
+		Tool.parse(home+File.separator+"megal"+File.separator+"prelude.megal");
+		Tool.parse(input);
 	}
 
 	@Test
