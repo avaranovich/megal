@@ -1,12 +1,12 @@
 package megal.model;
 
 public class ETDecl extends Decl {
-	private String subtype;
-	private String supertype;
-	public ETDecl(String subtype, String supertype) {
-		this.subtype = subtype;
-		this.supertype = supertype;
+	private String name;
+	private ETRef supertype;
+	public ETDecl(String name, String supertype) {
+		this.name = name;
+		this.supertype = new ETRef(supertype);
 	}
-	public String getSubtype() { return subtype; }
-	public String getSupertype() { return supertype; }
+	public String getName() { return name; }
+	public ETRef getSuper() { return supertype; }
 }

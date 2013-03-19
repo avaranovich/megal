@@ -1,5 +1,8 @@
 package megal.model;
 
+/**
+ * An eventually resolved reference to a relationship type
+ */
 public class RTRef {
 	private String name;
 	private RTDecl decl;

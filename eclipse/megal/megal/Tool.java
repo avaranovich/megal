@@ -59,9 +59,15 @@ public class Tool {
 			ps.close();
 		}
 		
+		// Run various analyses
+		new EDecls(model,log);
+		new ETDecls(model,log);
+		
+		// Exit with a non-zero exit code if there were any problems
 		if (log.fatalErrors > 0 
 			|| log.lexerErrors > 0 
-			|| log.parserErrors > 0)
+			|| log.parserErrors > 0
+			|| log.problems.size() > 0)
 		System.exit(1);
 	}
 }
