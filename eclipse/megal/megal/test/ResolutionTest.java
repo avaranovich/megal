@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 
+import megal.Context;
 import megal.Tool;
 import megal.analysis.Resolution;
 import megal.logging.Log;
@@ -14,13 +15,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ResolutionTest {
-	Model model;
-	Log log;
 	
 	@Before
 	public void setUp() throws Exception {
-		model = new Model();
-		log = new Log();
+		Model model = new Model();
+		Log log = new Log();
+		Context.model = model;
+		Context.log = log;
 		
 		String home = new java.io.File( "." ).getCanonicalPath();
 	    System.out.println("Current dir:" + home);
@@ -32,7 +33,7 @@ public class ResolutionTest {
 
 	@Test
 	public void resolutionTest() throws IOException {
-		Resolution v =  new Resolution(model, log);
+		Resolution v =  new Resolution();
 		assertEquals(true, v.isAllResolved());
 	}
 }

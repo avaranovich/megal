@@ -4,8 +4,6 @@ package megal.parser;
 
 import megal.*;
 import megal.model.*;
-import java.util.List;
-import java.util.LinkedList;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -16,6 +14,9 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 public class MegaLBaseListener implements MegaLListener {
 	@Override public void enterModel(MegaLParser.ModelContext ctx) { }
 	@Override public void exitModel(MegaLParser.ModelContext ctx) { }
+
+	@Override public void enterRtypedecl(MegaLParser.RtypedeclContext ctx) { }
+	@Override public void exitRtypedecl(MegaLParser.RtypedeclContext ctx) { }
 
 	@Override public void enterRname(MegaLParser.RnameContext ctx) { }
 	@Override public void exitRname(MegaLParser.RnameContext ctx) { }
@@ -38,17 +39,14 @@ public class MegaLBaseListener implements MegaLListener {
 	@Override public void enterUqref(MegaLParser.UqrefContext ctx) { }
 	@Override public void exitUqref(MegaLParser.UqrefContext ctx) { }
 
-	@Override public void enterRtdecl(MegaLParser.RtdeclContext ctx) { }
-	@Override public void exitRtdecl(MegaLParser.RtdeclContext ctx) { }
-
 	@Override public void enterEtypename(MegaLParser.EtypenameContext ctx) { }
 	@Override public void exitEtypename(MegaLParser.EtypenameContext ctx) { }
 
-	@Override public void enterEtdecl(MegaLParser.EtdeclContext ctx) { }
-	@Override public void exitEtdecl(MegaLParser.EtdeclContext ctx) { }
-
 	@Override public void enterEtype(MegaLParser.EtypeContext ctx) { }
 	@Override public void exitEtype(MegaLParser.EtypeContext ctx) { }
+
+	@Override public void enterEtypedecl(MegaLParser.EtypedeclContext ctx) { }
+	@Override public void exitEtypedecl(MegaLParser.EtypedeclContext ctx) { }
 
 	@Override public void enterDecl(MegaLParser.DeclContext ctx) { }
 	@Override public void exitDecl(MegaLParser.DeclContext ctx) { }

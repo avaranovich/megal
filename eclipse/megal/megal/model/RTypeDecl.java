@@ -1,10 +1,10 @@
 package megal.model;
 
-public class RTDecl extends Decl {
+public class RTypeDecl extends Decl {
 	private String name;
 	private String left;
 	private String right;
-	public RTDecl(String name, String left, String right) {
+	public RTypeDecl(String name, String left, String right) {
 		this.name = name;
 		this.left = left;
 		this.right = right;

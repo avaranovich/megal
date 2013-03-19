@@ -4,8 +4,6 @@ package megal.parser;
 
 import megal.*;
 import megal.model.*;
-import java.util.List;
-import java.util.LinkedList;
 
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -31,10 +29,10 @@ public class MegaLParser extends Parser {
 	public static final int
 		RULE_model = 0, RULE_decl = 1, RULE_edecl = 2, RULE_rdecl = 3, RULE_modifier = 4, 
 		RULE_etype = 5, RULE_ename = 6, RULE_rname = 7, RULE_etypename = 8, RULE_uqref = 9, 
-		RULE_parent = 10, RULE_etdecl = 11, RULE_rtdecl = 12;
+		RULE_parent = 10, RULE_etypedecl = 11, RULE_rtypedecl = 12;
 	public static final String[] ruleNames = {
 		"model", "decl", "edecl", "rdecl", "modifier", "etype", "ename", "rname", 
-		"etypename", "uqref", "parent", "etdecl", "rtdecl"
+		"etypename", "uqref", "parent", "etypedecl", "rtypedecl"
 	};
 
 	@Override
@@ -116,19 +114,19 @@ public class MegaLParser extends Parser {
 		public Decl d;
 		public EdeclContext edecl;
 		public RdeclContext rdecl;
-		public EtdeclContext etdecl;
-		public RtdeclContext rtdecl;
+		public EtypedeclContext etypedecl;
+		public RtypedeclContext rtypedecl;
 		public EdeclContext edecl() {
 			return getRuleContext(EdeclContext.class,0);
 		}
-		public RtdeclContext rtdecl() {
-			return getRuleContext(RtdeclContext.class,0);
+		public RtypedeclContext rtypedecl() {
+			return getRuleContext(RtypedeclContext.class,0);
 		}
 		public RdeclContext rdecl() {
 			return getRuleContext(RdeclContext.class,0);
 		}
-		public EtdeclContext etdecl() {
-			return getRuleContext(EtdeclContext.class,0);
+		public EtypedeclContext etypedecl() {
+			return getRuleContext(EtypedeclContext.class,0);
 		}
 		public DeclContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -168,15 +166,15 @@ public class MegaLParser extends Parser {
 
 			case 3:
 				{
-				setState(40); ((DeclContext)_localctx).etdecl = etdecl();
-				 ((DeclContext)_localctx).d =  ((DeclContext)_localctx).etdecl.d; 
+				setState(40); ((DeclContext)_localctx).etypedecl = etypedecl();
+				 ((DeclContext)_localctx).d =  ((DeclContext)_localctx).etypedecl.d; 
 				}
 				break;
 
 			case 4:
 				{
-				setState(43); ((DeclContext)_localctx).rtdecl = rtdecl();
-				 ((DeclContext)_localctx).d =  ((DeclContext)_localctx).rtdecl.d; 
+				setState(43); ((DeclContext)_localctx).rtypedecl = rtypedecl();
+				 ((DeclContext)_localctx).d =  ((DeclContext)_localctx).rtypedecl.d; 
 				}
 				break;
 			}
@@ -647,9 +645,9 @@ public class MegaLParser extends Parser {
 		return _localctx;
 	}
 
-	public static class EtdeclContext extends ParserRuleContext {
-		public ETDecl d;
-		public EtypenameContext subtype;
+	public static class EtypedeclContext extends ParserRuleContext {
+		public ETypeDecl d;
+		public EtypenameContext name;
 		public EtypenameContext supertype;
 		public EtypenameContext etypename(int i) {
 			return getRuleContext(EtypenameContext.class,i);
@@ -657,30 +655,30 @@ public class MegaLParser extends Parser {
 		public List<EtypenameContext> etypename() {
 			return getRuleContexts(EtypenameContext.class);
 		}
-		public EtdeclContext(ParserRuleContext parent, int invokingState) {
+		public EtypedeclContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_etdecl; }
+		@Override public int getRuleIndex() { return RULE_etypedecl; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).enterEtdecl(this);
+			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).enterEtypedecl(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).exitEtdecl(this);
+			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).exitEtypedecl(this);
 		}
 	}
 
-	public final EtdeclContext etdecl() throws RecognitionException {
-		EtdeclContext _localctx = new EtdeclContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_etdecl);
+	public final EtypedeclContext etypedecl() throws RecognitionException {
+		EtypedeclContext _localctx = new EtypedeclContext(_ctx, getState());
+		enterRule(_localctx, 22, RULE_etypedecl);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(107); ((EtdeclContext)_localctx).subtype = etypename();
+			setState(107); ((EtypedeclContext)_localctx).name = etypename();
 			setState(108); match(9);
-			setState(109); ((EtdeclContext)_localctx).supertype = etypename();
-			 ((EtdeclContext)_localctx).d =  new ETDecl(((EtdeclContext)_localctx).subtype.n, ((EtdeclContext)_localctx).supertype.n); 
+			setState(109); ((EtypedeclContext)_localctx).supertype = etypename();
+			 ((EtypedeclContext)_localctx).d =  new ETypeDecl(((EtypedeclContext)_localctx).name.n, ((EtypedeclContext)_localctx).supertype.n); 
 			}
 		}
 		catch (RecognitionException re) {
@@ -694,9 +692,9 @@ public class MegaLParser extends Parser {
 		return _localctx;
 	}
 
-	public static class RtdeclContext extends ParserRuleContext {
-		public RTDecl d;
-		public RnameContext r;
+	public static class RtypedeclContext extends ParserRuleContext {
+		public RTypeDecl d;
+		public RnameContext name;
 		public EtypenameContext arg1;
 		public EtypenameContext arg2;
 		public EtypenameContext etypename(int i) {
@@ -708,32 +706,32 @@ public class MegaLParser extends Parser {
 		public RnameContext rname() {
 			return getRuleContext(RnameContext.class,0);
 		}
-		public RtdeclContext(ParserRuleContext parent, int invokingState) {
+		public RtypedeclContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_rtdecl; }
+		@Override public int getRuleIndex() { return RULE_rtypedecl; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).enterRtdecl(this);
+			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).enterRtypedecl(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).exitRtdecl(this);
+			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).exitRtypedecl(this);
 		}
 	}
 
-	public final RtdeclContext rtdecl() throws RecognitionException {
-		RtdeclContext _localctx = new RtdeclContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_rtdecl);
+	public final RtypedeclContext rtypedecl() throws RecognitionException {
+		RtypedeclContext _localctx = new RtypedeclContext(_ctx, getState());
+		enterRule(_localctx, 24, RULE_rtypedecl);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(112); ((RtdeclContext)_localctx).r = rname();
+			setState(112); ((RtypedeclContext)_localctx).name = rname();
 			setState(113); match(9);
-			setState(114); ((RtdeclContext)_localctx).arg1 = etypename();
+			setState(114); ((RtypedeclContext)_localctx).arg1 = etypename();
 			setState(115); match(5);
-			setState(116); ((RtdeclContext)_localctx).arg2 = etypename();
-			 ((RtdeclContext)_localctx).d =  new RTDecl(((RtdeclContext)_localctx).r.n, ((RtdeclContext)_localctx).arg1.n, ((RtdeclContext)_localctx).arg2.n); 
+			setState(116); ((RtypedeclContext)_localctx).arg2 = etypename();
+			 ((RtypedeclContext)_localctx).d =  new RTypeDecl(((RtypedeclContext)_localctx).name.n, ((RtypedeclContext)_localctx).arg1.n, ((RtypedeclContext)_localctx).arg2.n); 
 			}
 		}
 		catch (RecognitionException re) {

@@ -42,8 +42,8 @@ public class Tool {
 		}		
 	}
 	
-	private static void resolve(Model model, Log log){
-		new Resolution(model, log);
+	private static void resolve(){
+		new Resolution();
 	}
 	
 	public static void main(String[] args) throws IOException {
@@ -54,7 +54,7 @@ public class Tool {
 		String config = args[3];
 		
 		// load the config file
-		// pululate the tool registry
+		// populate the tool registry
 		ConfigRegistry registry = ConfigRegistry.fromFile(config);
 		
 		Model model = new Model();
@@ -62,7 +62,14 @@ public class Tool {
 		parse(home+File.separator+"megal"+File.separator+"prelude.megal",model,log);
 		parse(input,model,log);
 		
-		resolve(model, log);
+		// Run various analyses
+		Context.model = model;
+		Context.log = log;
+		new EDecls();
+		new ETypeDecls();
+		new ERefs();
+		new ETypeRefs();
+		resolve();
 		
 		// Write log back next to input file
 		String output = input.replaceFirst(".megal", ".log");
@@ -72,11 +79,7 @@ public class Tool {
 			ps.println(gson.toJson(log));
 			ps.close();
 		}
-		
-		// Run various analyses
-		new EDecls(model,log);
-		new ETDecls(model,log);
-		
+				
 		// Exit with a non-zero exit code if there were any problems
 		if (log.fatalErrors > 0 
 			|| log.lexerErrors > 0 
