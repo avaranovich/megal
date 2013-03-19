@@ -35,7 +35,7 @@ public class Tool {
 				e.printStackTrace();
 				log.fatalErrors++;
 			}
-			TypeNames.check(model,log);
+//			Definedness.check(model,log);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.fatalErrors++;

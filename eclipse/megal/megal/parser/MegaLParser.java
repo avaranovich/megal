@@ -22,18 +22,19 @@ public class MegaLParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__7=1, T__6=2, T__5=3, T__4=4, T__3=5, T__2=6, T__1=7, T__0=8, ID=9, 
-		STRING=10, WS=11, COMMENT=12;
+		T__9=1, T__8=2, T__7=3, T__6=4, T__5=5, T__4=6, T__3=7, T__2=8, T__1=9, 
+		T__0=10, ID=11, STRING=12, WS=13, COMMENT=14;
 	public static final String[] tokenNames = {
-		"<INVALID>", "'.'", "'extern'", "'+'", "'*'", "':'", "'@'", "'<'", "'intern'", 
-		"ID", "STRING", "WS", "COMMENT"
+		"<INVALID>", "']'", "'.'", "'extern'", "'+'", "'*'", "'['", "':'", "'@'", 
+		"'<'", "'intern'", "ID", "STRING", "WS", "COMMENT"
 	};
 	public static final int
 		RULE_model = 0, RULE_decl = 1, RULE_edecl = 2, RULE_rdecl = 3, RULE_modifier = 4, 
-		RULE_etype = 5, RULE_ename = 6, RULE_name = 7, RULE_etdecl = 8, RULE_rtdecl = 9;
+		RULE_etype = 5, RULE_ename = 6, RULE_rname = 7, RULE_etypename = 8, RULE_uqref = 9, 
+		RULE_parent = 10, RULE_etdecl = 11, RULE_rtdecl = 12;
 	public static final String[] ruleNames = {
-		"model", "decl", "edecl", "rdecl", "modifier", "etype", "ename", "name", 
-		"etdecl", "rtdecl"
+		"model", "decl", "edecl", "rdecl", "modifier", "etype", "ename", "rname", 
+		"etypename", "uqref", "parent", "etdecl", "rtdecl"
 	};
 
 	@Override
@@ -84,17 +85,17 @@ public class MegaLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(25);
+			setState(31);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 2) | (1L << 8) | (1L << ID) | (1L << STRING))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 3) | (1L << 10) | (1L << ID))) != 0)) {
 				{
 				{
-				setState(20); ((ModelContext)_localctx).decl = decl();
+				setState(26); ((ModelContext)_localctx).decl = decl();
 				 root.getDecls().add(((ModelContext)_localctx).decl.d); 
 				}
 				}
-				setState(27);
+				setState(33);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -149,37 +150,37 @@ public class MegaLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(40);
+			setState(46);
 			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
 			case 1:
 				{
-				setState(28); ((DeclContext)_localctx).edecl = edecl();
+				setState(34); ((DeclContext)_localctx).edecl = edecl();
 				 ((DeclContext)_localctx).d =  ((DeclContext)_localctx).edecl.d; 
 				}
 				break;
 
 			case 2:
 				{
-				setState(31); ((DeclContext)_localctx).rdecl = rdecl();
+				setState(37); ((DeclContext)_localctx).rdecl = rdecl();
 				 ((DeclContext)_localctx).d =  ((DeclContext)_localctx).rdecl.d; 
 				}
 				break;
 
 			case 3:
 				{
-				setState(34); ((DeclContext)_localctx).etdecl = etdecl();
+				setState(40); ((DeclContext)_localctx).etdecl = etdecl();
 				 ((DeclContext)_localctx).d =  ((DeclContext)_localctx).etdecl.d; 
 				}
 				break;
 
 			case 4:
 				{
-				setState(37); ((DeclContext)_localctx).rtdecl = rtdecl();
+				setState(43); ((DeclContext)_localctx).rtdecl = rtdecl();
 				 ((DeclContext)_localctx).d =  ((DeclContext)_localctx).rtdecl.d; 
 				}
 				break;
 			}
-			setState(42); match(1);
+			setState(48); match(2);
 			}
 		}
 		catch (RecognitionException re) {
@@ -197,12 +198,20 @@ public class MegaLParser extends Parser {
 		public EDecl d;
 		public ModifierContext modifier;
 		public EnameContext ename;
+		public UqrefContext uqref;
+		public ParentContext parent;
 		public EtypeContext etype;
 		public ModifierContext modifier() {
 			return getRuleContext(ModifierContext.class,0);
 		}
+		public UqrefContext uqref() {
+			return getRuleContext(UqrefContext.class,0);
+		}
 		public EnameContext ename() {
 			return getRuleContext(EnameContext.class,0);
+		}
+		public ParentContext parent() {
+			return getRuleContext(ParentContext.class,0);
 		}
 		public EtypeContext etype() {
 			return getRuleContext(EtypeContext.class,0);
@@ -229,19 +238,21 @@ public class MegaLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			 Modifier m = null; 
-			setState(48);
+			setState(54);
 			_la = _input.LA(1);
-			if (_la==2 || _la==8) {
+			if (_la==3 || _la==10) {
 				{
-				setState(45); ((EdeclContext)_localctx).modifier = modifier();
+				setState(51); ((EdeclContext)_localctx).modifier = modifier();
 				 m = ((EdeclContext)_localctx).modifier.m; 
 				}
 			}
 
-			setState(50); ((EdeclContext)_localctx).ename = ename();
-			setState(51); match(5);
-			setState(52); ((EdeclContext)_localctx).etype = etype();
-			 ((EdeclContext)_localctx).d =  new EDecl(m, ((EdeclContext)_localctx).etype.t, ((EdeclContext)_localctx).ename.n); 
+			setState(56); ((EdeclContext)_localctx).ename = ename();
+			setState(57); ((EdeclContext)_localctx).uqref = uqref();
+			setState(58); ((EdeclContext)_localctx).parent = parent();
+			setState(59); match(7);
+			setState(60); ((EdeclContext)_localctx).etype = etype();
+			 ((EdeclContext)_localctx).d =  new EDecl(m, ((EdeclContext)_localctx).etype.t, ((EdeclContext)_localctx).ename.n, ((EdeclContext)_localctx).uqref.s, ((EdeclContext)_localctx).parent.n); 
 			}
 		}
 		catch (RecognitionException re) {
@@ -257,16 +268,18 @@ public class MegaLParser extends Parser {
 
 	public static class RdeclContext extends ParserRuleContext {
 		public RDecl d;
-		public NameContext left;
-		public Token ID;
-		public NameContext right;
-		public List<NameContext> name() {
-			return getRuleContexts(NameContext.class);
+		public EnameContext left;
+		public RnameContext rname;
+		public EnameContext right;
+		public List<EnameContext> ename() {
+			return getRuleContexts(EnameContext.class);
 		}
-		public NameContext name(int i) {
-			return getRuleContext(NameContext.class,i);
+		public RnameContext rname() {
+			return getRuleContext(RnameContext.class,0);
 		}
-		public TerminalNode ID() { return getToken(MegaLParser.ID, 0); }
+		public EnameContext ename(int i) {
+			return getRuleContext(EnameContext.class,i);
+		}
 		public RdeclContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -287,10 +300,10 @@ public class MegaLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(55); ((RdeclContext)_localctx).left = name();
-			setState(56); ((RdeclContext)_localctx).ID = match(ID);
-			setState(57); ((RdeclContext)_localctx).right = name();
-			 ((RdeclContext)_localctx).d =  new RDecl((((RdeclContext)_localctx).ID!=null?((RdeclContext)_localctx).ID.getText():null), ((RdeclContext)_localctx).left.n, ((RdeclContext)_localctx).right.n); 
+			setState(63); ((RdeclContext)_localctx).left = ename();
+			setState(64); ((RdeclContext)_localctx).rname = rname();
+			setState(65); ((RdeclContext)_localctx).right = ename();
+			 ((RdeclContext)_localctx).d =  new RDecl(((RdeclContext)_localctx).rname.n, ((RdeclContext)_localctx).left.n, ((RdeclContext)_localctx).right.n); 
 			}
 		}
 		catch (RecognitionException re) {
@@ -324,19 +337,19 @@ public class MegaLParser extends Parser {
 		ModifierContext _localctx = new ModifierContext(_ctx, getState());
 		enterRule(_localctx, 8, RULE_modifier);
 		try {
-			setState(64);
+			setState(72);
 			switch (_input.LA(1)) {
-			case 2:
+			case 3:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(60); match(2);
+				setState(68); match(3);
 				 ((ModifierContext)_localctx).m =  Modifier.Extern; 
 				}
 				break;
-			case 8:
+			case 10:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(62); match(8);
+				setState(70); match(10);
 				 ((ModifierContext)_localctx).m =  Modifier.Intern; 
 				}
 				break;
@@ -357,8 +370,10 @@ public class MegaLParser extends Parser {
 
 	public static class EtypeContext extends ParserRuleContext {
 		public EType t;
-		public Token ID;
-		public TerminalNode ID() { return getToken(MegaLParser.ID, 0); }
+		public EtypenameContext etypename;
+		public EtypenameContext etypename() {
+			return getRuleContext(EtypenameContext.class,0);
+		}
 		public EtypeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -380,27 +395,27 @@ public class MegaLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			 EType.Cardinality c = EType.Cardinality.None; 
-			setState(67); ((EtypeContext)_localctx).ID = match(ID);
-			setState(72);
+			setState(75); ((EtypeContext)_localctx).etypename = etypename();
+			setState(80);
 			switch (_input.LA(1)) {
-			case 3:
+			case 4:
 				{
-				setState(68); match(3);
+				setState(76); match(4);
 				 c = EType.Cardinality.Plus; 
 				}
 				break;
-			case 4:
+			case 5:
 				{
-				setState(70); match(4);
+				setState(78); match(5);
 				 c = EType.Cardinality.Star; 
 				}
 				break;
-			case 1:
+			case 2:
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			 ((EtypeContext)_localctx).t =  new EType((((EtypeContext)_localctx).ID!=null?((EtypeContext)_localctx).ID.getText():null), c); 
+			 ((EtypeContext)_localctx).t =  new EType(((EtypeContext)_localctx).etypename.n, c); 
 			}
 		}
 		catch (RecognitionException re) {
@@ -415,15 +430,9 @@ public class MegaLParser extends Parser {
 	}
 
 	public static class EnameContext extends ParserRuleContext {
-		public List<String> n;
-		public NameContext n1;
-		public NameContext n2;
-		public List<NameContext> name() {
-			return getRuleContexts(NameContext.class);
-		}
-		public NameContext name(int i) {
-			return getRuleContext(NameContext.class,i);
-		}
+		public String n;
+		public Token ID;
+		public TerminalNode ID() { return getToken(MegaLParser.ID, 0); }
 		public EnameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -441,28 +450,11 @@ public class MegaLParser extends Parser {
 	public final EnameContext ename() throws RecognitionException {
 		EnameContext _localctx = new EnameContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_ename);
-		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			 List<String> n = new LinkedList<String>(); 
-			setState(77); ((EnameContext)_localctx).n1 = name();
-			 n.add(((EnameContext)_localctx).n1.n); 
-			setState(85);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while (_la==6) {
-				{
-				{
-				setState(79); match(6);
-				setState(80); ((EnameContext)_localctx).n2 = name();
-				 n.add(((EnameContext)_localctx).n2.n); 
-				}
-				}
-				setState(87);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
+			setState(84); ((EnameContext)_localctx).ID = match(ID);
+			 ((EnameContext)_localctx).n =  (((EnameContext)_localctx).ID!=null?((EnameContext)_localctx).ID.getText():null); 
 			}
 		}
 		catch (RecognitionException re) {
@@ -476,49 +468,172 @@ public class MegaLParser extends Parser {
 		return _localctx;
 	}
 
-	public static class NameContext extends ParserRuleContext {
+	public static class RnameContext extends ParserRuleContext {
 		public String n;
 		public Token ID;
-		public Token STRING;
 		public TerminalNode ID() { return getToken(MegaLParser.ID, 0); }
-		public TerminalNode STRING() { return getToken(MegaLParser.STRING, 0); }
-		public NameContext(ParserRuleContext parent, int invokingState) {
+		public RnameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_name; }
+		@Override public int getRuleIndex() { return RULE_rname; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).enterName(this);
+			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).enterRname(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).exitName(this);
+			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).exitRname(this);
 		}
 	}
 
-	public final NameContext name() throws RecognitionException {
-		NameContext _localctx = new NameContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_name);
+	public final RnameContext rname() throws RecognitionException {
+		RnameContext _localctx = new RnameContext(_ctx, getState());
+		enterRule(_localctx, 14, RULE_rname);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(92);
-			switch (_input.LA(1)) {
-			case ID:
-				{
-				setState(88); ((NameContext)_localctx).ID = match(ID);
-				 ((NameContext)_localctx).n =  (((NameContext)_localctx).ID!=null?((NameContext)_localctx).ID.getText():null); 
-				}
-				break;
-			case STRING:
-				{
-				setState(90); ((NameContext)_localctx).STRING = match(STRING);
-				 ((NameContext)_localctx).n =  (((NameContext)_localctx).STRING!=null?((NameContext)_localctx).STRING.getText():null).substring(1,(((NameContext)_localctx).STRING!=null?((NameContext)_localctx).STRING.getText():null).length()-2); 
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
+			setState(87); ((RnameContext)_localctx).ID = match(ID);
+			 ((RnameContext)_localctx).n =  (((RnameContext)_localctx).ID!=null?((RnameContext)_localctx).ID.getText():null); 
 			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class EtypenameContext extends ParserRuleContext {
+		public String n;
+		public Token ID;
+		public TerminalNode ID() { return getToken(MegaLParser.ID, 0); }
+		public EtypenameContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_etypename; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).enterEtypename(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).exitEtypename(this);
+		}
+	}
+
+	public final EtypenameContext etypename() throws RecognitionException {
+		EtypenameContext _localctx = new EtypenameContext(_ctx, getState());
+		enterRule(_localctx, 16, RULE_etypename);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(90); ((EtypenameContext)_localctx).ID = match(ID);
+			 ((EtypenameContext)_localctx).n =  (((EtypenameContext)_localctx).ID!=null?((EtypenameContext)_localctx).ID.getText():null); 
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class UqrefContext extends ParserRuleContext {
+		public String s;
+		public Token STRING;
+		public TerminalNode STRING() { return getToken(MegaLParser.STRING, 0); }
+		public UqrefContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_uqref; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).enterUqref(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).exitUqref(this);
+		}
+	}
+
+	public final UqrefContext uqref() throws RecognitionException {
+		UqrefContext _localctx = new UqrefContext(_ctx, getState());
+		enterRule(_localctx, 18, RULE_uqref);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			 ((UqrefContext)_localctx).s =  null; 
+			setState(98);
+			_la = _input.LA(1);
+			if (_la==6) {
+				{
+				setState(94); match(6);
+				setState(95); ((UqrefContext)_localctx).STRING = match(STRING);
+				 ((UqrefContext)_localctx).s =  (((UqrefContext)_localctx).STRING!=null?((UqrefContext)_localctx).STRING.getText():null).substring(1,(((UqrefContext)_localctx).STRING!=null?((UqrefContext)_localctx).STRING.getText():null).length()-2); 
+				setState(97); match(1);
+				}
+			}
+
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ParentContext extends ParserRuleContext {
+		public String n;
+		public EnameContext ename;
+		public EnameContext ename() {
+			return getRuleContext(EnameContext.class,0);
+		}
+		public ParentContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_parent; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).enterParent(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MegaLListener ) ((MegaLListener)listener).exitParent(this);
+		}
+	}
+
+	public final ParentContext parent() throws RecognitionException {
+		ParentContext _localctx = new ParentContext(_ctx, getState());
+		enterRule(_localctx, 20, RULE_parent);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			 ((ParentContext)_localctx).n =  null; 
+			setState(105);
+			_la = _input.LA(1);
+			if (_la==8) {
+				{
+				setState(101); match(8);
+				setState(102); ((ParentContext)_localctx).ename = ename();
+				 ((ParentContext)_localctx).n =  ((ParentContext)_localctx).ename.n; 
+				}
+			}
+
 			}
 		}
 		catch (RecognitionException re) {
@@ -534,12 +649,14 @@ public class MegaLParser extends Parser {
 
 	public static class EtdeclContext extends ParserRuleContext {
 		public ETDecl d;
-		public Token subtype;
-		public Token supertype;
-		public TerminalNode ID(int i) {
-			return getToken(MegaLParser.ID, i);
+		public EtypenameContext subtype;
+		public EtypenameContext supertype;
+		public EtypenameContext etypename(int i) {
+			return getRuleContext(EtypenameContext.class,i);
 		}
-		public List<TerminalNode> ID() { return getTokens(MegaLParser.ID); }
+		public List<EtypenameContext> etypename() {
+			return getRuleContexts(EtypenameContext.class);
+		}
 		public EtdeclContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -556,14 +673,14 @@ public class MegaLParser extends Parser {
 
 	public final EtdeclContext etdecl() throws RecognitionException {
 		EtdeclContext _localctx = new EtdeclContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_etdecl);
+		enterRule(_localctx, 22, RULE_etdecl);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(94); ((EtdeclContext)_localctx).subtype = match(ID);
-			setState(95); match(7);
-			setState(96); ((EtdeclContext)_localctx).supertype = match(ID);
-			 ((EtdeclContext)_localctx).d =  new ETDecl((((EtdeclContext)_localctx).subtype!=null?((EtdeclContext)_localctx).subtype.getText():null), (((EtdeclContext)_localctx).supertype!=null?((EtdeclContext)_localctx).supertype.getText():null)); 
+			setState(107); ((EtdeclContext)_localctx).subtype = etypename();
+			setState(108); match(9);
+			setState(109); ((EtdeclContext)_localctx).supertype = etypename();
+			 ((EtdeclContext)_localctx).d =  new ETDecl(((EtdeclContext)_localctx).subtype.n, ((EtdeclContext)_localctx).supertype.n); 
 			}
 		}
 		catch (RecognitionException re) {
@@ -579,13 +696,18 @@ public class MegaLParser extends Parser {
 
 	public static class RtdeclContext extends ParserRuleContext {
 		public RTDecl d;
-		public Token r;
-		public Token arg1;
-		public Token arg2;
-		public TerminalNode ID(int i) {
-			return getToken(MegaLParser.ID, i);
+		public RnameContext r;
+		public EtypenameContext arg1;
+		public EtypenameContext arg2;
+		public EtypenameContext etypename(int i) {
+			return getRuleContext(EtypenameContext.class,i);
 		}
-		public List<TerminalNode> ID() { return getTokens(MegaLParser.ID); }
+		public List<EtypenameContext> etypename() {
+			return getRuleContexts(EtypenameContext.class);
+		}
+		public RnameContext rname() {
+			return getRuleContext(RnameContext.class,0);
+		}
 		public RtdeclContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -602,16 +724,16 @@ public class MegaLParser extends Parser {
 
 	public final RtdeclContext rtdecl() throws RecognitionException {
 		RtdeclContext _localctx = new RtdeclContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_rtdecl);
+		enterRule(_localctx, 24, RULE_rtdecl);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(99); ((RtdeclContext)_localctx).r = match(ID);
-			setState(100); match(7);
-			setState(101); ((RtdeclContext)_localctx).arg1 = match(ID);
-			setState(102); match(4);
-			setState(103); ((RtdeclContext)_localctx).arg2 = match(ID);
-			 ((RtdeclContext)_localctx).d =  new RTDecl((((RtdeclContext)_localctx).r!=null?((RtdeclContext)_localctx).r.getText():null), (((RtdeclContext)_localctx).arg1!=null?((RtdeclContext)_localctx).arg1.getText():null), (((RtdeclContext)_localctx).arg2!=null?((RtdeclContext)_localctx).arg2.getText():null)); 
+			setState(112); ((RtdeclContext)_localctx).r = rname();
+			setState(113); match(9);
+			setState(114); ((RtdeclContext)_localctx).arg1 = etypename();
+			setState(115); match(5);
+			setState(116); ((RtdeclContext)_localctx).arg2 = etypename();
+			 ((RtdeclContext)_localctx).d =  new RTDecl(((RtdeclContext)_localctx).r.n, ((RtdeclContext)_localctx).arg1.n, ((RtdeclContext)_localctx).arg2.n); 
 			}
 		}
 		catch (RecognitionException re) {
@@ -626,31 +748,33 @@ public class MegaLParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\2\3\16m\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t"+
-		"\t\4\n\t\n\4\13\t\13\3\2\3\2\3\2\7\2\32\n\2\f\2\16\2\35\13\2\3\3\3\3\3"+
-		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3+\n\3\3\3\3\3\3\4\3\4\3\4\3"+
-		"\4\5\4\63\n\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6"+
-		"\5\6C\n\6\3\7\3\7\3\7\3\7\3\7\3\7\5\7K\n\7\3\7\3\7\3\b\3\b\3\b\3\b\3\b"+
-		"\3\b\3\b\7\bV\n\b\f\b\16\bY\13\b\3\t\3\t\3\t\3\t\5\t_\n\t\3\n\3\n\3\n"+
-		"\3\n\3\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\2\f\2\4\6\b\n\f\16\20"+
-		"\22\24\2\2l\2\33\3\2\2\2\4*\3\2\2\2\6.\3\2\2\2\b9\3\2\2\2\nB\3\2\2\2\f"+
-		"D\3\2\2\2\16N\3\2\2\2\20^\3\2\2\2\22`\3\2\2\2\24e\3\2\2\2\26\27\5\4\3"+
-		"\2\27\30\b\2\1\2\30\32\3\2\2\2\31\26\3\2\2\2\32\35\3\2\2\2\33\31\3\2\2"+
-		"\2\33\34\3\2\2\2\34\3\3\2\2\2\35\33\3\2\2\2\36\37\5\6\4\2\37 \b\3\1\2"+
-		" +\3\2\2\2!\"\5\b\5\2\"#\b\3\1\2#+\3\2\2\2$%\5\22\n\2%&\b\3\1\2&+\3\2"+
-		"\2\2\'(\5\24\13\2()\b\3\1\2)+\3\2\2\2*\36\3\2\2\2*!\3\2\2\2*$\3\2\2\2"+
-		"*\'\3\2\2\2+,\3\2\2\2,-\7\3\2\2-\5\3\2\2\2.\62\b\4\1\2/\60\5\n\6\2\60"+
-		"\61\b\4\1\2\61\63\3\2\2\2\62/\3\2\2\2\62\63\3\2\2\2\63\64\3\2\2\2\64\65"+
-		"\5\16\b\2\65\66\7\7\2\2\66\67\5\f\7\2\678\b\4\1\28\7\3\2\2\29:\5\20\t"+
-		"\2:;\7\13\2\2;<\5\20\t\2<=\b\5\1\2=\t\3\2\2\2>?\7\4\2\2?C\b\6\1\2@A\7"+
-		"\n\2\2AC\b\6\1\2B>\3\2\2\2B@\3\2\2\2C\13\3\2\2\2DE\b\7\1\2EJ\7\13\2\2"+
-		"FG\7\5\2\2GK\b\7\1\2HI\7\6\2\2IK\b\7\1\2JF\3\2\2\2JH\3\2\2\2JK\3\2\2\2"+
-		"KL\3\2\2\2LM\b\7\1\2M\r\3\2\2\2NO\b\b\1\2OP\5\20\t\2PW\b\b\1\2QR\7\b\2"+
-		"\2RS\5\20\t\2ST\b\b\1\2TV\3\2\2\2UQ\3\2\2\2VY\3\2\2\2WU\3\2\2\2WX\3\2"+
-		"\2\2X\17\3\2\2\2YW\3\2\2\2Z[\7\13\2\2[_\b\t\1\2\\]\7\f\2\2]_\b\t\1\2^"+
-		"Z\3\2\2\2^\\\3\2\2\2_\21\3\2\2\2`a\7\13\2\2ab\7\t\2\2bc\7\13\2\2cd\b\n"+
-		"\1\2d\23\3\2\2\2ef\7\13\2\2fg\7\t\2\2gh\7\13\2\2hi\7\6\2\2ij\7\13\2\2"+
-		"jk\b\13\1\2k\25\3\2\2\2\t\33*\62BJW^";
+		"\2\3\20z\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t"+
+		"\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16\t\16\3\2\3\2\3\2\7\2 \n\2\f"+
+		"\2\16\2#\13\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3\61\n"+
+		"\3\3\3\3\3\3\4\3\4\3\4\3\4\5\49\n\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3"+
+		"\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\5\6K\n\6\3\7\3\7\3\7\3\7\3\7\3\7\5\7S\n"+
+		"\7\3\7\3\7\3\b\3\b\3\b\3\t\3\t\3\t\3\n\3\n\3\n\3\13\3\13\3\13\3\13\3\13"+
+		"\5\13e\n\13\3\f\3\f\3\f\3\f\3\f\5\fl\n\f\3\r\3\r\3\r\3\r\3\r\3\16\3\16"+
+		"\3\16\3\16\3\16\3\16\3\16\3\16\2\17\2\4\6\b\n\f\16\20\22\24\26\30\32\2"+
+		"\2v\2!\3\2\2\2\4\60\3\2\2\2\6\64\3\2\2\2\bA\3\2\2\2\nJ\3\2\2\2\fL\3\2"+
+		"\2\2\16V\3\2\2\2\20Y\3\2\2\2\22\\\3\2\2\2\24_\3\2\2\2\26f\3\2\2\2\30m"+
+		"\3\2\2\2\32r\3\2\2\2\34\35\5\4\3\2\35\36\b\2\1\2\36 \3\2\2\2\37\34\3\2"+
+		"\2\2 #\3\2\2\2!\37\3\2\2\2!\"\3\2\2\2\"\3\3\2\2\2#!\3\2\2\2$%\5\6\4\2"+
+		"%&\b\3\1\2&\61\3\2\2\2\'(\5\b\5\2()\b\3\1\2)\61\3\2\2\2*+\5\30\r\2+,\b"+
+		"\3\1\2,\61\3\2\2\2-.\5\32\16\2./\b\3\1\2/\61\3\2\2\2\60$\3\2\2\2\60\'"+
+		"\3\2\2\2\60*\3\2\2\2\60-\3\2\2\2\61\62\3\2\2\2\62\63\7\4\2\2\63\5\3\2"+
+		"\2\2\648\b\4\1\2\65\66\5\n\6\2\66\67\b\4\1\2\679\3\2\2\28\65\3\2\2\28"+
+		"9\3\2\2\29:\3\2\2\2:;\5\16\b\2;<\5\24\13\2<=\5\26\f\2=>\7\t\2\2>?\5\f"+
+		"\7\2?@\b\4\1\2@\7\3\2\2\2AB\5\16\b\2BC\5\20\t\2CD\5\16\b\2DE\b\5\1\2E"+
+		"\t\3\2\2\2FG\7\5\2\2GK\b\6\1\2HI\7\f\2\2IK\b\6\1\2JF\3\2\2\2JH\3\2\2\2"+
+		"K\13\3\2\2\2LM\b\7\1\2MR\5\22\n\2NO\7\6\2\2OS\b\7\1\2PQ\7\7\2\2QS\b\7"+
+		"\1\2RN\3\2\2\2RP\3\2\2\2RS\3\2\2\2ST\3\2\2\2TU\b\7\1\2U\r\3\2\2\2VW\7"+
+		"\r\2\2WX\b\b\1\2X\17\3\2\2\2YZ\7\r\2\2Z[\b\t\1\2[\21\3\2\2\2\\]\7\r\2"+
+		"\2]^\b\n\1\2^\23\3\2\2\2_d\b\13\1\2`a\7\b\2\2ab\7\16\2\2bc\b\13\1\2ce"+
+		"\7\3\2\2d`\3\2\2\2de\3\2\2\2e\25\3\2\2\2fk\b\f\1\2gh\7\n\2\2hi\5\16\b"+
+		"\2ij\b\f\1\2jl\3\2\2\2kg\3\2\2\2kl\3\2\2\2l\27\3\2\2\2mn\5\22\n\2no\7"+
+		"\13\2\2op\5\22\n\2pq\b\r\1\2q\31\3\2\2\2rs\5\20\t\2st\7\13\2\2tu\5\22"+
+		"\n\2uv\7\7\2\2vw\5\22\n\2wx\b\16\1\2x\33\3\2\2\2\t!\608JRdk";
 	public static final ATN _ATN =
 		ATNSimulator.deserialize(_serializedATN.toCharArray());
 	static {

@@ -9,9 +9,9 @@ MVC : Concept .
 Model @ MVC : Concept .
 View @ MVC : Concept .
 Controller @ MVC : Concept .
-"Design pattern" : Concept .
+DP ["Design pattern"] : Concept .
 
 Model partOf MVC .
 View partOf MVC .
 Controller partOf MVC .
-MVC instanceOf "Design pattern" .
+MVC instanceOf DP .
