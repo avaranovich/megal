@@ -1,7 +1,13 @@
 package megal.logging;
 
-import java.util.List;
-
+/**
+ * A problem tracking class for the log.
+ * Problems consist of problem code and related name of a model element.
+ */
 public class ProblemWithName extends Problem {
-	public List<String> name;
+	public String name;
+	public ProblemWithName(ProblemCode code, String name) {
+		this.code = code;
+		this.name = name;
+	}
 }
