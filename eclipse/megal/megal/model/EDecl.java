@@ -1,7 +1,6 @@
 package megal.model;
 
-import java.util.List;
-
+import java.lang.reflect.InvocationTargetException;
 import megal.entities.Entity;
 
 public class EDecl extends Decl {
@@ -23,11 +22,6 @@ public class EDecl extends Decl {
 	public String getUref() { return uqref; }
 	public String getParent() { return parent; }
 	
-	
-	/**
-	 * Lookups the entity for the entity declaration.
-	 * @return The entity assosiated with the given entity declaration.
-	 */
 	public Entity getEntity(){
 		Entity entity = null;
 		
@@ -37,13 +31,22 @@ public class EDecl extends Decl {
 			try {
 				entity = (Entity)Class.forName(type.getName()).getConstructor(types).newInstance(params);
 				
-			} catch (Exception e) {
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
 				e.printStackTrace();
 			}
-		} 
-		catch(Exception e){
+		} catch (InstantiationException e) {
 			e.printStackTrace();
-		}
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} 
 		
 		if (entity == null){
 			//TODO: Resolver not found exception
