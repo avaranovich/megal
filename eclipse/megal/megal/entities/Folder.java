@@ -16,11 +16,4 @@ public class Folder extends Entity {
 		// Check also whether this entity is physically part of the parent folder.
 		return false;
 	}
-	
-	@Override
-	public boolean resolve(){
-		//TODO: add resolution code
-		return false;
-	}  
-
 }

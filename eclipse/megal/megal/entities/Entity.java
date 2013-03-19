@@ -6,12 +6,13 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import megal.model.EDecl;
+import megal.model.EType;
 
 public abstract class Entity {
 	private EDecl edecl;
 	
 	public Object getResource() { return resource; }
-	public void setResource(Object resource) { this.resource = resource; }	
+	protected void setResource(Object resource) { this.resource = resource; }	
 	public boolean isResolved() { return !(resource==null); }
 	private Object resource;
 
@@ -19,35 +20,48 @@ public abstract class Entity {
 		this.edecl = edecl;
 	}
 	
+	/**
+	 * @return An associated entity declaration from the parsing tree.
+	 */
 	protected EDecl getEdecl() {
 		return edecl;
 	}
 	
-	public boolean tryResolve(){
-		return false;
+	/**
+	 * @return Base URL of 101companies discovery servicy, depending on the entity type.
+	 */
+	private String getBaseUrl(){
+		String base = "http://101companies.org/resources/";
+		String typeName = getEdecl().getType().getName();
+		
+		if (typeName == "Language") return base + "languages/" + getEdecl().getName();;
+		if (typeName == "Technology") return base + "technologies/" + getEdecl().getName();;
+		
+		return "";
 	}
 	
-	/*
-	 * Uses 101companies discovery service to resolve base entities (languages, technologies, etc.)
+	/**
+	 * Uses 101companies discovery service to resolve a base entity (language, technology, etc.).
+	 * @return True if the resolution succeeds, False otherwise.
 	 */
-	public boolean resolve(){
+	public boolean tryResolve(){
 		int code = 404;
-		String url = "http://101companies.org/resources/languages/" + this.getEdecl().getName();
+		String url = getBaseUrl();
 
-		try{
+		try {
 			URL u = new URL(url);
 			HttpURLConnection huc =  (HttpURLConnection) u.openConnection(); 
 			huc.setRequestMethod("GET");  
 			huc.connect(); 
 			code = huc.getResponseCode();	
 		}
-		catch(Exception skip){
+		catch(Exception _){
 			return false;
 		}
 		
 		if (code == 200){
 			try {
-				this.setResource(new URI(url));
+				this.resolve(new URI(url));
 			} catch (URISyntaxException e) {
 				return false;
 			}
@@ -55,5 +69,13 @@ public abstract class Entity {
 		}
 		
 		return false;
+	}
+	
+	/**
+	 * Resolves an entity using a provided resource.
+	 * @param resource Resource to use in a resolution process for a given entity.
+	 */
+	public void resolve(Object resource){
+		setResource(resource);
 	}
 }
