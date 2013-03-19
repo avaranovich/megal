@@ -1,5 +1,6 @@
 package megal.entities;
 
+import megal.Entity;
 import megal.model.EDecl;
 
 public class Concept extends Entity {

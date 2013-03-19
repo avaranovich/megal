@@ -1,7 +1,8 @@
 package megal.model;
 
 import java.lang.reflect.InvocationTargetException;
-import megal.entities.Entity;
+
+import megal.Entity;
 
 public class EDecl extends Decl {
 	private Modifier modifier;

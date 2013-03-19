@@ -2,6 +2,10 @@ package megal;
 
 import megal.model.EDecl;
 
+/**
+ * The abstract base class of all relationship types (classes).
+ * See package megal.relationships.
+ */
 public class Relationship {
 	/**
 	 * @return the result of testing the relationship to be well-formed

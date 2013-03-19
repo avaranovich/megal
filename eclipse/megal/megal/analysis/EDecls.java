@@ -10,9 +10,9 @@ import static megal.Context.*;
 public class EDecls extends Visitor {
 	public void visit(EDecl decl) {
 		String name = decl.getName();
-		if (edecls.containsKey(name))
+		if (eDecls.containsKey(name))
 			log.problems.add(new ProblemWithName(ProblemCode.doubleDeclaration, name));
 		else
-			edecls.put(name,decl);
+			eDecls.put(name,decl);
 	}
 }

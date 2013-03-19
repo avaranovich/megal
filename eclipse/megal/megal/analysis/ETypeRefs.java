@@ -11,7 +11,7 @@ public class ETypeRefs extends Visitor {
 	public void visit(EDecl edecl) {
 		if (edecl.getType().getDecl() == null) {
 			String name = edecl.getType().getName();
-			ETypeDecl etdecl = etdecls.get(name);
+			ETypeDecl etdecl = eTypeDecls.get(name);
 			if (etdecl == null)
 				log.problems.add(new ProblemWithName(
 						ProblemCode.undeclaredEntityType, name));

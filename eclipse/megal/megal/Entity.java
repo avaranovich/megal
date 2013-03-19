@@ -1,4 +1,4 @@
-package megal.entities;
+package megal;
 
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -8,6 +8,10 @@ import java.net.URL;
 import megal.model.EDecl;
 import megal.model.EType;
 
+/**
+ * The abstract base class of all entity types (classes).
+ * See package megal.entities.
+ */
 public abstract class Entity {
 	private EDecl edecl;
 	
