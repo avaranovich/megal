@@ -6,9 +6,6 @@ import megal.*;
 import megal.model.*;
 import java.util.List;
 import java.util.LinkedList;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;

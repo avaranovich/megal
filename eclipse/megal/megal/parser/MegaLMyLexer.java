@@ -1,7 +1,5 @@
 package megal.parser;
 
-import megal.MegaLException;
-
 import org.antlr.v4.runtime.LexerNoViableAltException;
 import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.CharStream;
@@ -11,6 +9,8 @@ import org.antlr.v4.runtime.CharStream;
  */
 public class MegaLMyLexer extends MegaLLexer {
 
+	private int errors = 0;
+	
 	/**
 	 * Delegate construction to the super lexer
 	 */
@@ -22,14 +22,17 @@ public class MegaLMyLexer extends MegaLLexer {
 	 * Do not recover!
 	 */
 	public void recover(LexerNoViableAltException e) {
-		throw new MegaLException();
+		errors++;
 	}
 
 	/**
 	 * Do not recover!
 	 */
 	public void recover(RecognitionException e) {
-		throw new MegaLException();
+		errors++;
 	}
-	
+
+	public int getNumberOfErrors() {
+		return errors;
+	}
 }

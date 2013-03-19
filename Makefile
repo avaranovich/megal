@@ -1,16 +1,14 @@
 tool = eclipse/megal
-
-antlr = antlr-4.0-complete.jar
-gson = google-gson-2.2.2-release.zip
+antlruri = http://www.antlr4.org/download/antlr-4.0-complete.jar
+antlrjar = ${tool}/libs/antlr-4.0-complete.jar
+gsonuri = https://google-gson.googlecode.com/files/google-gson-2.2.2-release.zip
+gsonjar = ${tool}/libs/google-gson-2.2.2/gson-2.2.2.jar
 
 nope:
 	@echo Want to build, test, or what?
 
-# Download ANTLR if needed
-download: ${antlr}
-
-#Download GSON library
-download-gson: ${gson}
+# Download deps if needed
+download: ${antlrjar} ${gsonjar}
 
 # Generate parser with ANTLR
 generate: ${tool}/megal/parser/MegaLParser.java
@@ -27,24 +25,24 @@ test: build
 	make models/prelude.tool
 
 # Helper for ANTLR download
-${antlr}:
-	cd ${tool}; curl -O http://www.antlr4.org/download/${antlr}
+${antlrjar}:
+	cd ${tool}/libs; curl -O ${antlruri}
 
-${gson}:
-	cd ${tool}/libs; curl -O https://google-gson.googlecode.com/files/${gson}; unzip ${gson}; rm ${gson}
+${gsonjar}:
+	cd ${tool}/libs; curl -O ${gsonuri}; unzip google-gson-2.2.2-release.zip; rm google-gson-2.2.2-release.zip
 
 # Helper for parser generation
-${tool}/megal/parser/MegaLParser.java: ${tool}/${antlr} ${tool}/megal/parser/MegaL.g4 ${tool}/megal/model/*.java Makefile
+${tool}/megal/parser/MegaLParser.java: ${tool}/megal/parser/MegaL.g4 ${tool}/megal/model/*.java Makefile download
 	cd ${tool}/megal/parser; java \
-		-cp ".:../../${antlr}" \
+		-cp ".:../../../../${antlrjar}" \
 		org.antlr.v4.Tool \
 		MegaL.g4
 
 # Rule for tool compilation
-${tool}/megal/Tool.class: ${tool}/${antlr} ${tool}/megal/parser/*.java Makefile
+${tool}/megal/Tool.class: ${tool}/megal/parser/*.java Makefile download
 	cd ${tool}; \
 	javac \
-		-cp ".:${antlr}" \
+		-cp ".:../../${antlrjar}:../../${gsonjar}" \
 		megal/model/*.java \
 		megal/entities/*.java \
 		megal/relationships/*.java \
@@ -56,6 +54,8 @@ ${tool}/megal/Tool.class: ${tool}/${antlr} ${tool}/megal/parser/*.java Makefile
 # Rule for running the MegaL tool
 %.tool:
 	java \
-		-cp "${tool}:${tool}/${antlr}" \
+		-cp "${tool}:${antlrjar}:${gsonjar}" \
 		megal.Tool \
 		$*.megal
+	diff $*.json $*.log
+

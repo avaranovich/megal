@@ -7,27 +7,10 @@ import megal.*;
 import megal.model.*;
 import java.util.List;
 import java.util.LinkedList;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 }
 
 @lexer::header {
 package megal.parser;
-}
-
-@parser::members {
-	public static Model parse(String s) throws IOException {
-    	FileInputStream stream = new FileInputStream(s);
-    	ANTLRInputStream antlr = new ANTLRInputStream(stream);
-    	MegaLLexer lexer = new MegaLMyLexer(antlr);
-    	CommonTokenStream tokens = new CommonTokenStream(lexer);
-    	MegaLParser parser = new MegaLParser(tokens);
-    	ModelContext ctx = parser.model();
-    	if (parser.getNumberOfSyntaxErrors()>0)
-    		throw new MegaLException();
-    	return ctx.m;
-	}
 }
 
 model returns [Model m] :
