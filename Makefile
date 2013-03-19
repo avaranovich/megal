@@ -1,11 +1,16 @@
 tool = eclipse/megal
+
 antlr = antlr-4.0-complete.jar
+gson = google-gson-2.2.2-release.zip
 
 nope:
 	@echo Want to build, test, or what?
 
 # Download ANTLR if needed
-download: ${tool}/${antlr}
+download: ${antlr}
+
+#Download GSON library
+download-gson: ${gson}
 
 # Generate parser with ANTLR
 generate: ${tool}/megal/parser/MegaLParser.java
@@ -24,6 +29,9 @@ test: build
 # Helper for ANTLR download
 ${antlr}:
 	cd ${tool}; curl -O http://www.antlr4.org/download/${antlr}
+
+${gson}:
+	cd ${tool}/libs; curl -O https://google-gson.googlecode.com/files/${gson}; unzip ${gson}; rm ${gson}
 
 # Helper for parser generation
 ${tool}/megal/parser/MegaLParser.java: ${tool}/${antlr} ${tool}/megal/parser/MegaL.g4 ${tool}/megal/model/*.java Makefile
