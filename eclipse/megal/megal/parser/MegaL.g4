@@ -5,8 +5,6 @@ package megal.parser;
 
 import megal.*;
 import megal.model.*;
-import java.util.List;
-import java.util.LinkedList;
 }
 
 @lexer::header {
@@ -26,8 +24,8 @@ model :
 decl returns [Decl d] : 
 	( edecl { $d = $edecl.d; }	
 	| rdecl { $d = $rdecl.d; }
-	| etdecl { $d = $etdecl.d; }
-	| rtdecl { $d = $rtdecl.d; }
+	| etypedecl { $d = $etypedecl.d; }
+	| rtypedecl { $d = $rtypedecl.d; }
 	)
 	'.'
 	;
@@ -103,21 +101,21 @@ parent returns [String n] :
 	;
 
 // Entity type declarations
-etdecl returns [ETDecl d] :
-	subtype=etypename
+etypedecl returns [ETypeDecl d] :
+	name=etypename
 	'<'
 	supertype=etypename
-	{ $d = new ETDecl($subtype.n, $supertype.n); } 
+	{ $d = new ETypeDecl($name.n, $supertype.n); } 
 	;
 
 // Relationship type declarations
-rtdecl returns [RTDecl d] :
-	r=rname
+rtypedecl returns [RTypeDecl d] :
+	name=rname
 	'<'
 	arg1=etypename
 	'*'
 	arg2=etypename
-	{ $d = new RTDecl($r.n, $arg1.n, $arg2.n); } 
+	{ $d = new RTypeDecl($name.n, $arg1.n, $arg2.n); } 
 	;
 
 // IDs as in names of entity or relationship type

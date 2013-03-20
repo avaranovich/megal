@@ -1,19 +1,16 @@
 package megal.analysis;
 
+import megal.model.*;
 import megal.logging.Log;
-import megal.model.EDecl;
-import megal.model.Model;
-import megal.model.Visitor;
 
 public class Resolution extends Visitor {
 	
 	private boolean allResolved = true;
 	
-	public Resolution(Model model, Log log){
-		super(model, log);
+	public Resolution(){
+		super();
 	}
-	
-	@Override
+
 	public void visit(EDecl edecl) { 
 		boolean isResolved = edecl.getEntity().tryResolve();
 		System.out.println(isResolved);

@@ -1,7 +1,8 @@
 package megal;
 
-import megal.logging.Log;
 import megal.model.*;
+import megal.logging.Log;
+import static megal.Context.*;
 import megal.analysis.*;
 import megal.parser.MegaLMyLexer;
 import megal.parser.MegaLParser;
@@ -19,7 +20,7 @@ import com.google.gson.Gson;
  */
 public class Tool {
 	
-	public static void parse(String input, Model model, Log log) {
+	public static void parse(String input) {
 		try {
 			try {
 				FileInputStream stream = new FileInputStream(input);
@@ -27,10 +28,10 @@ public class Tool {
 				MegaLMyLexer lexer = new MegaLMyLexer(antlr);
 				CommonTokenStream tokens = new CommonTokenStream(lexer);
 				MegaLParser parser = new MegaLParser(tokens);
-				parser.root = model;
+				parser.root = Context.model;
 				parser.model();
-				log.lexerErrors += lexer.getNumberOfErrors();
-				log.parserErrors += parser.getNumberOfSyntaxErrors();
+				Context.log.lexerErrors += lexer.getNumberOfErrors();
+				Context.log.parserErrors += parser.getNumberOfSyntaxErrors();
 			} catch (IOException e) {
 				e.printStackTrace();
 				log.fatalErrors++;
@@ -42,8 +43,8 @@ public class Tool {
 		}		
 	}
 	
-	private static void resolve(Model model, Log log){
-		new Resolution(model, log);
+	private static void resolve(){
+		//new Resolution();
 	}
 	
 	public static void main(String[] args) throws IOException {
@@ -58,26 +59,25 @@ public class Tool {
 			ConfigRegistry registry = ConfigRegistry.fromFile(config);
 		}
 		
-		Model model = new Model();
-		Log log = new Log();
-		parse(home+File.separator+"megal"+File.separator+"prelude.megal",model,log);
-		parse(input,model,log);
+		parse(home+File.separator+"megal"+File.separator+"prelude.megal");
+		parse(input);
 		
-		resolve(model, log);
+		// Run various analyses
+		new EDecls();
+		new ETypeDecls();
+		new ERefs();
+		new ETypeRefs();
+		resolve();
 		
 		// Write log back next to input file
 		String output = input.replaceFirst(".megal", ".log");
 		if (input!=output) {
 			PrintStream ps = new PrintStream(output);
 			Gson gson = new Gson();
-			ps.println(gson.toJson(log));
+			ps.println(gson.toJson(Context.log));
 			ps.close();
 		}
-		
-		// Run various analyses
-		new EDecls(model,log);
-		new ETDecls(model,log);
-		
+				
 		// Exit with a non-zero exit code if there were any problems
 		if (log.fatalErrors > 0 
 			|| log.lexerErrors > 0 

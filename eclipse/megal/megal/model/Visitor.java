@@ -1,18 +1,13 @@
 package megal.model;
 
-import megal.logging.Log;
-import megal.model.*;
+import megal.Context;
 
 /**
  * Reusable walker over MegaL model
  */
 public class Visitor {
-	protected Model model;
-	protected Log log;
-	public Visitor(Model model, Log log) {
-		this.model = model;
-		this.log = log;
-		for (Decl decl : model.getDecls()) {
+	public Visitor() {
+		for (Decl decl : Context.model.getDecls()) {
 			if (decl instanceof EDecl) {
 				EDecl edecl = (EDecl)decl;
 				visit(edecl);
@@ -20,11 +15,11 @@ public class Visitor {
 			} else if (decl instanceof RDecl) {
 				RDecl rdecl = (RDecl)decl;
 				visit(rdecl);
-			}  else if (decl instanceof ETDecl) {
-				ETDecl etdecl = (ETDecl)decl;
+			}  else if (decl instanceof ETypeDecl) {
+				ETypeDecl etdecl = (ETypeDecl)decl;
 				visit(etdecl);
-			}  else if (decl instanceof RTDecl) {
-				RTDecl rtdecl = (RTDecl)decl;
+			}  else if (decl instanceof RTypeDecl) {
+				RTypeDecl rtdecl = (RTypeDecl)decl;
 				visit(rtdecl);
 			}
 		}
@@ -32,6 +27,6 @@ public class Visitor {
 	public void visit(EDecl edecl) { }
 	public void visit(EType etype) { }
 	public void visit(RDecl rdecl) { }
-	public void visit(ETDecl etdecl) { }
-	public void visit(RTDecl rtdecl) { }	
+	public void visit(ETypeDecl etdecl) { }
+	public void visit(RTypeDecl rtdecl) { }	
 }
