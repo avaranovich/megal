@@ -51,11 +51,12 @@ public class Tool {
 		String input = args[1];
 		
 		//configuration file path
-		String config = args[3];
-		
-		// load the config file
-		// pululate the tool registry
-		ConfigRegistry registry = ConfigRegistry.fromFile(config);
+		if (args.length > 2){
+			String config = args[2];
+			// load the config file
+			// pululate the tool registry
+			ConfigRegistry registry = ConfigRegistry.fromFile(config);
+		}
 		
 		Model model = new Model();
 		Log log = new Log();

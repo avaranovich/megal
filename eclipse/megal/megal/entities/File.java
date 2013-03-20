@@ -9,6 +9,6 @@ public class File extends Entity {
 	
 	@Override
 	public boolean tryResolve(){
-		return true;
+		return false;
 	}
 }
