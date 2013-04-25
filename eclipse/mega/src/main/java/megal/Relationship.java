@@ -1,8 +1,14 @@
 package megal;
 
+import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 
 import megal.model.EDecl;
 
@@ -43,12 +49,19 @@ public class Relationship<X extends Entity, Y extends Entity> {
 	/**
 	 * @return the piece of config (if any), associated with a given relationship.
 	 */
-	public JsonObject getConfig(){
-		//TODO
-		String name = this.getClass().toString();
-		String cfg = "";
-		JsonElement je = new JsonParser().parse(cfg);  
-		JsonObject jo = je.getAsJsonObject();  
-		return jo.get("config").getAsJsonObject();
+	
+	@SuppressWarnings("unchecked")
+	public Config getConfig(){
+		Config conf = ConfigFactory.load();
+		List<Config> rels = (List<Config>) conf.getConfigList("relationships");
+		for (Config rel : rels){
+			String name = rel.getString("relationship");
+			//System.out.println(this.getClass().getName());
+			if (name.equalsIgnoreCase(this.getClass().getName())){
+				return rel.getConfig("config");	
+			}
+		}
+		
+		return null;
 	}
 }

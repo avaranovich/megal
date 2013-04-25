@@ -30,6 +30,16 @@
     	<artifactId>javaparser</artifactId>
     	<version>1.0.8</version>
 	</dependency>
+	<dependency>
+    	<groupId>com.typesafe</groupId>
+    	<artifactId>config</artifactId>
+    	<version>1.0.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.functionaljava</groupId>
+		<artifactId>functionaljava</artifactId>
+		<version>3.1</version>
+	</dependency>
   </dependencies>
 
   <build>

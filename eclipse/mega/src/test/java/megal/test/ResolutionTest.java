@@ -15,7 +15,7 @@ import megal.model.Model;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ResolutionTest {
+public class ResolutionTest extends BaseTest {
 	
 	@Before
 	public void setUp() throws Exception {
@@ -31,10 +31,6 @@ public class ResolutionTest {
 		
 		Tool.parse(getResorucePath("prelude.megal"));
 		Tool.parse(input);
-	}
-	
-	private String getResorucePath(String relPath){
-		return this.getClass().getResource(relPath).getPath();
 	}
 
 	@Test

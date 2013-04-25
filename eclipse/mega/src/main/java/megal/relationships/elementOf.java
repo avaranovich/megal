@@ -1,5 +1,7 @@
 package megal.relationships;
 
+import com.typesafe.config.Config;
+
 import megal.Entity;
 import megal.Relationship;
 
