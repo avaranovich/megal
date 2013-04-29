@@ -11,6 +11,13 @@ public class Model {
 		return decls;
 	}
 	
+	public void addDecl(Decl d){
+		if (decls==null)
+			decls = new LinkedList<Decl>();
+		
+		decls.add(d);
+	}
+	
 	public void resolve(String entity, Object resource) {
 		EDecl e = this.getEDecl(entity);
 		e.getEntity().resolve(resource);

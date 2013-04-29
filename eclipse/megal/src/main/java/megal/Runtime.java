@@ -4,12 +4,12 @@ import java.lang.reflect.Array;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import megal.model.RDecl;
+import megal.model.RTypeDecl;
 
 import org.reflections.Reflections;
 
@@ -54,13 +54,13 @@ public class Runtime {
 			}
 		}
 
-		public RDecl toRDecl(){
+		public RTypeDecl toRTypeDecl(){
 			Class<?> coreRel = getClass(typedRelationship);
 			String name = getCore().typedRelationship.getSimpleName();
 
 			ParameterizedType ptString = (ParameterizedType) coreRel.getGenericSuperclass();
 
-			RDecl rdecl = new RDecl(
+			RTypeDecl rdecl = new RTypeDecl(
 					name, 
 					getClass(ptString.getActualTypeArguments()[0]).getSimpleName(), 
 					getClass(ptString.getActualTypeArguments()[1]).getSimpleName(),
@@ -120,10 +120,10 @@ public class Runtime {
 	/*
 	 * Convers all custom relationships in a form of realtionship delaration
 	 */
-	public List<RDecl> getCustomRDecls(){
-		List<RDecl> decls = new ArrayList<RDecl>();
+	public List<RTypeDecl> getCustomRDecls(){
+		List<RTypeDecl> decls = new ArrayList<RTypeDecl>();
 		for(Relationship r: customRels){
-			decls.add(r.toRDecl());
+			decls.add(r.toRTypeDecl());
 		}
 
 		return decls;

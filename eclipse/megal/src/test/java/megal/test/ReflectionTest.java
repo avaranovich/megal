@@ -8,6 +8,7 @@ import java.util.Set;
 
 import megal.Relationship;
 import megal.model.RDecl;
+import megal.model.RTypeDecl;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,15 +45,15 @@ public class ReflectionTest {
 	@Test
 	public void getRDeclForCustomRelationship(){
 		megal.Runtime.Relationship rel = customRels.get(0);
-		RDecl rDecl = rel.toRDecl();
+		RTypeDecl rDecl = rel.toRTypeDecl();
 		
-		String name = rDecl.getRel().getName();
+		String name = rDecl.getName();
 		assertEquals("elementOf", name);
 		
-		String left = rDecl.getLeft().getName();
+		String left = rDecl.getLeft();
 		assertEquals("File", left);
 		
-		String right = rDecl.getRight().getName();
+		String right = rDecl.getRight();
 		assertEquals("Language", right);
 		
 		assertEquals(false, rDecl.isCore());

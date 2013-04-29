@@ -16,7 +16,11 @@ public class RTypeDecls extends Visitor {
 		String right = decl.getRight();
 		if (!rTypeDecls.containsKey(name))
 			rTypeDecls.put(name, new LinkedList<Pair<String,String>>());
+		
 		List<Pair<String,String>> decls = rTypeDecls.get(name);
-		decls.add(new Pair<String,String>(left,right));
+		Pair<String,String> n = new Pair<String,String>(left,right);
+		if (!decls.contains(n)){
+			decls.add(n);
+		}
 	}
 }

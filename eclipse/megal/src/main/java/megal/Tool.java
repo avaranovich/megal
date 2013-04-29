@@ -2,13 +2,19 @@ package megal;
 
 import static megal.Context.*;
 import megal.analysis.*;
+import megal.model.RDecl;
+import megal.model.RTypeDecl;
 import megal.parser.MegaLMyLexer;
 import megal.parser.MegaLParser;
+import megal.trivia.Pair;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.antlr.v4.runtime.*;
 import com.google.gson.Gson;
 
@@ -38,11 +44,36 @@ public class Tool {
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.fatalErrors++;
-		}		
+		}
 	}
 	
 	private static void resolve(){
 		//new Resolution();
+	}
+	
+	/*
+	 * After prelude was parsed, we need to bootstrap MegaL, i.e. register all plugins and add custom relationships
+	 */
+	public static void bootstrap(){
+		List<RTypeDecl> customRDecls = Context.runtime.getCustomRDecls();
+		for(RTypeDecl decl: customRDecls){
+			/*String name = decl.getRel().getName();
+			if (!Context.rTypeDecls.containsKey(name))
+				Context.rTypeDecls.put(name, new LinkedList<Pair<String,String>>());
+			
+			List<Pair<String,String>> decls = Context.rTypeDecls.get(name);
+			decls.add(new Pair<String,String>(decl.getLeft().getName(), decl.getRight().getName()));*/
+			Context.model.addDecl(decl);
+		}
+	}
+	
+	public static void analyze(){
+		// Run various analyses
+		new EDecls();
+		new ETypeDecls();
+		new ERefs();
+		new ETypeRefs();
+		new RTypeDecls();
 	}
 	
 	public static void main(String[] args) throws IOException {
@@ -53,14 +84,12 @@ public class Tool {
 		/* TODO: after loading prelude, generate MegaL code from the plugins (custom relationships),
 		 and construct the object model from it.
 		 See https://github.com/avaranovich/megal/issues/3 */
+		bootstrap();
+		
+		analyze();
 		
 		parse(input);
-		
-		// Run various analyses
-		new EDecls();
-		new ETypeDecls();
-		new ERefs();
-		new ETypeRefs();
+
 		resolve();
 		
 		// Write log back next to input file
