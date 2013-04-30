@@ -51,6 +51,7 @@ public class RelationshipsTest extends BaseTest {
 			String key = entry.getKey();
 		    System.out.println("Key = " + key + ", Value = " + entry.getValue());
 		    if (key.equals("elementOf")){
+		    	// we have a custom relationships, so there should be 2 relationships for elementOf
 				assertEquals(2, entry.getValue().size());	
 		    }
 		    else{

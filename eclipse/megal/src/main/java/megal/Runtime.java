@@ -118,7 +118,7 @@ public class Runtime {
 	}
 
 	/*
-	 * Convers all custom relationships in a form of realtionship delaration
+	 * Converts all custom relationships in a form of realtionship delaration
 	 */
 	public List<RTypeDecl> getCustomRDecls(){
 		List<RTypeDecl> decls = new ArrayList<RTypeDecl>();

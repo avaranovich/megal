@@ -1,5 +1,10 @@
 package megal.test;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 
 import megal.Context;
@@ -24,5 +29,33 @@ public abstract class BaseTest {
 	
 	String getResorucePath(String relPath){
 		return this.getClass().getResource(relPath).getPath();
+	}
+	
+	String getResourceContent(String relPath){
+		String pprintSrcPath =  getResorucePath(relPath);
+		FileInputStream inputStream = null;
+		try {
+			inputStream = new FileInputStream(pprintSrcPath);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+	    try {
+	        try {
+				String src = IOUtils.toString(inputStream);
+				return src;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	    } finally {
+	    	if (inputStream != null){
+		        try {
+					inputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+	    	}
+	    }
+	    
+		return "";
 	}
 }
