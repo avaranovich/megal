@@ -1,14 +1,15 @@
 package megal.relationships;
 
-import java.net.URL;
 import java.util.List;
-
-import com.google.gson.JsonObject;
 import com.typesafe.config.Config;
 
 import megal.checkers.Checker;
 import megal.entities.File;
 import megal.entities.Language;
+import megal.events.RelationshipEvaluationFailed;
+import megal.events.RelationshipEvaluationSucceeded;
+
+import static megal.Context.*;
 
 public class FileElementOfLanguage extends elementOf<File, Language> {
 	
@@ -35,20 +36,23 @@ public class FileElementOfLanguage extends elementOf<File, Language> {
 					try {
 						clazz = Class.forName(checker);
 					} catch (ClassNotFoundException e) {
+						eventBus.post(new RelationshipEvaluationFailed(first, second, this));
 						return false;
 					}
 				    try {
 						Checker<String> tool = (Checker<String>) clazz.newInstance();
-						return tool.check(((URL)first.getResource()).getPath());
-					} catch (InstantiationException e) {
-						return false;
-					} catch (IllegalAccessException e) {
+						boolean success = tool.check(first.getResource().getPath());
+						eventBus.post(new RelationshipEvaluationSucceeded(first, second, this));
+						return success;
+					} catch (Exception e) {
+						eventBus.post(new RelationshipEvaluationFailed(first, second, this));
 						return false;
 					}
 				}
 			}
 		}
 		
+		eventBus.post(new RelationshipEvaluationFailed(first, second, this));
 		return false;
 	}
 }

@@ -6,7 +6,10 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
 import megal.entities.Entity;
+import megal.events.RelationshipEvaluationStarted;
 import megal.model.EDecl;
+
+import static megal.Context.*;
 
 /**
  * The abstract base class of all relationship types (classes).
@@ -39,6 +42,7 @@ public class Relationship<X extends Entity, Y extends Entity> {
 	 * as we may not know how to check the relationship.
 	 */
 	public boolean evaluate(X first, Y second) {
+		eventBus.post(new RelationshipEvaluationStarted(first, second, this));
 		return true;
 	}
 	
