@@ -7,6 +7,6 @@ import megal.model.*;
  */
 public class ERefs extends Visitor {
 	public void visit(RDecl rdecl) {
-		// TODO
+		//rdecl.getLeft()
 	}
 }

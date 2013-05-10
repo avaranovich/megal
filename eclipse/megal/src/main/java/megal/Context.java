@@ -1,5 +1,6 @@
 package megal;
 
+import static megal.Context.eventBus;
 import megal.model.*;
 import megal.trivia.Pair;
 import megal.logging.*;
@@ -7,6 +8,8 @@ import megal.logging.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.eventbus.EventBus;
 
 /**
  * Analyses semi-persist results in this context class.
@@ -31,10 +34,13 @@ public final class Context {
 
 	// The declared relationship types
 	public static Map<String,List<Pair<String,String>>> rTypeDecls = new HashMap<String,List<Pair<String,String>>>();
+	
+	public static EventBus eventBus = new EventBus();
 
 	// Registry of the Entity base type
 	static {
 		eTypeDecls.put("Entity",null);
+		eventBus.register(new EventBusChangeRecorder());
 	}
 
 	public static Map<String,EDecl> customEDecls = new HashMap<String,EDecl>(); 

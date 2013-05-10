@@ -8,7 +8,7 @@ import java.net.URL;
 
 import megal.Context;
 import megal.Tool;
-import megal.analysis.Resolution;
+import megal.analysis.Linking;
 import megal.logging.Log;
 import megal.model.Model;
 
@@ -26,7 +26,7 @@ public class ResolutionTest extends BaseTest {
 
 	@Test
 	public void resolutionTest() throws IOException {
-		Resolution v =  new Resolution();
-		assertEquals(true, v.isAllResolved());
+		Linking v =  new Linking();
+		assertEquals(true, v.isAllLinked());
 	}
 }

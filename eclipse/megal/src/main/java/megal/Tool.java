@@ -47,22 +47,16 @@ public class Tool {
 		}
 	}
 	
-	private static void resolve(){
-		//new Resolution();
+	public static void link(){
+		new Linking();
 	}
 	
 	/*
-	 * After prelude was parsed, we need to bootstrap MegaL, i.e. register all plugins and add custom relationships
+	 * After prelude was parsed, we need to extend MegaL, i.e. register all plugins and add custom relationships
 	 */
-	public static void bootstrap(){
+	public static void extend(){ 
 		List<RTypeDecl> customRDecls = Context.runtime.getCustomRDecls();
 		for(RTypeDecl decl: customRDecls){
-			/*String name = decl.getRel().getName();
-			if (!Context.rTypeDecls.containsKey(name))
-				Context.rTypeDecls.put(name, new LinkedList<Pair<String,String>>());
-			
-			List<Pair<String,String>> decls = Context.rTypeDecls.get(name);
-			decls.add(new Pair<String,String>(decl.getLeft().getName(), decl.getRight().getName()));*/
 			Context.model.addDecl(decl);
 		}
 	}
@@ -81,16 +75,14 @@ public class Tool {
 		String input = args[1];
 		
 		parse(home+File.separator+"megal"+File.separator+"prelude.megal");
-		/* TODO: after loading prelude, generate MegaL code from the plugins (custom relationships),
-		 and construct the object model from it.
-		 See https://github.com/avaranovich/megal/issues/3 */
-		bootstrap();
+
+		extend();
 		
 		analyze();
 		
 		parse(input);
 
-		resolve();
+		link();
 		
 		// Write log back next to input file
 		String output = input.replaceFirst(".megal", ".log");

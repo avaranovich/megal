@@ -8,7 +8,11 @@ public class File extends Entity {
 	}
 	
 	@Override
-	public boolean tryResolve(){
+	public boolean tryLink(){
+		if (super.tryLink() == true)
+			return true;
+		
+		
 		return false;
 	}
 }

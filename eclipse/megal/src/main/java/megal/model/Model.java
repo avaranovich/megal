@@ -20,7 +20,7 @@ public class Model {
 	
 	public void resolve(String entity, Object resource) {
 		EDecl e = this.getEDecl(entity);
-		e.getEntity().resolve(resource);
+		e.getEntity().link(resource);
 	}
 	
 	public EDecl getEDecl(String name) {

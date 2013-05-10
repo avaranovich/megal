@@ -1,8 +1,9 @@
 package megal.model;
 
-import java.lang.reflect.InvocationTargetException;
-
+import static megal.Context.*;
 import megal.entities.Entity;
+import megal.events.EntityLookupStarted;
+import megal.events.EntityNotFound;
 
 public class EDecl extends Decl {
 	private Modifier modifier;
@@ -29,6 +30,8 @@ public class EDecl extends Decl {
 	 * @return The entity associated with the given entity declaration.
 	 */
 	public Entity getEntity(){
+		eventBus.post(new EntityLookupStarted(this));
+		
 		if (entity != null){
 			return entity;
 		}
@@ -37,27 +40,20 @@ public class EDecl extends Decl {
 			Class[] types = {this.getClass()};
 			try {
 				entity = (Entity)Class.forName("megal.entities." + type.getName()).getConstructor(types).newInstance(params);
-				
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				e.printStackTrace();
+			} catch (Exception e) {
+				eventBus.post(new EntityNotFound(e, this));
+				return null;
 			}
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			eventBus.post(new EntityNotFound(e, this));
+			return null;
 		} 
 		
 		if (entity == null){
-			//TODO: Resolver not found exception
+			//TODO: do we want to handle this in some specific way?
 		}
+		
+		
 		return entity;
 	}
 }

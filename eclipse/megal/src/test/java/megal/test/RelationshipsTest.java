@@ -43,7 +43,7 @@ public class RelationshipsTest extends BaseTest {
 	@Test
 	public void allCustomRelationshipsShouldBeAddedToTheGraphAfterBootstrap(){
 		Tool.analyze();
-		Tool.bootstrap();
+		Tool.extend();
 		Tool.analyze();
 		
 		System.out.println("All relationship types:");

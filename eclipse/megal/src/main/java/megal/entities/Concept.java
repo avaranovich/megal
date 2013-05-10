@@ -9,7 +9,7 @@ public class Concept extends Entity {
 	}
 	
 	@Override
-	public boolean tryResolve(){
+	public boolean tryLink(){
 		return true;
 	}
 }

@@ -6,9 +6,9 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Set;
 
-import megal.Relationship;
 import megal.model.RDecl;
 import megal.model.RTypeDecl;
+import megal.relationships.Relationship;
 
 import org.junit.Before;
 import org.junit.Test;

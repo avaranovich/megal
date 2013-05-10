@@ -4,9 +4,18 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.List;
 
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
+
+import megal.events.EntityLinkingFailed;
+import megal.events.EntityLinkingStarted;
+import megal.events.EntityLinkingSucceeded;
 import megal.model.EDecl;
 import megal.model.EType;
+
+import static megal.Context.*;
 
 /**
  * The abstract base class of all entity types (classes).
@@ -15,12 +24,16 @@ import megal.model.EType;
 public abstract class Entity {
 	private EDecl edecl;
 	
-	public Object getResource() { return resource; }
-	protected void setResource(Object resource) { this.resource = resource; }	
-	public boolean isResolved() { return !(resource==null); }
+	public URI getResource() { return resource; }
+	protected void setResource(URI resource) { this.resource = resource; }	
+	public boolean isLinked() { return !(resource==null); }
 	//TODO: add properies related to the resolution results (e.g. failed because of checker was not found)
 	
-	private Object resource;
+	/*
+	 * URI is user, as it can be extended in for any domain-specific notion of resource. 
+	 * See http://docs.oracle.com/javase/1.5.0/docs/api/java/net/URI.html
+	 */
+	private URI resource;
 
 	public Entity(EDecl edecl){
 		this.edecl = edecl;
@@ -47,13 +60,15 @@ public abstract class Entity {
 	}
 	
 	/**
-	 * Uses 101companies discovery service to resolve a base entity (language, technology, etc.).
-	 * @return True if the resolution succeeds, False otherwise.
+	 * Uses 101companies discovery service to link to a base entity (language, technology, etc.).
+	 * @return True if the linking succeeds, False otherwise.
 	 */
-	public boolean tryResolve(){
+	public boolean tryLink(){
 		int code = 404;
 		String url = getBaseUrl();
 
+		eventBus.post(new EntityLinkingStarted(url));
+		
 		try {
 			URL u = new URL(url);
 			HttpURLConnection huc =  (HttpURLConnection) u.openConnection(); 
@@ -61,14 +76,18 @@ public abstract class Entity {
 			huc.connect(); 
 			code = huc.getResponseCode();	
 		}
-		catch(Exception _){
+		catch(Exception ex){
+			eventBus.post(new EntityLinkingFailed(ex));
 			return false;
 		}
 		
 		if (code == 200){
 			try {
-				this.resolve(new URI(url));
-			} catch (URISyntaxException e) {
+				URI uri = new URI(url);
+				this.link(uri);
+				eventBus.post(new EntityLinkingSucceeded(uri, this));
+			} catch (URISyntaxException ex) {
+				eventBus.post(new EntityLinkingFailed(ex));
 				return false;
 			}
 			return true;
@@ -78,10 +97,28 @@ public abstract class Entity {
 	}
 	
 	/**
-	 * Resolves an entity using a provided resource.
-	 * @param resource Resource to use in a resolution process for a given entity.
+	 * Links an entity to a provided resource.
+	 * @param resource Resource to use in a linking process for a given entity.
 	 */
-	public void resolve(Object resource){
+	public void link(URI resource){
 		setResource(resource);
+	}
+	
+	/**
+	 * @return the piece of config (if any), associated with a given relationship.
+	 */
+	@SuppressWarnings("unchecked")
+	public Config getConfig(){
+		Config conf = ConfigFactory.load();
+		List<Config> rels = (List<Config>) conf.getConfigList("linking");
+		for (Config rel : rels){
+			String name = rel.getString("relationship");
+			//System.out.println(this.getClass().getName());
+			if (name.equalsIgnoreCase(this.getClass().getName())){
+				return rel.getConfig("config");	
+			}
+		}
+		
+		return null;
 	}
 }

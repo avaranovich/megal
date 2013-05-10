@@ -1,6 +1,5 @@
 package megal.relationships;
 
-import megal.Relationship;
 import megal.entities.Entity;
 import megal.model.EDecl;
 

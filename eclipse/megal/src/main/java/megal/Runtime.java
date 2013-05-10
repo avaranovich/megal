@@ -24,7 +24,7 @@ public class Runtime {
 
 		public boolean isCore(){
 			ParameterizedType t = (ParameterizedType) typedRelationship.getGenericSuperclass();	
-			return (t.getRawType() == megal.Relationship.class);
+			return (t.getRawType() == megal.relationships.Relationship.class);
 		}
 
 		/**
@@ -79,7 +79,7 @@ public class Runtime {
 			do{
 				rel = new Runtime.Relationship(superClass);
 				superClass = getSuperClass(superClass);
-			} while (superClass != megal.Relationship.class);
+			} while (superClass != megal.relationships.Relationship.class);
 
 			return rel;			
 		}
@@ -94,12 +94,12 @@ public class Runtime {
 
 		Reflections reflections = new Reflections("megal.relationships");
 		@SuppressWarnings("rawtypes")
-		Set<Class<? extends megal.Relationship>> subTypes = reflections.getSubTypesOf(megal.Relationship.class);
+		Set<Class<? extends megal.relationships.Relationship>> subTypes = reflections.getSubTypesOf(megal.relationships.Relationship.class);
 
 		for(Class<?> c: subTypes){
 			ParameterizedType t = (ParameterizedType) c.getGenericSuperclass();
 
-			if (t.getRawType() == megal.Relationship.class){
+			if (t.getRawType() == megal.relationships.Relationship.class){
 				//System.out.println("Core relationship: " + c);
 				coreRels.add(new Relationship(c));
 			} else {

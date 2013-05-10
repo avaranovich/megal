@@ -27,11 +27,11 @@ public abstract class BaseTest {
 		Tool.parse(getResorucePath("/prelude.megal"));
 	}
 	
-	String getResorucePath(String relPath){
+	protected String getResorucePath(String relPath){
 		return this.getClass().getResource(relPath).getPath();
 	}
 	
-	String getResourceContent(String relPath){
+	protected String getResourceContent(String relPath){
 		String pprintSrcPath =  getResorucePath(relPath);
 		FileInputStream inputStream = null;
 		try {

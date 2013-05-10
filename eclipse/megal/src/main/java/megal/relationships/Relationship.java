@@ -1,4 +1,4 @@
-package megal;
+package megal.relationships;
 
 import java.util.List;
 
@@ -45,7 +45,6 @@ public class Relationship<X extends Entity, Y extends Entity> {
 	/**
 	 * @return the piece of config (if any), associated with a given relationship.
 	 */
-	
 	@SuppressWarnings("unchecked")
 	public Config getConfig(){
 		Config conf = ConfigFactory.load();

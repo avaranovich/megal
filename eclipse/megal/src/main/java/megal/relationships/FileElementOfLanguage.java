@@ -1,6 +1,7 @@
 package megal.relationships;
 
 import java.net.URL;
+import java.util.List;
 
 import com.google.gson.JsonObject;
 import com.typesafe.config.Config;
@@ -17,27 +18,34 @@ public class FileElementOfLanguage extends elementOf<File, Language> {
 		boolean isValid = super.evaluate(first, second);
 		if (!isValid) return false;
 		
-		if (!first.isResolved()) return false;
+		if ((!first.isLinked()) && (!second.isLinked())) return false;
 		
 		Config c = this.getConfig();
-		String type = c.getString("type");
-		String resource = c.getString("resource");
-		String checker = c.getString("checker");
-		
-		if (type == "class"){
-		    Class<?> clazz;
-			try {
-				clazz = Class.forName(checker);
-			} catch (ClassNotFoundException e) {
-				return false;
-			}
-		    try {
-				Checker<String> tool = (Checker<String>) clazz.newInstance();
-				return tool.check(((URL)first.getResource()).getPath());
-			} catch (InstantiationException e) {
-				return false;
-			} catch (IllegalAccessException e) {
-				return false;
+				
+		// all checkers for this relationship
+		List<Config> configs = (List<Config>) c.getAnyRefList("checkers");
+		for(Config conf: configs){
+			String resource = conf.getString("resource");
+			if (resource.equals(second.getResource().toString())){
+				String checker  = conf.getString("checker");
+				String type = c.getString("type");
+				
+				if (type == "class"){
+				    Class<?> clazz;
+					try {
+						clazz = Class.forName(checker);
+					} catch (ClassNotFoundException e) {
+						return false;
+					}
+				    try {
+						Checker<String> tool = (Checker<String>) clazz.newInstance();
+						return tool.check(((URL)first.getResource()).getPath());
+					} catch (InstantiationException e) {
+						return false;
+					} catch (IllegalAccessException e) {
+						return false;
+					}
+				}
 			}
 		}
 		

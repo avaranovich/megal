@@ -3,7 +3,7 @@ Set < Entity .
 Artifact < Entity .
 Language < Set .
 Technology < Entity .
-Concept < .E = ntity .
+Concept < Entity .
 File < Artifact .
 Folder < Artifact .
 
