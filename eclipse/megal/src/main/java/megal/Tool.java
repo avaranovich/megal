@@ -71,6 +71,12 @@ public class Tool {
 	}
 	
 	public static void main(String[] args) throws IOException {
+		
+		if (args.length < 2){
+			System.out.print("Please provide the following arguments: home dir and a megamodel file");
+			System.exit(-1);
+		}
+		
 		String home = args[0];
 		String input = args[1];
 		

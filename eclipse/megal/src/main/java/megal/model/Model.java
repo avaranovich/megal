@@ -1,5 +1,6 @@
 package megal.model;
 
+import java.net.URI;
 import java.util.List;
 import java.util.LinkedList;
 
@@ -18,7 +19,7 @@ public class Model {
 		decls.add(d);
 	}
 	
-	public void resolve(String entity, Object resource) {
+	public void resolve(String entity, URI resource) {
 		EDecl e = this.getEDecl(entity);
 		e.getEntity().link(resource);
 	}

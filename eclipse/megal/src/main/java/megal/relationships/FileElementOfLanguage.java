@@ -19,7 +19,10 @@ public class FileElementOfLanguage extends elementOf<File, Language> {
 		boolean isValid = super.evaluate(first, second);
 		if (!isValid) return false;
 		
-		if ((!first.isLinked()) && (!second.isLinked())) return false;
+		if ((!first.isLinked()) && (!second.isLinked())) {
+			eventBus.post(new RelationshipEvaluationFailed(first, second, this));
+			return false;
+		}
 		
 		Config c = this.getConfig();
 				
