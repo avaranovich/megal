@@ -12,4 +12,8 @@ public class RelationshipEvaluationSucceeded extends RelationshipEvaluation {
 		this.second = second;
 		this.rel    = rel;
 	}
+	
+	public String toString(){
+		return "Successfully evaluated: " + first.getName() + " " + rel + " " + second.getName();
+	}
 }

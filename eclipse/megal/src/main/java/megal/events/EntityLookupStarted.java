@@ -11,4 +11,8 @@ public class EntityLookupStarted {
 	public EntityLookupStarted(EDecl eDecl){
 		this.eDecl = eDecl;
 	}
+	
+	public String toString(){
+		return "Looking for entity: " + eDecl.getName();
+	}
 }

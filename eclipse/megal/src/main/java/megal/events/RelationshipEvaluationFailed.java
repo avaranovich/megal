@@ -12,4 +12,8 @@ public class RelationshipEvaluationFailed extends RelationshipEvaluation {
 		this.second = second;
 		this.rel    = rel;
 	}
+	
+	public String toString(){
+		return "Failed to evaluate: " + first + " " + rel + " " + second;
+	}
 }

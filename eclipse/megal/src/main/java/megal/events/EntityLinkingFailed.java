@@ -12,4 +12,8 @@ public class EntityLinkingFailed {
 	public EntityLinkingFailed(Exception ex){
 		this.ex = ex;
 	}
+
+	public String toString(){
+		return "Linking failed: " + ex.getMessage();
+	}
 }

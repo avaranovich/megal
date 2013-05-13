@@ -39,6 +39,10 @@ public abstract class Entity {
 		this.edecl = edecl;
 	}
 	
+	public String getName(){
+		return this.edecl.getName();
+	}
+	
 	/**
 	 * @return An associated entity declaration from the parsing tree.
 	 */

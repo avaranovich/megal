@@ -22,4 +22,8 @@ public class EntityLinkingSucceeded {
 		this.resource = resource;
 		this.entity   = entity;
 	}
+	
+	public String toString(){
+		return "Successfully linked entity " + entity.getName() + " to resource: " + resource.toString();
+	}
 }

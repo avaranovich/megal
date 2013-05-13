@@ -6,5 +6,5 @@ import megal.relationships.Relationship;
 public abstract class RelationshipEvaluation {
 	protected Entity first;
 	protected Entity second;
-	protected Relationship rel;
+	protected Relationship<?,?> rel;
 }

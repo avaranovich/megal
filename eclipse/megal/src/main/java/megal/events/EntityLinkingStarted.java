@@ -12,4 +12,8 @@ public class EntityLinkingStarted {
 	public EntityLinkingStarted(String url){
 		this.url = url;
 	}
+	
+	public String toString(){
+		return "Trying to link entity to the resource: " + url;
+	}
 }

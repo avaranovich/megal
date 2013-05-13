@@ -29,4 +29,8 @@ public class EntityNotFound {
 	public EDecl getEdecl(){
 		return this.eDecl;
 	}
+	
+	public String toString(){
+		return "Entity for " + eDecl.getName() + " not found: " + ex.getMessage();
+	}
 }
