@@ -16,6 +16,15 @@ import static megal.Context.*;
  * See package megal.relationships.
  */
 public class Relationship<X extends Entity, Y extends Entity> {
+	
+	protected X first;
+	protected Y second;
+	
+	protected Relationship(X first, Y second){
+		this.first  = first;
+		this.second = second;
+	}
+	
 	/**
 	 * @return the result of testing the relationship to be well-formed
 	 * 
@@ -41,8 +50,8 @@ public class Relationship<X extends Entity, Y extends Entity> {
 	 * By default, we assume that it vacuously holds 
 	 * as we may not know how to check the relationship.
 	 */
-	public boolean evaluate(X first, Y second) {
-		eventBus.post(new RelationshipEvaluationStarted(first, second, this));
+	public boolean evaluate() {
+		eventBus.post(new RelationshipEvaluationStarted(this.first, this.second, this));
 		return true;
 	}
 	

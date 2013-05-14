@@ -13,10 +13,14 @@ import static megal.Context.*;
 
 public class FileElementOfLanguage extends elementOf<File, Language> {
 	
+	public FileElementOfLanguage(File first, Language second){
+		super(first, second);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean evaluate(File first, Language second) {
-		boolean isValid = super.evaluate(first, second);
+	public boolean evaluate() {
+		boolean isValid = super.evaluate();
 		if (!isValid) return false;
 		
 		if ((!first.isLinked()) && (!second.isLinked())) {

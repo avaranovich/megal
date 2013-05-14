@@ -8,8 +8,12 @@ import static megal.Context.*;
 
 public class elementOf<X extends Entity, Y extends Set> extends Relationship<X, Y> {
 	
-	public boolean evaluate(X first, Y second) {
-		if (!super.evaluate(first, second)) {
+	public elementOf(X first, Y second){
+		super(first, second);
+	}
+	
+	public boolean evaluate() {
+		if (!super.evaluate()) {
 			eventBus.post(new RelationshipEvaluationFailed(first, second, this));
 			return false;
 		}
