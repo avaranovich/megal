@@ -15,7 +15,7 @@ import megal.model.Model;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ResolutionTest extends BaseTest {
+public class LinkingTest extends BaseTest {
 	
 	@Before
 	public void setUp() {

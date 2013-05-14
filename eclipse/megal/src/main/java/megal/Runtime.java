@@ -2,12 +2,14 @@ package megal;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.GenericArrayType;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import megal.entities.Entity;
 import megal.model.RDecl;
 import megal.model.RTypeDecl;
 
@@ -25,6 +27,23 @@ public class Runtime {
 		public boolean isCore(){
 			ParameterizedType t = (ParameterizedType) typedRelationship.getGenericSuperclass();	
 			return (t.getRawType() == megal.relationships.Relationship.class);
+		}
+		
+		/*
+		 * Creates a new instance of the relationship, parametrized with two entities.
+		 */
+		public megal.relationships.Relationship<?,?> newInstance(Entity first, Entity second){
+			@SuppressWarnings("rawtypes")
+			Class[] types = {first.getClass(), second.getClass()};
+			
+			Object[] params = {first, second};
+			
+			try {
+				return (megal.relationships.Relationship<?, ?>) typedRelationship.getConstructor(types).newInstance(params);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
 		}
 
 		/**

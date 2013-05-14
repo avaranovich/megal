@@ -45,7 +45,10 @@ public class ConfigTest extends BaseTest {
 	
 	@Test
 	public void configForRelationshipTypeShouldBeDiscoveredIfExists(){
-		Relationship<File, Language> rel = new FileElementOfLanguage();
+		File f = new File(null);
+		Language l = new Language(null);
+		
+		Relationship<File, Language> rel = new FileElementOfLanguage(f, l);
 		Config c = rel.getConfig();
 		assertNotEquals(c, null);
 	}
