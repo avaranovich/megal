@@ -7,7 +7,11 @@ import java.util.Map.Entry;
 
 import megal.Context;
 import megal.Tool;
+import megal.model.Decl;
+import megal.model.RDecl;
 import megal.model.RTypeDecl;
+import megal.relationships.FileElementOfLanguage;
+import megal.relationships.Relationship;
 import megal.trivia.Pair;
 
 import org.junit.Before;
@@ -57,6 +61,21 @@ public class RelationshipsTest extends BaseTest {
 		    else{
 		    	assertEquals(1, entry.getValue().size());	
 		    }
+		}
+	}
+	
+	@Test
+	public void existingCustomRelationsihpShouldBeProperlyResolved(){
+		Tool.analyze();
+		Tool.extend();
+		Tool.analyze();
+				
+		for(Decl d: Context.model.getDecls()){
+			if (d instanceof RDecl){
+				assertEquals("elementOf", ((RDecl)d).getRel().getName()); 
+				Relationship<?,?> rel = ((RDecl)d).getRelationship();
+				assertTrue(rel instanceof FileElementOfLanguage);
+			}
 		}
 	}
 }

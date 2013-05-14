@@ -12,7 +12,7 @@ import megal.Tool;
 import megal.logging.Log;
 import megal.model.Model;
 
-public abstract class BaseTest {
+public class BaseTest {
 	
 	@Before
 	public void setUp(){

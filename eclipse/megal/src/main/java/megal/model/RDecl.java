@@ -1,13 +1,8 @@
 package megal.model;
 
-import java.util.List;
-import java.util.Map.Entry;
-
-import megal.Context;
 import megal.entities.Entity;
 import megal.events.RelationshipLookupStarted;
 import megal.relationships.Relationship;
-import megal.trivia.Pair;
 
 import static megal.Context.*;
 
@@ -39,16 +34,16 @@ public class RDecl extends Decl {
 		for(megal.Runtime.Relationship r: runtime.getCustomRels()){
 			//TODO: implement ambiquity check
 			RTypeDecl rType = r.toRTypeDecl();
-			if ((rType.getLeft() == this.left.getDecl().getName()) && 
-				(rType.getRight() == this.right.getDecl().getName())){
+			if ((rType.getLeft().equals(this.left.getDecl().getType().getName())) && 
+				(rType.getRight().equals(this.right.getDecl().getType().getName()))){
 				return r.newInstance(first, second);
 			}
 		}
 		
 		for(megal.Runtime.Relationship r: runtime.getCoreRels()){
 			RTypeDecl rType = r.toRTypeDecl();
-			if ((rType.getLeft() == this.left.getDecl().getName()) && 
-				(rType.getRight() == this.right.getDecl().getName())){
+			if ((rType.getLeft().equals(this.left.getDecl().getType().getName())) && 
+				(rType.getRight().equals(this.right.getDecl().getType().getName()))){
 				return r.newInstance(first, second);
 			}
 		}

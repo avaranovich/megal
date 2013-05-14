@@ -67,6 +67,7 @@ public class Tool {
 		new ETypeDecls();
 		new ERefs();
 		new ETypeRefs();
+		new RDecls();
 		new RTypeDecls();
 	}
 	

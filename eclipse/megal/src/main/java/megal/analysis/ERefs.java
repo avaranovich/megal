@@ -1,5 +1,6 @@
 package megal.analysis;
 
+import megal.Context;
 import megal.model.*;
 
 /**
@@ -7,6 +8,10 @@ import megal.model.*;
  */
 public class ERefs extends Visitor {
 	public void visit(RDecl rdecl) {
-		//rdecl.getLeft()
+		EDecl eDecl = Context.eDecls.get(rdecl.getLeft().getName());
+		rdecl.getLeft().setDecl(eDecl);
+		
+		eDecl = Context.eDecls.get(rdecl.getRight().getName());
+		rdecl.getRight().setDecl(eDecl);
 	}
 }

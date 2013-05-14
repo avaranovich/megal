@@ -31,6 +31,9 @@ public final class Context {
 
 	// The declared entity types
 	public static Map<String,ETypeDecl> eTypeDecls = new HashMap<String,ETypeDecl>();
+	
+	// The declared relationships
+	public static Map<String, RDecl> rDecls = new HashMap<String, RDecl>();
 
 	// The declared relationship types
 	public static Map<String,List<Pair<String,String>>> rTypeDecls = new HashMap<String,List<Pair<String,String>>>();
