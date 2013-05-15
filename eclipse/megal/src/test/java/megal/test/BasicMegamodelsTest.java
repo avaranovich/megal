@@ -15,7 +15,9 @@ public class BasicMegamodelsTest extends BaseTest {
 	@Test
 	public void javaProgram(){
 		Tool.parse(getResorucePath("/models/java.megal"));
+		Tool.extend();
 		Tool.analyze();
 		Tool.link();
+		Tool.check();
 	}
 }

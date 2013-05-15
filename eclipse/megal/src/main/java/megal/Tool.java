@@ -51,6 +51,10 @@ public class Tool {
 		new Linking();
 	}
 	
+	public static void check(){
+		new Checking();
+	}
+	
 	/*
 	 * After prelude was parsed, we need to extend MegaL, i.e. register all plugins and add custom relationships
 	 */

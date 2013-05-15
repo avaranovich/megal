@@ -1,5 +1,7 @@
 package megal.relationships;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import com.typesafe.config.Config;
 
@@ -31,14 +33,20 @@ public class FileElementOfLanguage extends elementOf<File, Language> {
 		Config c = this.getConfig();
 				
 		// all checkers for this relationship
-		List<Config> configs = (List<Config>) c.getAnyRefList("checkers");
+		List<Config> configs = (List<Config>) c.getConfigList("checkers");
 		for(Config conf: configs){
-			String resource = conf.getString("resource");
-			if (resource.equals(second.getResource().toString())){
+			URI resource;
+			try {
+				resource = new URI(conf.getString("resource"));
+			} catch (URISyntaxException e) {
+				eventBus.post(new RelationshipEvaluationFailed(first, second, this));
+				return false;
+			}
+			if (resource.equals(second.getResource())){
 				String checker  = conf.getString("checker");
-				String type = c.getString("type");
+				String type = conf.getString("type");
 				
-				if (type == "class"){
+				if (type.equals("class")){
 				    Class<?> clazz;
 					try {
 						clazz = Class.forName(checker);
@@ -47,9 +55,9 @@ public class FileElementOfLanguage extends elementOf<File, Language> {
 						return false;
 					}
 				    try {
-						Checker<String> tool = (Checker<String>) clazz.newInstance();
-						boolean success = tool.check(first.getResource().getPath());
-						eventBus.post(new RelationshipEvaluationSucceeded(first, second, this));
+						Checker<URI> tool = (Checker<URI>) clazz.newInstance();
+						boolean success = tool.check(first.getResource());
+						eventBus.post(new RelationshipEvaluationSucceeded(first, second, this, success));
 						return success;
 					} catch (Exception e) {
 						eventBus.post(new RelationshipEvaluationFailed(first, second, this));

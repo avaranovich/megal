@@ -30,16 +30,16 @@ public class EDecl extends Decl {
 	 * @return The entity associated with the given entity declaration.
 	 */
 	public Entity getEntity(){
-		eventBus.post(new EntityLookupStarted(this));
-		
-		if (entity != null){
-			return entity;
+		if (this.entity != null){
+			return this.entity;
 		}
+		
+		eventBus.post(new EntityLookupStarted(this));
 		try {
 			Object[] params = {this};
 			Class[] types = {this.getClass()};
 			try {
-				entity = (Entity)Class.forName("megal.entities." + type.getName()).getConstructor(types).newInstance(params);
+				this.entity = (Entity)Class.forName("megal.entities." + type.getName()).getConstructor(types).newInstance(params);
 			} catch (Exception e) {
 				eventBus.post(new EntityNotFound(e, this));
 				return null;
@@ -49,11 +49,11 @@ public class EDecl extends Decl {
 			return null;
 		} 
 		
-		if (entity == null){
+		if (this.entity == null){
 			//TODO: do we want to handle this in some specific way?
 		}
 		
 		
-		return entity;
+		return this.entity;
 	}
 }

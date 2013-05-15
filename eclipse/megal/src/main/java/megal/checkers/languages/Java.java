@@ -7,36 +7,46 @@ import japa.parser.ast.CompilationUnit;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+
+import com.google.common.base.Charsets;
+import com.google.common.io.CharStreams;
+import com.google.common.io.Closeables;
+import com.google.common.io.Resources;
+import com.google.common.primitives.Chars;
 
 import megal.checkers.Checker;
 
-public class Java implements Checker<String> {
+public class Java implements Checker<URI> {
 
-	public boolean check(String fileName) {
-		// creates an input stream for the file to be parsed
-        FileInputStream in;
-		try {
-			in = new FileInputStream(fileName);
-		} catch (FileNotFoundException e) {
-			return false;
-		}
-
+	@SuppressWarnings("deprecation")
+	public boolean check(URI file) {
         CompilationUnit cu;
         try {
             // parse the file
-            cu = JavaParser.parse(in);
+        	InputStream in = null;
+            try {
+            	in = Resources.newInputStreamSupplier(file.toURL()).getInput();
+            	//String content = CharStreams.toString(new InputStreamReader(in, Charsets.UTF_8));
+            	
+				cu = JavaParser.parse(in);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+            finally{
+            	Closeables.closeQuietly(in);
+            }
         } catch (ParseException e) {
 			return false;
-		} finally {
-			if (in != null){
-	            try {
-					in.close();
-				} catch (IOException e) {
-					return false;
-				}
-			}
-        }
+		} 
 
-		return false;
+		return true;
 	}
 }

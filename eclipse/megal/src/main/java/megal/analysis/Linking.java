@@ -4,6 +4,9 @@ import megal.model.*;
 import megal.entities.Entity;
 import megal.logging.Log;
 
+/*
+ * Tries to link entities to their resources.
+ */
 public class Linking extends Visitor {
 	
 	private boolean allLinked = true;

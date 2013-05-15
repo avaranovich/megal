@@ -26,7 +26,7 @@ public abstract class Entity {
 	
 	public URI getResource() { return resource; }
 	protected void setResource(URI resource) { this.resource = resource; }	
-	public boolean isLinked() { return !(resource==null); }
+	public boolean isLinked() { return !(resource == null); }
 	//TODO: add properies related to the resolution results (e.g. failed because of checker was not found)
 	
 	/*
@@ -68,6 +68,28 @@ public abstract class Entity {
 	 * @return True if the linking succeeds, False otherwise.
 	 */
 	public boolean tryLink(){
+		Config conf = ConfigFactory.load();
+		List<Config> rels = (List<Config>) conf.getConfigList("linking");
+		for(Config c: rels){
+			String type = c.getString("type");
+			String name = c.getString("name");
+			URI uri = null;
+			try {
+				String res = c.getString("resource");
+				uri = new URI(res);
+			} catch (URISyntaxException ex) {
+				eventBus.post(new EntityLinkingFailed(ex));
+				return false;
+			}
+			String t = this.edecl.getType().getName();
+			String n = this.getName(); 
+			if ((type.equals(t)) && (name.equals(n))){
+				this.link(uri);
+				eventBus.post(new EntityLinkingSucceeded(uri, this));
+				return true;
+			}
+		}
+		
 		int code = 404;
 		String url = getBaseUrl();
 
