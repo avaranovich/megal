@@ -13,11 +13,13 @@ public class BasicMegamodelsTest extends BaseTest {
 	}
 	
 	@Test
-	public void javaProgram(){
+	public void javaTest(){
 		Tool.parse(getResorucePath("/models/java.megal"));
 		Tool.extend();
 		Tool.analyze();
 		Tool.link();
 		Tool.check();
+		
+		System.out.println("JSON:" + Tool.getEvents().getJson());
 	}
 }

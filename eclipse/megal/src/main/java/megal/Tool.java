@@ -24,6 +24,16 @@ import com.google.gson.Gson;
  */
 public class Tool {
 	
+	private static EventBusChangeRecorder eventRecorder;
+	
+	public static EventBusChangeRecorder getEvents(){
+		return eventRecorder;
+	}
+	
+	static {
+		eventRecorder = new EventBusChangeRecorder();
+	}
+	
 	public static void parse(String input) {
 		try {
 			try {
@@ -33,6 +43,7 @@ public class Tool {
 				CommonTokenStream tokens = new CommonTokenStream(lexer);
 				MegaLParser parser = new MegaLParser(tokens);
 				parser.root = Context.model;
+				Context.register(eventRecorder);
 				parser.model();
 				Context.log.lexerErrors += lexer.getNumberOfErrors();
 				Context.log.parserErrors += parser.getNumberOfSyntaxErrors();

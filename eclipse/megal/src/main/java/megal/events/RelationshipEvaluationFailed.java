@@ -16,4 +16,9 @@ public class RelationshipEvaluationFailed extends RelationshipEvaluation {
 	public String toString(){
 		return "Failed to evaluate: " + first.getName() + " " + rel.getClass().getName() + " " + second.getName();
 	}
+
+	public String toJson() {
+		return String.format("{'event':'RelationshipEvaluationFailed', 'left':'%s', 'rel':'%s', 'right':'%s'}",
+				first.getName(), rel.getClass().getName(), second.getName());
+	}
 }

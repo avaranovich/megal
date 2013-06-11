@@ -43,7 +43,10 @@ public final class Context {
 	// Registry of the Entity base type
 	static {
 		eTypeDecls.put("Entity",null);
-		eventBus.register(new EventBusChangeRecorder());
+	}
+	
+	public static void register(EventBusChangeRecorder recorder){
+		eventBus.register(recorder);
 	}
 
 	public static Map<String,EDecl> customEDecls = new HashMap<String,EDecl>(); 

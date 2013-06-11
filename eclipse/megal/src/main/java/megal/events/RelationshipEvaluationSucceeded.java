@@ -22,4 +22,9 @@ public class RelationshipEvaluationSucceeded extends RelationshipEvaluation {
 	public String toString(){
 		return "Successfully evaluated: " + first.getName() + " " + rel.getClass().getName() + " " + second.getName() + "; Holds:" + this.holds;
 	}
+
+	public String toJson() {
+		return String.format("{'event':'RelationshipEvaluationSucceeded', 'left':'%s', 'rel':'%s', 'right':'%s'}",
+				first.getName(), rel.getClass().getName(), second.getName());
+	}
 }

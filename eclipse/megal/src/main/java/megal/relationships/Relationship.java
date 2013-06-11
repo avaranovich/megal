@@ -15,7 +15,7 @@ import static megal.Context.*;
  * The abstract base class of all relationship types (classes).
  * See package megal.relationships.
  */
-public class Relationship<X extends Entity, Y extends Entity> {
+public abstract class Relationship<X extends Entity, Y extends Entity> {
 	
 	protected X first;
 	protected Y second;

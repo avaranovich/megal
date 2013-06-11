@@ -17,4 +17,9 @@ public class RelationshipEvaluationStarted extends RelationshipEvaluation {
 	public String toString(){
 		return "Started evaluating: " + first.getName() + " " + rel.getClass().getName() + " " + second.getName();
 	}
+
+	public String toJson() {
+		return String.format("{'event':'RelationshipEvaluationStarted', 'left':'%s', 'rel':'%s', 'right':'%s'}",
+				first.getName(), rel.getClass().getName(), second.getName());
+	}
 }

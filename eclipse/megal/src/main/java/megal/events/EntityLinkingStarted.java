@@ -3,7 +3,7 @@ package megal.events;
 /*
  * Represents an event, when the framework starts linking the entity to a resource.
  */
-public class EntityLinkingStarted {
+public class EntityLinkingStarted extends Event {
 	/*
 	 * URL which represents a resource and used for linking.
 	 */
@@ -15,5 +15,9 @@ public class EntityLinkingStarted {
 	
 	public String toString(){
 		return "Trying to link entity to the resource: " + url;
+	}
+
+	public String toJson() {
+		return String.format("{'event':'EntityLinkingStarted', 'resource':'%s'}", url);
 	}
 }

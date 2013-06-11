@@ -7,7 +7,7 @@ import megal.entities.Entity;
 /*
  * Represents an event, when the entity was successfully linked to the resource.
  */
-public class EntityLinkingSucceeded {
+public class EntityLinkingSucceeded extends Event {
 	/*
 	 * Resource, to which the given entity is linked.
 	 */
@@ -25,5 +25,10 @@ public class EntityLinkingSucceeded {
 	
 	public String toString(){
 		return "Successfully linked entity " + entity.getName() + " to resource: " + resource.toString();
+	}
+
+	public String toJson() {
+		return String.format("{'event':'EntityLinkingSucceeded', 'entity':'%s', 'resource':'%s'}", 
+				entity.getName(), resource.toString());
 	}
 }

@@ -6,7 +6,7 @@ import megal.model.EDecl;
 /*
  * Represents an event when the entity for a given entity declaration is not found.
  */
-public class EntityNotFound {
+public class EntityNotFound extends Event {
 	/*
 	 * Raw exception was raised while the framework was trying to find the entity.
 	 */
@@ -32,5 +32,9 @@ public class EntityNotFound {
 	
 	public String toString(){
 		return "Entity for " + eDecl.getName() + " not found: " + ex.getMessage();
+	}
+
+	public String toJson() {
+		return String.format("{'event':'EntityNotFound', 'entity':'%s', 'error':'%s'}", eDecl.getName(), ex.getMessage());
 	}
 }

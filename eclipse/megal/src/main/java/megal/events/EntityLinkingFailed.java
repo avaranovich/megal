@@ -1,9 +1,11 @@
 package megal.events;
 
+import com.google.gson.Gson;
+
 /*
  * Represents an event when a linking process for a given entity has failed.
  */
-public class EntityLinkingFailed {
+public class EntityLinkingFailed extends Event {
 	/*
 	 * An exception associated with the failure.
 	 */
@@ -15,5 +17,9 @@ public class EntityLinkingFailed {
 
 	public String toString(){
 		return "Linking failed: " + ex.getMessage();
+	}
+
+	public String toJson() {
+		return String.format("{'event':'EntityLinkingFailed', 'error':'%s'}", ex.getMessage());
 	}
 }
