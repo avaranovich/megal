@@ -1,5 +1,6 @@
 package megal;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.InvocationTargetException;
@@ -12,6 +13,7 @@ import java.util.Set;
 import megal.entities.Entity;
 import megal.model.RDecl;
 import megal.model.RTypeDecl;
+import megal.relationships.WeakRef;
 
 import org.reflections.Reflections;
 
@@ -115,14 +117,17 @@ public class Runtime {
 		@SuppressWarnings("rawtypes")
 		Set<Class<? extends megal.relationships.Relationship>> subTypes = reflections.getSubTypesOf(megal.relationships.Relationship.class);
 
+		@SuppressWarnings("unchecked")
+		Set<Class<?>> weakRels = reflections.getTypesAnnotatedWith(WeakRef.class);
+		
 		for(Class<?> c: subTypes){
-			ParameterizedType t = (ParameterizedType) c.getGenericSuperclass();
+			//ParameterizedType t = (ParameterizedType) c.getGenericSuperclass();
 
-			if (t.getRawType() == megal.relationships.Relationship.class){
-				//System.out.println("Core relationship: " + c);
+			if (weakRels.contains(c)){
+				System.out.println("Core relationship: " + c);
 				coreRels.add(new Relationship(c));
 			} else {
-				//System.out.println("Custom relationship: " + c);
+				System.out.println("Custom relationship: " + c);
 				customRels.add(new Relationship(c));
 			}
 		}

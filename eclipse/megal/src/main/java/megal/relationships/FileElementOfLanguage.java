@@ -22,9 +22,7 @@ public class FileElementOfLanguage extends elementOf<File, Language> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean evaluate() {
-		boolean isValid = super.evaluate();
-		if (!isValid) return false;
-		
+		// entities on both sides of this relationship have to be linked to resources before		
 		if ((!first.isLinked()) && (!second.isLinked())) {
 			eventBus.post(new RelationshipEvaluationFailed(first, second, this));
 			return false;

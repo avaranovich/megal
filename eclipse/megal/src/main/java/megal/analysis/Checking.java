@@ -9,6 +9,7 @@ import megal.model.Visitor;
 public class Checking extends Visitor { 
 
 	public void visit(RDecl decl) {
+		//TODO: check if allowed to invoke, trigger an event otherwise
 		decl.getRelationship().evaluate();
 	}
 }
