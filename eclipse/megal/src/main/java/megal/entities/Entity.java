@@ -46,7 +46,7 @@ public abstract class Entity {
 	/**
 	 * @return An associated entity declaration from the parsing tree.
 	 */
-	protected EDecl getEdecl() {
+	public EDecl getEdecl() {
 		return edecl;
 	}
 	
@@ -78,7 +78,7 @@ public abstract class Entity {
 				String res = c.getString("resource");
 				uri = new URI(res);
 			} catch (URISyntaxException ex) {
-				eventBus.post(new EntityLinkingFailed(ex));
+				eventBus.post(new EntityLinkingFailed(ex, edecl));
 				return false;
 			}
 			String t = this.edecl.getType().getName();
@@ -93,7 +93,7 @@ public abstract class Entity {
 		int code = 404;
 		String url = getBaseUrl();
 
-		eventBus.post(new EntityLinkingStarted(url));
+		eventBus.post(new EntityLinkingStarted(url, edecl));
 		
 		try {
 			URL u = new URL(url);
@@ -103,7 +103,7 @@ public abstract class Entity {
 			code = huc.getResponseCode();	
 		}
 		catch(Exception ex){
-			eventBus.post(new EntityLinkingFailed(ex));
+			eventBus.post(new EntityLinkingFailed(ex, edecl));
 			return false;
 		}
 		
@@ -113,7 +113,7 @@ public abstract class Entity {
 				this.link(uri);
 				eventBus.post(new EntityLinkingSucceeded(uri, this));
 			} catch (URISyntaxException ex) {
-				eventBus.post(new EntityLinkingFailed(ex));
+				eventBus.post(new EntityLinkingFailed(ex, edecl));
 				return false;
 			}
 			return true;

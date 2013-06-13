@@ -17,6 +17,7 @@ public class EntityLookupStarted extends Event {
 	}
 
 	public String toJson() {
-		return String.format("{'event':'EntityLookupStarted', 'entity':'%s'}", eDecl.getName());
+		return String.format("{\"event\":\"EntityLookupStarted\", \"source\":\"%s\", \"entity\":\"%s\"}", 
+				eDecl.toSource(), eDecl.getName());
 	}
 }

@@ -24,7 +24,7 @@ public class RelationshipEvaluationSucceeded extends RelationshipEvaluation {
 	}
 
 	public String toJson() {
-		return String.format("{'event':'RelationshipEvaluationSucceeded', 'left':'%s', 'rel':'%s', 'right':'%s'}",
-				first.getName(), rel.getClass().getName(), second.getName());
+		return String.format("{\"event\":\"RelationshipEvaluationSucceeded\", \"source\":\"%s\", \"left\":\"%s\", \"rel\":\"%s\", \"right\":\"%s\"}",
+				this.toMegalSoruce(), first.getName(), rel.getClass().getSimpleName(), second.getName());
 	}
 }

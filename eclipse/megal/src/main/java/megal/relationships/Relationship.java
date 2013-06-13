@@ -8,6 +8,7 @@ import com.typesafe.config.ConfigFactory;
 import megal.entities.Entity;
 import megal.events.RelationshipEvaluationStarted;
 import megal.model.EDecl;
+import megal.model.RTypeDecl;
 
 import static megal.Context.*;
 
@@ -19,10 +20,16 @@ public abstract class Relationship<X extends Entity, Y extends Entity> {
 	
 	protected X first;
 	protected Y second;
+	protected RTypeDecl rTypeDecl;
 	
-	protected Relationship(X first, Y second){
-		this.first  = first;
-		this.second = second;
+	protected Relationship(X first, Y second, RTypeDecl rTypeDecl){
+		this.first  	 = first;
+		this.second 	 = second;
+		this.rTypeDecl   = rTypeDecl;
+	}
+	
+	public RTypeDecl getTypeDecl(){
+		return this.rTypeDecl;
 	}
 	
 	/**

@@ -26,19 +26,21 @@ public class Runtime {
 			typedRelationship = clazz;
 		}
 
-		public boolean isCore(){
-			ParameterizedType t = (ParameterizedType) typedRelationship.getGenericSuperclass();	
-			return (t.getRawType() == megal.relationships.Relationship.class);
+		/*
+		 * Checks if the relationship is weak, i.e. it cannot be evaluated.
+		 */
+		public boolean isWeak(){
+			return typedRelationship.isAnnotationPresent(WeakRef.class);
 		}
 		
 		/*
 		 * Creates a new instance of the relationship, parametrized with two entities.
 		 */
-		public megal.relationships.Relationship<?,?> newInstance(Entity first, Entity second){
+		public megal.relationships.Relationship<?,?> newInstance(Entity first, Entity second, RTypeDecl rTypeDecl){
 			@SuppressWarnings("rawtypes")
-			Class[] types = {first.getClass(), second.getClass()};
+			Class[] types = {first.getClass(), second.getClass(), rTypeDecl.getClass()};
 			
-			Object[] params = {first, second};
+			Object[] params = {first, second, rTypeDecl};
 			
 			try {
 				return (megal.relationships.Relationship<?, ?>) typedRelationship.getConstructor(types).newInstance(params);
@@ -124,7 +126,7 @@ public class Runtime {
 			//ParameterizedType t = (ParameterizedType) c.getGenericSuperclass();
 
 			if (weakRels.contains(c)){
-				System.out.println("Core relationship: " + c);
+				System.out.println("Weak relationship: " + c);
 				coreRels.add(new Relationship(c));
 			} else {
 				System.out.println("Custom relationship: " + c);

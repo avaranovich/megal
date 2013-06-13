@@ -36,7 +36,7 @@ public class RDecl extends Decl {
 			RTypeDecl rType = r.toRTypeDecl();
 			if ((rType.getLeft().equals(this.left.getDecl().getType().getName())) && 
 				(rType.getRight().equals(this.right.getDecl().getType().getName()))){
-				return r.newInstance(first, second);
+				return r.newInstance(first, second, rType);
 			}
 		}
 		
@@ -44,7 +44,7 @@ public class RDecl extends Decl {
 			RTypeDecl rType = r.toRTypeDecl();
 			if ((rType.getLeft().equals(this.left.getDecl().getType().getName())) && 
 				(rType.getRight().equals(this.right.getDecl().getType().getName()))){
-				return r.newInstance(first, second);
+				return r.newInstance(first, second, rType);
 			}
 		}
 

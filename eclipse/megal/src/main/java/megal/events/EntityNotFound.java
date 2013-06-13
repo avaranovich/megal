@@ -35,6 +35,6 @@ public class EntityNotFound extends Event {
 	}
 
 	public String toJson() {
-		return String.format("{'event':'EntityNotFound', 'entity':'%s', 'error':'%s'}", eDecl.getName(), ex.getMessage());
+		return String.format("{\"event\":\"EntityNotFound\", \"entity\":\"%s\", \"error\":\"%s\"}", eDecl.getName(), ex.getMessage());
 	}
 }

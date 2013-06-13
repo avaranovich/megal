@@ -32,14 +32,14 @@ public class ReflectionTest {
 		assertSame(3, coreRels.size());
 		assertSame(1, customRels.size());
 		
-		assertSame(false, customRels.get(0).isCore());
+		assertSame(false, customRels.get(0).isWeak());
 	}	
 	
 	@Test
 	public void getCoreForCustomRelationship(){
 		megal.Runtime.Relationship rel = customRels.get(0);
 		megal.Runtime.Relationship core = rel.getCore();
-		assertSame(true, core.isCore());
+		assertSame(true, core.isWeak());
 	}
 	
 	@Test

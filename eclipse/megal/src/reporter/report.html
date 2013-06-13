@@ -9,6 +9,36 @@
 	<script type="text/javascript" src="https://raw.github.com/wycats/handlebars.js/1.0.0/dist/handlebars.js"></script>
   <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="tree.css">
+
+ <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
+ <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+
+ <style type="text/css">
+  td.relationship {
+    background-image: url('rel.png');
+    background-repeat: no-repeat;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%; 
+    background-size: 100% 100%;
+  }
+  td.entity{
+    background-image: url('entity.png');
+    background-repeat: no-repeat;
+     -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    -webkit-background-size: 100% 100%; 
+    background-size: 100% 100%;
+  }
+  pre {
+    margin: 0 0 0px;
+    padding: 0px;
+  }
+  .table td {
+    vertical-align: center !important;
+  }
+ </style>
+
 </head>
 <body>
 
@@ -46,6 +76,8 @@
       <thead>
         <tr>
           <th>Event</th>
+          <th>Type</th>
+          <th style='width:30%'>Source</th>
           <th>Details</th>
         </tr>
       </thead>
@@ -59,76 +91,103 @@
 
 	<script id="EntityLookupStarted" type="text/x-handlebars-template">
    <tr>
-    <td> <span class="label label-info"> Entity lookup started</span> </td>
+    <td> <span class="label label-info">Lookup started</span> </td>
+    <td class='entity'></td>
+    <td>{{src source}}</td>
     <td> entity:{{entity}}</td>
   </tr>
 	</script>
 
 	<script id="EntityLinkingStarted" type="text/x-handlebars-template">
    <tr>
-    <td><span class="label label-info"> Entity linking started </span> </td>
+    <td><span class="label label-info">Linking started </span> </td>
+    <td class='entity'></td>
+    <td>{{src source}}</td>
     <td> resource: <a href={{resource}}>{{resource}}</a> </td>
   </tr>
 	</script>
 
   <script id="EntityLinkingFailed" type="text/x-handlebars-template">
    <tr>
-    <td><span class="label label-error"> Entity linking failer </span> </td>
+    <td><span class="label label-error">Linking failed</span> </td>
+    <td class='entity'></td>
+    <td>{{src source}}</td>
     <td> error: {{error}}</td>
   </tr>
   </script>
 
 	<script id="EntityLinkingSucceeded" type="text/x-handlebars-template">
   <tr>
-    <td>  <span class="label label-success">Entity linking succeeded</span> </td>
+    <td>  <span class="label label-success">Linking succeeded</span> </td>
+    <td class='entity'></td>
+    <td>{{src source}}</td>
     <td>  <a href={{resource}}>{{entity}}</a>; resource: {{resource}}</td>
   </tr>
 	</script>
 
 	<script id="EntityLookupStarted" type="text/x-handlebars-template">
   <tr>
-    <td> <span class="label label-success">Entity lookup started</span> </td>
+    <td> <span class="label label-success">Lookup started</span> </td>
+    <td class='entity'></td>
+    <td>{{src source}}</td>
     <td> entity: {{JavaProgram}} </td>
   </tr>
 	</script>
 
 	<script id="EntityLinkingSucceeded" type="text/x-handlebars-template">
    <tr>
-    <td><span class="label label-success">  Entity linking succeeded</span></td>
+    <td><span class="label label-success">Linking succeeded</span></td>
+    <td class='entity'></td>
+    <td>{{src source}}</td>
     <td>entity: <a href={{resource}}>{{entity}}</a>; resource: {{resource}}</td>
   </tr>
 	</script>
 
   <script id="EntityNotFound" type="text/x-handlebars-template">
    <tr>
-    <td><span class="label label-error"> Entity {{entity}} not found</span></td>
-    <td> error: {{error}}</td>  </tr>
+    <td><span class="label label-error">Not found</span></td>
+    <td class='entity'></td>
+    <td>{{src source}}</td>
+    <td> entity: {{entity}} error: {{error}}</td>  </tr>
   </script>
 
 	<script id="RelationshipEvaluationStarted" type="text/x-handlebars-template">
    <tr>
-    <td><span class="label label-info">Relationship evaluation started</span></td>
+    <td><span class="label label-info">Evaluation started</span></td>
+    <td class='relationship'></td>
+     <td>({{src source}})</td>
     <td>{{left}}->({{rel}})->{{right}}</td>
   </tr>
 	</script>
 
 	<script id="RelationshipEvaluationSucceeded" type="text/x-handlebars-template">
    <tr>
-    <td><span class="label label-success">Relationship evaluation succeeded</span></td>
+    <td><span class="label label-success">Evaluation succeeded</span></td>
+    <td class='relationship'></td>
+    <td>{{src source}}</td>
     <td>{{left}}->({{rel}})->{{right}}</td>
   </tr>
 	</script>
 
 	<script type="text/javascript">
+
 	$(function() {
 
-		$.getJSON("test1.json", function(json) {
+    Handlebars.registerHelper('src', function(text) {
+      //var result = hljs.highlight('python', text).value;
+      var result = "<pre><code>"+text+"</pre></code>";
+      return new Handlebars.SafeString(result);
+    });
+
+
+		$.getJSON("test2.json", function(json) {
 			var html = _.map(json.events, function(e){
 				var source   = $("#"+e.event).html();
 				var template = Handlebars.compile(source);
 				return template(e);
 			});
 			$('#report').append(html);
+      $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
 		});
 	});
 	</script>

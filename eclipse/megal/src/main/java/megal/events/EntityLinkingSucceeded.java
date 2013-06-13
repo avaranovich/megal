@@ -28,7 +28,7 @@ public class EntityLinkingSucceeded extends Event {
 	}
 
 	public String toJson() {
-		return String.format("{'event':'EntityLinkingSucceeded', 'entity':'%s', 'resource':'%s'}", 
-				entity.getName(), resource.toString());
+		return String.format("{\"event\":\"EntityLinkingSucceeded\", \"source\":\"%s\", \"entity\":\"%s\", \"resource\":\"%s\"}", 
+				entity.getEdecl().toSource(), entity.getName(), resource.toString());
 	}
 }

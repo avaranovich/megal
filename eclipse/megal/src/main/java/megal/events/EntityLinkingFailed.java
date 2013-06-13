@@ -1,5 +1,7 @@
 package megal.events;
 
+import megal.model.EDecl;
+
 import com.google.gson.Gson;
 
 /*
@@ -11,8 +13,11 @@ public class EntityLinkingFailed extends Event {
 	 */
 	private Exception ex;
 	
-	public EntityLinkingFailed(Exception ex){
-		this.ex = ex;
+	private EDecl eDecl;
+	
+	public EntityLinkingFailed(Exception ex, EDecl eDecl){
+		this.ex    = ex;
+		this.eDecl = eDecl;
 	}
 
 	public String toString(){
@@ -20,6 +25,6 @@ public class EntityLinkingFailed extends Event {
 	}
 
 	public String toJson() {
-		return String.format("{'event':'EntityLinkingFailed', 'error':'%s'}", ex.getMessage());
+		return String.format("{\"event\":\"EntityLinkingFailed\", \"%s\", \"error\":\"%s\"}", eDecl.toSource(), ex.getMessage());
 	}
 }

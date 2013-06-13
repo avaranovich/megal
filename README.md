@@ -4,8 +4,9 @@ To be written
 
 # Preparations
 
-Run this command:
+Go to eclipse folder :
 
-     make download
+     mvn test
 
-This will download the ANTLR JAR which is needed for the MegaL parser.
+This will download all the dependencies, compile the project and run all
+unit tests.

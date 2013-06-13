@@ -26,7 +26,7 @@ public class EventBusChangeRecorder {
 	}
 	
 	public String getJson(){
-		String json = "{'events':[";
+		String json = "{\"events\":[";
 		Iterator<Event> iter = events.iterator();
 		while(iter.hasNext()){
 			Event e = iter.next();

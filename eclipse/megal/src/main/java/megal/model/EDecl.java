@@ -25,6 +25,10 @@ public class EDecl extends Decl {
 	public String getUref() { return uqref; }
 	public String getParent() { return parent; }
 	
+	public String toSource(){
+		return String.format("%s: %s", name, type.getName());
+	}
+	
 	/**
 	 * Lookups the entity for the entity declaration.
 	 * @return The entity associated with the given entity declaration.

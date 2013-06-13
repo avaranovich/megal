@@ -10,13 +10,14 @@ import megal.entities.File;
 import megal.entities.Language;
 import megal.events.RelationshipEvaluationFailed;
 import megal.events.RelationshipEvaluationSucceeded;
+import megal.model.RTypeDecl;
 
 import static megal.Context.*;
 
 public class FileElementOfLanguage extends elementOf<File, Language> {
 	
-	public FileElementOfLanguage(File first, Language second){
-		super(first, second);
+	public FileElementOfLanguage(File first, Language second, RTypeDecl rTypeDecl){
+		super(first, second, rTypeDecl);
 	}
 	
 	@SuppressWarnings("unchecked")

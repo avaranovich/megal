@@ -5,7 +5,7 @@ import megal.model.RDecl;
 /*
  * Represents an event, when the framework starts the relationship lookup for a given relationship declaration.
  */
-public class RelationshipLookupStarted extends Event {
+public class RelationshipLookupStarted extends RelationshipEvaluation {
 	private RDecl rDecl;
 	
 	public RelationshipLookupStarted(RDecl rDecl){
@@ -17,7 +17,7 @@ public class RelationshipLookupStarted extends Event {
 	}
 
 	public String toJson() {
-		return String.format("{'event':'RelationshipLookupStarted', 'left':'%s', 'rel':'%s', 'right':'%s'}",
-				rDecl.getLeft().getName() , rDecl.getRel().getName(), rDecl.getRight().getName());
+		return String.format("{\"event\":\"RelationshipLookupStarted\", \"source\": \"%s\", \"left\":\"%s\", \"rel\":\"%s\", \"right\":\"%s\"}",
+				this.toMegalSoruce(), rDecl.getLeft().getName() , rDecl.getRel().getName(), rDecl.getRight().getName());
 	}
 }

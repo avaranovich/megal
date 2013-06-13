@@ -6,6 +6,7 @@ import java.util.List;
 
 import megal.entities.File;
 import megal.entities.Language;
+import megal.model.RTypeDecl;
 import megal.relationships.FileElementOfLanguage;
 import megal.relationships.Relationship;
 
@@ -47,8 +48,9 @@ public class ConfigTest extends BaseTest {
 	public void configForRelationshipTypeShouldBeDiscoveredIfExists(){
 		File f = new File(null);
 		Language l = new Language(null);
+		RTypeDecl rTypeDecl = new RTypeDecl("elementOf", "File", "Language", true);
 		
-		Relationship<File, Language> rel = new FileElementOfLanguage(f, l);
+		Relationship<File, Language> rel = new FileElementOfLanguage(f, l, rTypeDecl);
 		Config c = rel.getConfig();
 		assertNotEquals(c, null);
 	}
