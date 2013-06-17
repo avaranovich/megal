@@ -28,6 +28,14 @@ public abstract class Relationship<X extends Entity, Y extends Entity> {
 		this.rTypeDecl   = rTypeDecl;
 	}
 	
+	public X getLeft(){
+		return this.first;
+	}
+	
+	public Y getRight(){
+		return this.second;
+	}
+	
 	public RTypeDecl getTypeDecl(){
 		return this.rTypeDecl;
 	}
@@ -46,7 +54,7 @@ public abstract class Relationship<X extends Entity, Y extends Entity> {
 	 * 
 	 * By default, no constraints are imposed.
 	 */
-	public boolean wellFormed(EDecl first, EDecl second) {
+	public boolean wellFormed() {
 		return true;
 	}
 
@@ -58,7 +66,6 @@ public abstract class Relationship<X extends Entity, Y extends Entity> {
 	 * as we may not know how to check the relationship.
 	 */
 	public boolean evaluate() {
-		eventBus.post(new RelationshipEvaluationStarted(this.first, this.second, this));
 		return true;
 	}
 	

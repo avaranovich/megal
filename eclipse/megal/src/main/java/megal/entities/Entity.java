@@ -22,12 +22,11 @@ import static megal.Context.*;
  * See package megal.entities.
  */
 public abstract class Entity {
-	private EDecl edecl;
+	protected EDecl edecl;
 	
 	public URI getResource() { return resource; }
 	protected void setResource(URI resource) { this.resource = resource; }	
 	public boolean isLinked() { return !(resource == null); }
-	//TODO: add properies related to the resolution results (e.g. failed because of checker was not found)
 	
 	/*
 	 * URI is user, as it can be extended in for any domain-specific notion of resource. 
@@ -50,77 +49,7 @@ public abstract class Entity {
 		return edecl;
 	}
 	
-	/**
-	 * @return Base URL of 101companies discovery servicy, depending on the entity type.
-	 */
-	private String getBaseUrl(){
-		String base = "http://101companies.org/resources/";
-		String typeName = getEdecl().getType().getName();
-		
-		if (typeName.equals("Language")) return base + "languages/" + getEdecl().getName();;
-		if (typeName.equals("Technology")) return base + "technologies/" + getEdecl().getName();;
-		
-		return "";
-	}
-	
-	/**
-	 * Uses 101companies discovery service to link to a base entity (language, technology, etc.).
-	 * @return True if the linking succeeds, False otherwise.
-	 */
-	public boolean tryLink(){
-		Config conf = ConfigFactory.load();
-		List<Config> rels = (List<Config>) conf.getConfigList("linking");
-		for(Config c: rels){
-			String type = c.getString("type");
-			String name = c.getString("name");
-			URI uri = null;
-			try {
-				String res = c.getString("resource");
-				uri = new URI(res);
-			} catch (URISyntaxException ex) {
-				eventBus.post(new EntityLinkingFailed(ex, edecl));
-				return false;
-			}
-			String t = this.edecl.getType().getName();
-			String n = this.getName(); 
-			if ((type.equals(t)) && (name.equals(n))){
-				this.link(uri);
-				eventBus.post(new EntityLinkingSucceeded(uri, this));
-				return true;
-			}
-		}
-		
-		int code = 404;
-		String url = getBaseUrl();
-
-		eventBus.post(new EntityLinkingStarted(url, edecl));
-		
-		try {
-			URL u = new URL(url);
-			HttpURLConnection huc =  (HttpURLConnection) u.openConnection(); 
-			huc.setRequestMethod("GET");  
-			huc.connect(); 
-			code = huc.getResponseCode();	
-		}
-		catch(Exception ex){
-			eventBus.post(new EntityLinkingFailed(ex, edecl));
-			return false;
-		}
-		
-		if (code == 200){
-			try {
-				URI uri = new URI(url);
-				this.link(uri);
-				eventBus.post(new EntityLinkingSucceeded(uri, this));
-			} catch (URISyntaxException ex) {
-				eventBus.post(new EntityLinkingFailed(ex, edecl));
-				return false;
-			}
-			return true;
-		}
-		
-		return false;
-	}
+	public abstract boolean tryLink();
 	
 	/**
 	 * Links an entity to a provided resource.

@@ -20,10 +20,6 @@ public class EntityLinkingFailed extends Event {
 		this.eDecl = eDecl;
 	}
 
-	public String toString(){
-		return "Linking failed: " + ex.getMessage();
-	}
-
 	public String toJson() {
 		return String.format("{\"event\":\"EntityLinkingFailed\", \"%s\", \"error\":\"%s\"}", eDecl.toSource(), ex.getMessage());
 	}

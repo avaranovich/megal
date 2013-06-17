@@ -2,14 +2,9 @@ package megal.entities;
 
 import megal.model.EDecl;
 
-public class Concept extends Entity {
+public class Concept extends Entity101 {
 
 	public Concept(EDecl edecl) {
 		super(edecl);
-	}
-	
-	@Override
-	public boolean tryLink(){
-		return true;
 	}
 }

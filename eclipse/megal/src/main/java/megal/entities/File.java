@@ -2,7 +2,7 @@ package megal.entities;
 
 import megal.model.EDecl;
 
-public class File extends Entity {
+public class File extends Entity101 {
 	public File(EDecl edecl){
 		super(edecl);
 	}
@@ -11,7 +11,6 @@ public class File extends Entity {
 	public boolean tryLink(){
 		if (super.tryLink() == true)
 			return true;
-		
 		
 		return false;
 	}

@@ -25,7 +25,6 @@ public class FileElementOfLanguage extends elementOf<File, Language> {
 	public boolean evaluate() {
 		// entities on both sides of this relationship have to be linked to resources before		
 		if ((!first.isLinked()) && (!second.isLinked())) {
-			eventBus.post(new RelationshipEvaluationFailed(first, second, this));
 			return false;
 		}
 		
@@ -38,7 +37,6 @@ public class FileElementOfLanguage extends elementOf<File, Language> {
 			try {
 				resource = new URI(conf.getString("resource"));
 			} catch (URISyntaxException e) {
-				eventBus.post(new RelationshipEvaluationFailed(first, second, this));
 				return false;
 			}
 			if (resource.equals(second.getResource())){
@@ -50,7 +48,6 @@ public class FileElementOfLanguage extends elementOf<File, Language> {
 					try {
 						clazz = Class.forName(checker);
 					} catch (ClassNotFoundException e) {
-						eventBus.post(new RelationshipEvaluationFailed(first, second, this));
 						return false;
 					}
 				    try {
@@ -59,14 +56,12 @@ public class FileElementOfLanguage extends elementOf<File, Language> {
 						eventBus.post(new RelationshipEvaluationSucceeded(first, second, this, success));
 						return success;
 					} catch (Exception e) {
-						eventBus.post(new RelationshipEvaluationFailed(first, second, this));
 						return false;
 					}
 				}
 			}
 		}
 		
-		eventBus.post(new RelationshipEvaluationFailed(first, second, this));
 		return false;
 	}
 }

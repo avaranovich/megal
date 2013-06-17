@@ -23,7 +23,7 @@ public class ReflectionTest {
 	public void setUp() throws Exception {
 		megal.Runtime runtime = new megal.Runtime();
 		
-		coreRels = runtime.getCoreRels();
+		coreRels = runtime.getWeakRels();
 		customRels = runtime.getCustomRels();
 	}
 	

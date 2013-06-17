@@ -34,20 +34,16 @@ public class Runtime {
 		}
 		
 		/*
-		 * Creates a new instance of the relationship, parametrized with two entities.
+		 * Creates a new instance of the relationship, parametrized with two entities and current relationship type declaration.
 		 */
-		public megal.relationships.Relationship<?,?> newInstance(Entity first, Entity second, RTypeDecl rTypeDecl){
+		public megal.relationships.Relationship<?,?> newInstance(Entity first, Entity second, RTypeDecl rTypeDecl) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException{
 			@SuppressWarnings("rawtypes")
 			Class[] types = {first.getClass(), second.getClass(), rTypeDecl.getClass()};
 			
 			Object[] params = {first, second, rTypeDecl};
 			
-			try {
-				return (megal.relationships.Relationship<?, ?>) typedRelationship.getConstructor(types).newInstance(params);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return null;
+
+			return (megal.relationships.Relationship<?, ?>) typedRelationship.getConstructor(types).newInstance(params);
 		}
 
 		/**
@@ -108,11 +104,11 @@ public class Runtime {
 		}
 	}
 
-	private List<Relationship> coreRels;
+	private List<Relationship> weakRels;
 	private List<Relationship> customRels;
 
 	public Runtime(){
-		coreRels = new ArrayList<Relationship>();
+		weakRels = new ArrayList<Relationship>();
 		customRels = new ArrayList<Relationship>();
 
 		Reflections reflections = new Reflections("megal.relationships");
@@ -120,23 +116,28 @@ public class Runtime {
 		Set<Class<? extends megal.relationships.Relationship>> subTypes = reflections.getSubTypesOf(megal.relationships.Relationship.class);
 
 		@SuppressWarnings("unchecked")
-		Set<Class<?>> weakRels = reflections.getTypesAnnotatedWith(WeakRef.class);
+		Set<Class<?>> wr = reflections.getTypesAnnotatedWith(WeakRef.class);
 		
 		for(Class<?> c: subTypes){
-			//ParameterizedType t = (ParameterizedType) c.getGenericSuperclass();
 
-			if (weakRels.contains(c)){
+			if (wr.contains(c)){
 				System.out.println("Weak relationship: " + c);
-				coreRels.add(new Relationship(c));
+				weakRels.add(new Relationship(c));
 			} else {
 				System.out.println("Custom relationship: " + c);
 				customRels.add(new Relationship(c));
 			}
 		}
 	}
+	
+	public List<Relationship> getAllRels(){
+		List<Relationship> allRels = new ArrayList<Relationship>(this.weakRels);
+		allRels.addAll(customRels);
+		return allRels;
+	}
 
-	public List<Relationship> getCoreRels(){
-		return this.coreRels;
+	public List<Relationship> getWeakRels(){
+		return this.weakRels;
 	}
 
 	public List<Relationship> getCustomRels(){
