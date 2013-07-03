@@ -49,7 +49,34 @@ public abstract class Entity {
 		return edecl;
 	}
 	
-	public abstract boolean tryLink();
+	/**
+	 * Lookup the config file and try to find a related resource for a given entity.
+	 * @return true if the entity is linked, false otherwise.
+	 */
+	public boolean tryLink(){
+		Config conf = ConfigFactory.load();
+		List<Config> rels = (List<Config>) conf.getConfigList("linking");
+		for(Config c: rels){
+			String type = c.getString("type");
+			String name = c.getString("name");
+			URI uri = null;
+			try {
+				String res = c.getString("resource");
+				uri = new URI(res);
+			} catch (URISyntaxException ex) {
+				eventBus.post(new EntityLinkingFailed(ex, edecl));
+				return false;
+			}
+			String t = this.edecl.getType().getName();
+			String n = this.getName(); 
+			if ((type.equals(t)) && (name.equals(n))){
+				this.link(uri);
+				eventBus.post(new EntityLinkingSucceeded(uri, this));
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	/**
 	 * Links an entity to a provided resource.
@@ -60,7 +87,7 @@ public abstract class Entity {
 	}
 	
 	/**
-	 * @return the piece of config (if any), associated with a given relationship.
+	 * @return the piece of config (if any), associated with a given entity.
 	 */
 	@SuppressWarnings("unchecked")
 	public Config getConfig(){

@@ -46,8 +46,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <annotation id="6" language="java" name="megal.relationships.WeakRef" project="megal1" 
-    file="/megal1/src/main/java/megal/relationships/WeakRef.java" binary="false" corner="BOTTOM_RIGHT">    
+  <annotation id="6" language="java" name="megal.relationships.WeakRel" project="megal1" 
+    file="/megal1/src/main/java/megal/relationships/WeakRel.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="692" y="123"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      

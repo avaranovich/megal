@@ -4,7 +4,7 @@ import megal.entities.Entity;
 import megal.model.EDecl;
 import megal.model.RTypeDecl;
 
-@WeakRef
+@WeakRel
 public class conformsTo<X extends Entity, Y extends Entity> extends Relationship<X, Y> {
 
 	protected conformsTo(X first, Y second, RTypeDecl rTypeDecl) {

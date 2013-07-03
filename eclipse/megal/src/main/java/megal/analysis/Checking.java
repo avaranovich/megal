@@ -7,7 +7,7 @@ import megal.events.RelationshipEvaluationStarted;
 import megal.model.RDecl;
 import megal.model.Visitor;
 import megal.relationships.Relationship;
-import megal.relationships.WeakRef;
+import megal.relationships.WeakRel;
 
 /*
  * Checks all the relationships in the megamodel.
@@ -23,7 +23,7 @@ public class Checking extends Visitor {
 		}
 		
 		// check if the relationship is "weak"
-		if (rel.getClass().isAnnotationPresent(WeakRef.class)){
+		if (rel.getClass().isAnnotationPresent(WeakRel.class)){
 			// we don't evaluate it
 			eventBus.post(new RelationshipEvaluationStarted(rel.getLeft(), rel.getRight(), rel));
 		}

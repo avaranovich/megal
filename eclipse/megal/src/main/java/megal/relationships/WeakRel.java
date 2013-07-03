@@ -7,4 +7,4 @@ import java.lang.annotation.RetentionPolicy;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface WeakRef {}
+public @interface WeakRel {}

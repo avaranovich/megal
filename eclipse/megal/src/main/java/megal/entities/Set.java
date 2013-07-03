@@ -8,5 +8,7 @@ public abstract class Set extends Entity {
 		super(edecl);
 	}
 	
-	public abstract boolean tryLink();
+	public boolean tryLink(){
+		return super.tryLink();
+	}
 }

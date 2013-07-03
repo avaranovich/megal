@@ -7,7 +7,7 @@ import megal.model.RTypeDecl;
 
 import static megal.Context.*;
 
-@WeakRef
+@WeakRel
 public class elementOf<X extends Entity, Y extends Set> extends Relationship<X, Y> {
 	
 	public elementOf(X first, Y second, RTypeDecl rTypeDecl){

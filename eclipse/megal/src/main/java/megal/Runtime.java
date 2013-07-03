@@ -13,7 +13,7 @@ import java.util.Set;
 import megal.entities.Entity;
 import megal.model.RDecl;
 import megal.model.RTypeDecl;
-import megal.relationships.WeakRef;
+import megal.relationships.WeakRel;
 
 import org.reflections.Reflections;
 
@@ -30,7 +30,7 @@ public class Runtime {
 		 * Checks if the relationship is weak, i.e. it cannot be evaluated.
 		 */
 		public boolean isWeak(){
-			return typedRelationship.isAnnotationPresent(WeakRef.class);
+			return typedRelationship.isAnnotationPresent(WeakRel.class);
 		}
 		
 		/*
@@ -116,7 +116,7 @@ public class Runtime {
 		Set<Class<? extends megal.relationships.Relationship>> subTypes = reflections.getSubTypesOf(megal.relationships.Relationship.class);
 
 		@SuppressWarnings("unchecked")
-		Set<Class<?>> wr = reflections.getTypesAnnotatedWith(WeakRef.class);
+		Set<Class<?>> wr = reflections.getTypesAnnotatedWith(WeakRel.class);
 		
 		for(Class<?> c: subTypes){
 
