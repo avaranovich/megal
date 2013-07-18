@@ -2,7 +2,7 @@ package megal.entities;
 
 import megal.model.EDecl;
 
-public class Folder extends Entity101 {
+public class Folder extends Entity {
 
 	public Folder(EDecl edecl) {
 		super(edecl);
