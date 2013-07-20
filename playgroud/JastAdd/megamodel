@@ -1,0 +1,26 @@
+JastAddAbstractGrammar conformsTo Grammar
+JastAddLanguage intanceOf Language
+JastAddAbtractGrammar partOf JastAddAbtractSytaxTree
+JastAddBehavoirSpecification partOf JastAddAbstractSyntaxTree
+JastAddAbstractSyntaxTree partOf JastAddLanguageSpec
+ContextFreeGrammar instanceOf Grammar
+ContextfreeGrammar partOf JastAddlanguageSpec
+JastAddLanguageSpec definitionOf JastAddLanguage
+
+ASTFile isA Artifact
+JRAGFile isA Artifact
+JADDFile isA Artifact
+FlexFile isA Artifact
+ParserFile isA Artifact
+
+FlexFile instanceOf ContextFreeGrammar
+ParserFile instanceOf ContextFreeGrammar
+
+ASTFile partOf JastAddAbtractGrammar
+JRAGFile partOf JastAddBehavoirSpecification
+JADDFile partOf JastAddBehavoirSpecification
+
+SourceFile isA Artifact
+SourceFile instanceOf JastAddLanguage
+
+JastAddLanguageSpec definitionOf JastAddParser
