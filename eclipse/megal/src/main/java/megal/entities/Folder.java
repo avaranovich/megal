@@ -2,7 +2,7 @@ package megal.entities;
 
 import megal.model.EDecl;
 
-public class Folder extends Entity101 {
+public class Folder extends Entity {
 
 	public Folder(EDecl edecl) {
 		super(edecl);
@@ -14,6 +14,9 @@ public class Folder extends Entity101 {
 		// If so, check whether the parent folder is resolved to a URI.
 		// If so, interpret entity's name as subfolder name relative to parent folder.
 		// Check also whether this entity is physically part of the parent folder.
+		// Example:
+		// extern Folder app .
+		// Folder models @ app .
 		return false;
 	}
 }
