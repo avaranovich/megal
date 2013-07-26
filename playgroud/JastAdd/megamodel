@@ -1,26 +1,25 @@
-JastAddAbstractGrammar conformsTo Grammar
-JastAddLanguage intanceOf Language
-JastAddAbtractGrammar partOf JastAddAbtractSytaxTree
-JastAddBehavoirSpecification partOf JastAddAbstractSyntaxTree
-JastAddAbstractSyntaxTree partOf JastAddLanguageSpec
-ContextFreeGrammar instanceOf Grammar
-ContextfreeGrammar partOf JastAddlanguageSpec
-JastAddLanguageSpec definitionOf JastAddLanguage
+ASTLanguage: Language .
+JSTLanguage: Language .
+NewDefinedLanguage: Language .
 
-ASTFile isA Artifact
-JRAGFile isA Artifact
-JADDFile isA Artifact
-FlexFile isA Artifact
-ParserFile isA Artifact
+ASTFile elementOf ASTLanguage .
 
-FlexFile instanceOf ContextFreeGrammar
-ParserFile instanceOf ContextFreeGrammar
+JragFile elementOf JSTLanguage .
+JstFile elementOf JSTLanguage .
 
-ASTFile partOf JastAddAbtractGrammar
-JRAGFile partOf JastAddBehavoirSpecification
-JADDFile partOf JastAddBehavoirSpecification
+JragFile inputOf ParserGenerator .
+JstFile inputOf ParserGenerator .
+ConcreteSyntax inputOf ParserGenerator .
 
-SourceFile isA Artifact
-SourceFile instanceOf JastAddLanguage
+ParserGenerator hasOutput Parser .
 
-JastAddLanguageSpec definitionOf JastAddParser
+Parser definitionOf NewDefinedLanguage .
+Programm elementOf NewDefinedLanguage .
+
+Program inputOf Parser .
+
+Parser hasOutput AST .
+
+AST inputOf BytecodeGenereator .
+
+BytecodeGenereator hasOutput Bytecode .
