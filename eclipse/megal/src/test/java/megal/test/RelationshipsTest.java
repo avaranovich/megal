@@ -29,7 +29,7 @@ public class RelationshipsTest extends BaseTest {
 	@Test
 	public void customRelationshipsShouldBeAddedToTheGraph(){
 		List<RTypeDecl> customRels =  Context.runtime.getCustomRDecls();
-		assertEquals(1, customRels.size());	
+		assertEquals(2, customRels.size());	
 		
 		RTypeDecl fileElementOfLanguage = customRels.get(0);
 		assertEquals("elementOf", fileElementOfLanguage.getName());
@@ -54,12 +54,12 @@ public class RelationshipsTest extends BaseTest {
 		for (Entry<String, List<Pair<String, String>>> entry : Context.rTypeDecls.entrySet()) {
 			String key = entry.getKey();
 		    System.out.println("Key = " + key + ", Value = " + entry.getValue());
-		    if (key.equals("elementOf")){
-		    	// we have a custom relationships, so there should be 2 relationships for elementOf
+		    if (key.equals("elementOf") || key.equals("partOf")){
+		    	// we have a custom relationships, so there should be 2 relationships for elementOf and partOf
 				assertEquals(2, entry.getValue().size());	
 		    }
 		    else{
-		    	assertEquals(1, entry.getValue().size());	
+		    		assertEquals(1, entry.getValue().size());	
 		    }
 		}
 	}

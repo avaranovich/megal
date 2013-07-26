@@ -30,7 +30,7 @@ public class ReflectionTest {
 	@Test
 	public void findAllRuntimeRelationships(){
 		assertSame(3, coreRels.size());
-		assertSame(1, customRels.size());
+		assertSame(2, customRels.size());
 		
 		assertSame(false, customRels.get(0).isWeak());
 	}	

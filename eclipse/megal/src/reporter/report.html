@@ -6,7 +6,7 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.js"></script>
 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 	<script type="text/javascript" src="http://underscorejs.org/underscore.js"></script>
-	<script type="text/javascript" src="https://raw.github.com/wycats/handlebars.js/1.0.0/dist/handlebars.js"></script>
+	<script type="text/javascript" src="handlebars.js"></script>
   <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="tree.css">
 
@@ -15,7 +15,7 @@
 
  <style type="text/css">
   td.relationship {
-    background-image: url('rel.png');
+    /*background-image: url('rel.png');*/
     background-repeat: no-repeat;
     -moz-background-size: 100% 100%;
     -o-background-size: 100% 100%;
@@ -23,7 +23,7 @@
     background-size: 100% 100%;
   }
   td.entity{
-    background-image: url('entity.png');
+    /*background-image: url('entity.png');*/
     background-repeat: no-repeat;
      -moz-background-size: 100% 100%;
     -o-background-size: 100% 100%;
@@ -92,7 +92,7 @@
 	<script id="EntityLookupStarted" type="text/x-handlebars-template">
    <tr>
     <td> <span class="label label-info">Lookup started</span> </td>
-    <td class='entity'></td>
+    <td class='entity'>E</td>
     <td>{{src source}}</td>
     <td> entity:{{entity}}</td>
   </tr>
@@ -101,7 +101,7 @@
 	<script id="EntityLinkingStarted" type="text/x-handlebars-template">
    <tr>
     <td><span class="label label-info">Linking started </span> </td>
-    <td class='entity'></td>
+    <td class='entity'>E</td>
     <td>{{src source}}</td>
     <td> resource: <a href={{resource}}>{{resource}}</a> </td>
   </tr>
@@ -110,7 +110,7 @@
   <script id="EntityLinkingFailed" type="text/x-handlebars-template">
    <tr>
     <td><span class="label label-error">Linking failed</span> </td>
-    <td class='entity'></td>
+    <td class='entity'>E</td>
     <td>{{src source}}</td>
     <td> error: {{error}}</td>
   </tr>
@@ -119,16 +119,16 @@
 	<script id="EntityLinkingSucceeded" type="text/x-handlebars-template">
   <tr>
     <td>  <span class="label label-success">Linking succeeded</span> </td>
-    <td class='entity'></td>
+    <td class='entity'>E</td>
     <td>{{src source}}</td>
-    <td>  <a href={{resource}}>{{entity}}</a>; resource: {{resource}}</td>
+    <td>  <a href={{resource}}>{{entity}}</a></td>
   </tr>
 	</script>
 
 	<script id="EntityLookupStarted" type="text/x-handlebars-template">
   <tr>
     <td> <span class="label label-success">Lookup started</span> </td>
-    <td class='entity'></td>
+    <td class='entity'>E</td>
     <td>{{src source}}</td>
     <td> entity: {{JavaProgram}} </td>
   </tr>
@@ -137,7 +137,7 @@
 	<script id="EntityLinkingSucceeded" type="text/x-handlebars-template">
    <tr>
     <td><span class="label label-success">Linking succeeded</span></td>
-    <td class='entity'></td>
+    <td class='entity'>E</td>
     <td>{{src source}}</td>
     <td>entity: <a href={{resource}}>{{entity}}</a>; resource: {{resource}}</td>
   </tr>
@@ -146,7 +146,7 @@
   <script id="EntityNotFound" type="text/x-handlebars-template">
    <tr>
     <td><span class="label label-error">Not found</span></td>
-    <td class='entity'></td>
+    <td class='entity'>E</td>
     <td>{{src source}}</td>
     <td> entity: {{entity}} error: {{error}}</td>  </tr>
   </script>
@@ -154,7 +154,7 @@
 	<script id="RelationshipEvaluationStarted" type="text/x-handlebars-template">
    <tr>
     <td><span class="label label-info">Evaluation started</span></td>
-    <td class='relationship'></td>
+    <td class='relationship'>R</td>
      <td>({{src source}})</td>
     <td>{{left}}->({{rel}})->{{right}}</td>
   </tr>
@@ -163,9 +163,9 @@
 	<script id="RelationshipEvaluationSucceeded" type="text/x-handlebars-template">
    <tr>
     <td><span class="label label-success">Evaluation succeeded</span></td>
-    <td class='relationship'></td>
+    <td class='relationship'>R</td>
     <td>{{src source}}</td>
-    <td>{{left}}->({{rel}})->{{right}}</td>
+    <td>{{left}} ({{rel}}): {{right}}</td>
   </tr>
 	</script>
 
