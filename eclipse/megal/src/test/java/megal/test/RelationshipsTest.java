@@ -12,6 +12,7 @@ import megal.model.RDecl;
 import megal.model.RTypeDecl;
 import megal.relationships.FileElementOfLanguage;
 import megal.relationships.Relationship;
+import megal.relationships.elementOf;
 import megal.trivia.Pair;
 
 import org.junit.Before;
@@ -31,10 +32,14 @@ public class RelationshipsTest extends BaseTest {
 		List<RTypeDecl> customRels =  Context.runtime.getCustomRDecls();
 		assertEquals(2, customRels.size());	
 		
-		RTypeDecl fileElementOfLanguage = customRels.get(0);
-		assertEquals("elementOf", fileElementOfLanguage.getName());
-		assertEquals("Language", fileElementOfLanguage.getRight());
-		assertEquals("File", fileElementOfLanguage.getLeft());	
+		for (RTypeDecl rTypeDecl: customRels){
+			if(rTypeDecl.getClass().isAssignableFrom(elementOf.class)){
+				//RTypeDecl fileElementOfLanguage = customRels.get(1);
+				assertEquals("elementOf", rTypeDecl.getName());
+				assertEquals("Language", rTypeDecl.getRight());
+				assertEquals("File", rTypeDecl.getLeft());	
+			}
+		}
 	}
 	
 	@Test

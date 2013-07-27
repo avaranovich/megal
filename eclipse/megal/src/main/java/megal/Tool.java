@@ -88,15 +88,14 @@ public class Tool {
 	
 	public static void main(String[] args) throws IOException {
 		
-		if (args.length < 2){
-			System.out.print("Please provide the following arguments: home dir and a megamodel file");
+		if (args.length < 1){
+			System.out.print("Please provide the following arguments: a megamodel file");
 			System.exit(-1);
 		}
 		
-		String home = args[0];
-		String input = args[1];
-		
-		parse(home+File.separator+"megal"+File.separator+"prelude.megal");
+		String input = args[0];
+				
+		parse(input);
 
 		extend();
 		
@@ -107,19 +106,19 @@ public class Tool {
 		link();
 		
 		// Write log back next to input file
-		String output = input.replaceFirst(".megal", ".log");
+		/*String output = input.replaceFirst(".megal", ".log");
 		if (input!=output) {
 			PrintStream ps = new PrintStream(output);
 			Gson gson = new Gson();
 			ps.println(gson.toJson(Context.log));
 			ps.close();
-		}
+		}*/
 				
 		// Exit with a non-zero exit code if there were any problems
-		if (log.fatalErrors > 0 
+		/*if (log.fatalErrors > 0 
 			|| log.lexerErrors > 0 
 			|| log.parserErrors > 0
 			|| log.problems.size() > 0)
-		System.exit(1);
+		System.exit(1);*/
 	}
 }
