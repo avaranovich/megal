@@ -32,7 +32,7 @@ public class BaseTest {
 	}
 	
 	protected String getResourceContent(String relPath){
-		String pprintSrcPath =  getResorucePath(relPath);
+		String pprintSrcPath = getResorucePath(relPath);
 		FileInputStream inputStream = null;
 		try {
 			inputStream = new FileInputStream(pprintSrcPath);
