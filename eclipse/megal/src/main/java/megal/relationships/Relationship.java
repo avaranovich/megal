@@ -22,10 +22,13 @@ public abstract class Relationship<X extends Entity, Y extends Entity> {
 	protected Y second;
 	protected RTypeDecl rTypeDecl;
 	
+	protected String src;
+	
 	protected Relationship(X first, Y second, RTypeDecl rTypeDecl){
 		this.first  	 = first;
 		this.second 	 = second;
 		this.rTypeDecl   = rTypeDecl;
+		this.src		 = "";
 	}
 	
 	public X getLeft(){
@@ -38,6 +41,13 @@ public abstract class Relationship<X extends Entity, Y extends Entity> {
 	
 	public RTypeDecl getTypeDecl(){
 		return this.rTypeDecl;
+	}
+	
+	public String getSrc(){
+		if (this.src.isEmpty()){
+			this.getConfig();
+		}
+		return this.src;
 	}
 	
 	/**
@@ -80,6 +90,7 @@ public abstract class Relationship<X extends Entity, Y extends Entity> {
 			String name = rel.getString("relationship");
 			//System.out.println(this.getClass().getName());
 			if (name.equalsIgnoreCase(this.getClass().getName())){
+				this.src = rel.getString("src");
 				return rel.getConfig("config");	
 			}
 		}

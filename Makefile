@@ -5,7 +5,7 @@ nope:
 
 # Compile MegaL tool
 build: 
-	pushd ${tool}; mvn package; popd; 
+	pushd ${tool}; mvn clean; mvn package; popd; 
 
 dist: build
 	rm -r ./dist
