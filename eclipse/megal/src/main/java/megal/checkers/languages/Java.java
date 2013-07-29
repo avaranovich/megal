@@ -4,21 +4,12 @@ import japa.parser.JavaParser;
 import japa.parser.ParseException;
 import japa.parser.ast.CompilationUnit;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
-
-import com.google.common.base.Charsets;
-import com.google.common.io.CharStreams;
 import com.google.common.io.Closeables;
 import com.google.common.io.Resources;
-import com.google.common.primitives.Chars;
 
 import megal.checkers.Checker;
 

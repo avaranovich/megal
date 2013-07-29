@@ -1,0 +1,14 @@
+Ruby : Language .
+extern RubyProgram : File .
+
+extern RubyOnRailsApp : Folder .
+RubyOnRailsViews @ RubyOnRailsApp : Folder .
+RubyOnRailsModels @ RubyOnRailsApp : Folder.
+RubyOnRailsControllers @ RubyOnRailsApp : Folder .
+
+RubyProgram elementOf Ruby .
+
+RubyOnRailsViews partOf RubyOnRailsApp .
+RubyOnRailsModels partOf RubyOnRailsApp .
+RubyOnRailsControllers partOf RubyOnRailsApp.
+
