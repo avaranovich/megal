@@ -1,0 +1,25 @@
+ASTLanguage: Language .
+JSTLanguage: Language .
+NewDefinedLanguage: Language .
+
+ASTFile elementOf ASTLanguage .
+
+JragFile elementOf JSTLanguage .
+JstFile elementOf JSTLanguage .
+
+JragFile inputOf ParserGenerator .
+JstFile inputOf ParserGenerator .
+ConcreteSyntax inputOf ParserGenerator .
+
+ParserGenerator hasOutput Parser .
+
+Parser definitionOf NewDefinedLanguage .
+Programm elementOf NewDefinedLanguage .
+
+Program inputOf Parser .
+
+Parser hasOutput AST .
+
+AST inputOf BytecodeGenereator .
+
+BytecodeGenereator hasOutput Bytecode .
