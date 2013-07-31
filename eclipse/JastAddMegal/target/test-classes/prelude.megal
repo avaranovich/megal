@@ -1,0 +1,17 @@
+// Entity types
+Set < Entity .
+Artifact < Entity .
+Language < Set .
+Technology < Entity .
+Concept < Entity .
+File < Artifact .
+Folder < Artifact .
+
+// Relationship types
+elementOf < Entity * Set .
+subsetOf < Set * Set .
+partOf < Artifact * Artifact .
+instanceOf < Concept * Concept . 
+isA < Concept * Concept . 
+conformsTo < Artifact * Artifact .
+definitionOf < Artifact * Language .

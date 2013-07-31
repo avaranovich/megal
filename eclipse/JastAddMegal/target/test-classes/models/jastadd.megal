@@ -1,0 +1,7 @@
+intern ASTLanguage: Language .
+intern JSTLanguage: Language .
+intern NewDefinedLanguage: Language .
+
+extern Program: File .
+
+Program elementOf NewDefinedLanguage .

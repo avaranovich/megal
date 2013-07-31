@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend
+END
+JVMBytecodes.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/JVMBytecodes.jrag
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/LICENSE
+END
+CreateBCode.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/CreateBCode.jrag
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/.project
+END
+JVMBytecodesDebug.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/JVMBytecodesDebug.jrag
+END
+ConstantPoolNames.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/ConstantPoolNames.jrag
+END
+JavaCompiler.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/JavaCompiler.java
+END
+LocalNum.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/LocalNum.jrag
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/README
+END
+build.xml
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/build.xml
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/.classpath
+END
+GenerateClassfile.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/GenerateClassfile.jrag
+END
+ConstantPool.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/ConstantPool.jrag
+END
+CodeGeneration.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/CodeGeneration.jrag
+END
+Attributes.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/Attributes.jrag
+END
+Java2Rewrites.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/Java2Rewrites.jrag
+END
+FlushCaches.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/FlushCaches.jrag
+END
+InnerClasses.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/InnerClasses.jrag
+END
+Transformations.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/Transformations.jrag
+END
+Flags.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Backend/Flags.jrag
+END

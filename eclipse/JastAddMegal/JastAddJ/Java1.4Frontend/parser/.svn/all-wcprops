@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Frontend/parser
+END
+java14.parser
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Frontend/parser/java14.parser
+END
+preamble.parser
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Frontend/parser/preamble.parser
+END
+errorrecovery.parser
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Frontend/parser/errorrecovery.parser
+END

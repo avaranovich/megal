@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Frontend/scanner
+END
+Separators.flex
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Frontend/scanner/Separators.flex
+END
+macros.flex
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Frontend/scanner/macros.flex
+END
+Comments.flex
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Frontend/scanner/Comments.flex
+END
+Identifiers.flex
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Frontend/scanner/Identifiers.flex
+END
+postamble.flex
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Frontend/scanner/postamble.flex
+END
+Keywords.flex
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Frontend/scanner/Keywords.flex
+END
+preamble.flex
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Frontend/scanner/preamble.flex
+END
+Unicode.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Frontend/scanner/Unicode.java
+END
+WhiteSpace.flex
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Frontend/scanner/WhiteSpace.flex
+END
+Operators.flex
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Frontend/scanner/Operators.flex
+END
+Literals.flex
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Frontend/scanner/Literals.flex
+END
+rules_preamble.flex
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/softlang/main/!svn/ver/4280/courses/sle13/students/henny_eschleining/JastAddJ/Java1.4Frontend/scanner/rules_preamble.flex
+END
