@@ -18,7 +18,7 @@ public class BasicMegamodelsTest extends BaseTest {
         Tool.analyze();
         Tool.link();
         Tool.check();
-
+        
         System.out.println("JSON:" + Tool.getEvents().getJson());
     }
 
@@ -29,6 +29,7 @@ public class BasicMegamodelsTest extends BaseTest {
         Tool.analyze();
         Tool.link();
         Tool.check();
+        
         System.out.println("JSON:" + Tool.getEvents().getJson());
 
     }

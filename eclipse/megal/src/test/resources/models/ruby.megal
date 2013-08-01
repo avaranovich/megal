@@ -1,4 +1,5 @@
 Ruby : Language .
+Rails : Technology .
 extern RubyProgram : File .
 
 extern RubyOnRailsApp : Folder .
@@ -6,9 +7,16 @@ RubyOnRailsViews @ RubyOnRailsApp : Folder .
 RubyOnRailsModels @ RubyOnRailsApp : Folder.
 RubyOnRailsControllers @ RubyOnRailsApp : Folder .
 
-RubyProgram elementOf Ruby .
-
 RubyOnRailsViews partOf RubyOnRailsApp .
 RubyOnRailsModels partOf RubyOnRailsApp .
 RubyOnRailsControllers partOf RubyOnRailsApp.
 
+mfiles @ RubyOnRailsModels : File+ .
+vfiles @ RubyOnRailsViews : File+.
+cfiles @ RubyOnRailsControllers : File+ .
+
+mfiles @ RubyOnRailsModels partOf RubyOnRailsModels @ RubyOnRailsApp .
+vfiles @ RubyOnRailsViews partOf RubyOnRailsViews @ RubyOnRailsApp .
+cfiles @ RubyOnRailsControllers partOf RubyOnRailsControllers @ RubyOnRailsApp .
+
+mfiles elementOf Ruby .

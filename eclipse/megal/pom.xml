@@ -60,6 +60,14 @@
       <version>1.7.0.RC1</version>
     </dependency>
     <!-- JRuby Dependencies end -->
+    
+    <!-- Github dependencies -->
+    <dependency>
+        <groupId>org.eclipse.mylyn.github</groupId>
+        <artifactId>org.eclipse.egit.github.core</artifactId>
+        <version>2.1.5</version>
+    </dependency>
+    <!-- Github dependencies end -->
      
      <dependency>
 		<groupId>org.apache.commons</groupId>

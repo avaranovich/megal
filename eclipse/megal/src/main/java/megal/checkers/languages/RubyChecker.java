@@ -5,9 +5,11 @@
  */
 package megal.checkers.languages;
 
+import com.google.common.io.Resources;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.URI;
 import megal.checkers.Checker;
 import org.jruby.Ruby;
@@ -22,11 +24,12 @@ public class RubyChecker implements Checker<URI> {
 
     public boolean check(URI target) {
         try {
+            InputStream in = null;
+            in = Resources.newInputStreamSupplier(target.toURL()).getInput();
+            
+            
             Ruby ruby = Ruby.newInstance();
-            ruby.loadFile("rubyChecker",
-                    new FileInputStream(
-                    new File(target.getPath())),
-                    true);
+            ruby.loadFile("rubyChecker",in,true);
             Parser parser = new Parser(ruby);
             
         } catch (FileNotFoundException fnfex) {
