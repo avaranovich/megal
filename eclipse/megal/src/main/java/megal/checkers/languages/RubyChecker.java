@@ -6,15 +6,13 @@
 package megal.checkers.languages;
 
 import com.google.common.io.Resources;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.List;
 import megal.checkers.Checker;
 import org.jruby.Ruby;
 import org.jruby.parser.Parser;
-import org.jruby.*;
 
 /**
  *
@@ -38,5 +36,13 @@ public class RubyChecker implements Checker<URI> {
             return false;
         }
         return true;
+    }
+
+    public boolean check(List<URI> targets) {
+        boolean check = true;
+        for(URI t : targets){
+            check = check && check(t); 
+        }
+        return check;
     }
 }

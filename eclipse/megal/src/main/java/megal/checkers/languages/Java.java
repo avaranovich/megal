@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import com.google.common.io.Closeables;
 import com.google.common.io.Resources;
+import java.util.List;
 
 import megal.checkers.Checker;
 
@@ -40,4 +41,8 @@ public class Java implements Checker<URI> {
 
 		return true;
 	}
+
+    public boolean check(List<URI> targets) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

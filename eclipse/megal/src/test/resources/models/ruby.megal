@@ -19,4 +19,6 @@ mfiles @ RubyOnRailsModels partOf RubyOnRailsModels @ RubyOnRailsApp .
 vfiles @ RubyOnRailsViews partOf RubyOnRailsViews @ RubyOnRailsApp .
 cfiles @ RubyOnRailsControllers partOf RubyOnRailsControllers @ RubyOnRailsApp .
 
-mfiles elementOf Ruby .
+mfiles  elementOf Ruby .
+vfiles  elementOf Ruby .
+cfiles  elementOf Ruby.
