@@ -24,13 +24,8 @@ public class ASTChecker implements Checker<URI> {
 			if(parser.parseProblems().isEmpty())
 				return true;
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-
-			e.printStackTrace();
 			return false;
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return false;
 		}
 		return false;

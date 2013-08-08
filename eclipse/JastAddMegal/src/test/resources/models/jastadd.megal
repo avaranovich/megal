@@ -6,7 +6,7 @@ extern Program: File .
 intern Parser: Artifact .
 
 extern JragFile: File .
-intern JstFile: File .
+extern JaddFile: File .
 extern ASTFile: File .
 
 intern ConcreteSyntax: Language .
@@ -22,7 +22,7 @@ Program inputOf Parser .
 Parser definitionOf NewDefinedLanguage .
 
 JragFile inputOf ParserGenerator .
-JstFile inputOf ParserGenerator .
+JaddFile inputOf ParserGenerator .
 
 ConcreteSyntax inputOf ParserGenerator .
 
@@ -35,7 +35,7 @@ AST inputOf BytecodeGenerator .
 BytecodeGenerator hasOutput Bytecode .
 
 JragFile elementOf JSTLanguage .
-JstFile elementOf JSTLanguage .
+JaddFile elementOf JSTLanguage .
 
 ASTFile elementOf ASTLanguage .
 
