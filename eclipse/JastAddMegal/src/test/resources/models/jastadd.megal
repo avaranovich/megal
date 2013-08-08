@@ -7,7 +7,7 @@ intern Parser: Artifact .
 
 extern JragFile: File .
 intern JstFile: File .
-intern ASTFile: File .
+extern ASTFile: File .
 
 intern ConcreteSyntax: Language .
 
