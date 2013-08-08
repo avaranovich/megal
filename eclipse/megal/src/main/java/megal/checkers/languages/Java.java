@@ -31,6 +31,7 @@ public class Java implements Checker<URI> {
             // parse the file
         	InputStream in = null;
             try {
+            	
             	in = Resources.newInputStreamSupplier(file.toURL()).getInput();
             	//String content = CharStreams.toString(new InputStreamReader(in, Charsets.UTF_8));
             	

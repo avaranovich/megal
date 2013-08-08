@@ -1,25 +1,42 @@
-ASTLanguage: Language .
-JSTLanguage: Language .
-NewDefinedLanguage: Language .
+intern ASTLanguage: Language .
+intern JSTLanguage: Language .
+intern NewDefinedLanguage: Language .
 
-ASTFile elementOf ASTLanguage .
+extern Program: File .
+intern Parser: Artifact .
 
-JragFile elementOf JSTLanguage .
-JstFile elementOf JSTLanguage .
+extern JragFile: File .
+intern JstFile: File .
+intern ASTFile: File .
+
+intern ConcreteSyntax: Language .
+
+intern ParserGenerator: Technology .
+intern BytecodeGenerator: Technology .
+
+intern Bytecode: Artifact .
+intern AST: Artifact .
+
+Program inputOf Parser .
+
+Parser definitionOf NewDefinedLanguage .
 
 JragFile inputOf ParserGenerator .
 JstFile inputOf ParserGenerator .
+
 ConcreteSyntax inputOf ParserGenerator .
 
 ParserGenerator hasOutput Parser .
 
-Parser definitionOf NewDefinedLanguage .
-Programm elementOf NewDefinedLanguage .
-
-Program inputOf Parser .
-
 Parser hasOutput AST .
 
-AST inputOf BytecodeGenereator .
+AST inputOf BytecodeGenerator .
 
-BytecodeGenereator hasOutput Bytecode .
+BytecodeGenerator hasOutput Bytecode .
+
+JragFile elementOf JSTLanguage .
+JstFile elementOf JSTLanguage .
+
+ASTFile elementOf ASTLanguage .
+
+Program elementOf NewDefinedLanguage .

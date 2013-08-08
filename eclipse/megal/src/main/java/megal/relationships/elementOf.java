@@ -2,7 +2,6 @@ package megal.relationships;
 
 import megal.entities.Entity;
 import megal.entities.Set;
-import megal.events.RelationshipEvaluationFailed;
 import megal.model.RTypeDecl;
 
 import static megal.Context.*;

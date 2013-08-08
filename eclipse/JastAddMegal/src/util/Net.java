@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class Net {
 
-	public static void safeFileFromURI(File output, URI input){
+	public static boolean safeFileFromURI(File output, URI input){
 		BufferedInputStream in = null;
     	FileOutputStream fout = null;
     	try
@@ -25,6 +25,7 @@ public class Net {
     		
     	} catch(Exception e){
     		e.printStackTrace();
+    		return false;
     	}
     	finally{
     		if (in != null)
@@ -32,14 +33,17 @@ public class Net {
 					in.close();
 				} catch (IOException e) {
 					e.printStackTrace();
+					return false;
 				}
     		if (fout != null)
 				try {
 					fout.close();
 				} catch (IOException e) {
 					e.printStackTrace();
+					return false;
 				}
     	}
+    	return true;
 	}
 	
 }

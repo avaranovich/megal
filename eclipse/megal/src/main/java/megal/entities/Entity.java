@@ -14,6 +14,7 @@ import megal.events.EntityLinkingStarted;
 import megal.events.EntityLinkingSucceeded;
 import megal.model.EDecl;
 import megal.model.EType;
+import megal.model.Modifier;
 
 import static megal.Context.*;
 
@@ -54,6 +55,18 @@ public abstract class Entity {
 	 * @return true if the entity is linked, false otherwise.
 	 */
 	public boolean tryLink(){
+		//System.out.println(this.edecl.getModifier());
+		
+		// we don't link internal entities
+		if (this.edecl.getModifier().equals(Modifier.Intern)){
+			try {
+				this.link(new URI("http://megal.org/resources/" + this.getName()));
+				return true;
+			} catch (URISyntaxException e) {
+				return false;
+			}
+		}
+		
 		Config conf = ConfigFactory.load();
 		List<Config> rels = (List<Config>) conf.getConfigList("linking");
 		for(Config c: rels){

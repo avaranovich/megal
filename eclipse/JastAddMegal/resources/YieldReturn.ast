@@ -1,0 +1,11 @@
+/**
+*
+* 	This is the Abstract Syntax for an Yield Return Method
+*
+**/
+
+YieldReturnStmt : Stmt ::= Expr;
+YieldBreakStmt : Stmt;
+
+YieldBreakRewritten : ReturnStmt;
+YieldReturnRewritten : ExprStmt;

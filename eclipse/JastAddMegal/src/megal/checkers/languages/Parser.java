@@ -1,6 +1,9 @@
 package megal.checkers.languages;
 
+import java.io.File;
 import java.net.URI;
+
+import util.Net;
 
 import AST.BytecodeParser;
 import AST.CompilationUnit;
@@ -12,6 +15,17 @@ public class Parser implements Checker<URI> {
 	public boolean check(URI file) {
 		// parse the file
 		try {
+			if(file.toString().startsWith("http")){
+		    	try
+		    	{
+		    		//safes the linked file in URI in output file temp.java
+		    		if(Net.safeFileFromURI(new File("temp.java"), file));
+		    			return compile("temp.java");
+		    	} catch(Exception e){
+		    		e.printStackTrace();
+		    		return false;
+		    	}
+			}
 			return compile(file.getPath());
 		} catch (Exception e) {
 			return false;

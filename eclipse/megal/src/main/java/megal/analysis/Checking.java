@@ -28,6 +28,9 @@ public class Checking extends Visitor {
 			eventBus.post(new RelationshipEvaluationStarted(rel.getLeft(), rel.getRight(), rel));
 		}
 		else{
+			System.out.println(String.format("Evaluating relationship %s %s : %s using %s", 
+					rel.getLeft(), rel.getTypeDecl().getName(), rel.getRight(), rel.getSrc()));
+			
 			eventBus.post(new RelationshipEvaluationStarted(rel.getLeft(), rel.getRight(), rel));
 			boolean res = rel.evaluate();
 			if (res == false){

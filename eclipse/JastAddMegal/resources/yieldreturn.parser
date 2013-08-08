@@ -1,0 +1,12 @@
+/**
+* 
+*	Parse a yield return Statement and check if its valid
+*
+**/
+Stmt statement_without_trailing_substatement = yield_return_stmt;
+
+Stmt statement_without_trailing_substatement = yield_break_stmt; 
+
+YieldReturnStmt yield_return_stmt = YIELD RETURN expression SEMICOLON {: return new YieldReturnStmt(expression); :};
+
+YieldBreakStmt yield_break_stmt = YIELD BREAK SEMICOLON {: return new YieldBreakStmt(); :};
