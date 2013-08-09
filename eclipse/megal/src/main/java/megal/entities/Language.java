@@ -25,6 +25,9 @@ public class Language extends Set {
 		String base = "http://101companies.org/resources/";
 		String typeName = getEdecl().getType().getName();
 		
+		// TODO: name does not always represent the actual resource. Think about
+		// Rails: Technology
+		// the solution is to use Rails ["Ruby on Rails"]: Technology
 		if (typeName.equals("Language")) return base + "languages/" + getEdecl().getName();;
 		if (typeName.equals("Technology")) return base + "technologies/" + getEdecl().getName();;
 		

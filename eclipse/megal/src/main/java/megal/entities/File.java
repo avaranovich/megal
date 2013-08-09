@@ -1,5 +1,7 @@
 package megal.entities;
 
+import java.util.List;
+
 import megal.model.EDecl;
 
 public class File extends Entity {

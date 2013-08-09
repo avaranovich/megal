@@ -40,6 +40,9 @@ public class FileElementOfLanguage extends elementOf<File, Language> {
 				return false;
 			}
 			if (resource.equals(second.getResource())){
+				// TODO: if the file is actualy many files?
+				// because we do have File+ in MegaL
+				
 				String checker  = conf.getString("checker");
 				String type = conf.getString("type");
 				
@@ -52,7 +55,7 @@ public class FileElementOfLanguage extends elementOf<File, Language> {
 					}
 				    try {
 						Checker<URI> tool = (Checker<URI>) clazz.newInstance();
-						boolean success = tool.check(first.getResource());
+						boolean success = tool.check(this.getProvider(first.getResource()).getURIs());
 						eventBus.post(new RelationshipEvaluationSucceeded(first, second, this, success));
 						return success;
 					} catch (Exception e) {

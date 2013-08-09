@@ -91,7 +91,8 @@ public abstract class Relationship<X extends Entity, Y extends Entity> {
 			//System.out.println(this.getClass().getName());
 			if (name.equalsIgnoreCase(this.getClass().getName())){
 				this.src = rel.getString("src");
-				return rel.getConfig("config");	
+				if (rel.hasPath("config"))
+					return rel.getConfig("config");	
 			}
 		}
 		

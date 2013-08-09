@@ -57,9 +57,10 @@ public abstract class Entity {
 	public boolean tryLink(){
 		
 		// we don't link internal entities
-		if (this.edecl.getModifier() == Modifier.Intern){
+		if (this.edecl.getModifier().equals(Modifier.Intern)){
 			try {
 				this.link(new URI("http://megal.org/resources/" + this.getName()));
+				return true;
 			} catch (URISyntaxException e) {
 				return false;
 			}
