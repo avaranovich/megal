@@ -52,6 +52,7 @@ public class Provider {
         List<URI> files = new ArrayList<URI>();
         try {
 
+            gitHubUrl = gitHubUrl.replaceAll("https://github.com/.*/master/", "");
             RepositoryService repositoryService = new RepositoryService();
             Repository repo = repositoryService.getRepository("avaranovich", "megal");
 
