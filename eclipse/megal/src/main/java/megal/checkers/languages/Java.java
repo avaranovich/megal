@@ -16,33 +16,36 @@ import megal.checkers.Checker;
 
 public class Java implements Checker<URI> {
 
-	@SuppressWarnings("deprecation")
-	public boolean check(URI file) {
+    @SuppressWarnings("deprecation")
+    public boolean check(URI file) {
         CompilationUnit cu;
         try {
             // parse the file
-        	InputStream in = null;
+            InputStream in = null;
             try {
-            	in = Resources.newInputStreamSupplier(file.toURL()).getInput();
-            	//String content = CharStreams.toString(new InputStreamReader(in, Charsets.UTF_8));
-            	
-				cu = JavaParser.parse(in);
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-            finally{
-            	Closeables.closeQuietly(in);
+                in = Resources.newInputStreamSupplier(file.toURL()).getInput();
+                //String content = CharStreams.toString(new InputStreamReader(in, Charsets.UTF_8));
+
+                cu = JavaParser.parse(in);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                Closeables.closeQuietly(in);
             }
         } catch (ParseException e) {
-			return false;
-		} 
+            return false;
+        }
 
-		return true;
-	}
+        return true;
+    }
 
     public boolean check(List<URI> targets) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean check = true;
+        for (URI t : targets) {
+            check = check && check(t);
+        }
+        return check;
     }
 }
