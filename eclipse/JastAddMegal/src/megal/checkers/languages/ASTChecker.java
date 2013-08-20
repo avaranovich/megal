@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URI;
 
+import util.Net;
+
 import ast.AST.Ast;
 import ast.AST.ParseException;
 
@@ -18,7 +20,13 @@ public class ASTChecker implements Checker<URI> {
 		String path=target.getPath();
 		Ast parser;
 		try {
-			parser = new Ast(new FileInputStream(path));
+			if(target.toString().startsWith("http")){
+				Net.safeFileFromURI(new File("temp.ast"), target);
+				parser = new Ast(new FileInputStream("temp.ast"));
+			}
+			else{
+				parser = new Ast(new FileInputStream(path));
+			}
 			parser.fileName = path;
 			parser.Grammar();
 			if(parser.parseProblems().isEmpty())
@@ -26,6 +34,8 @@ public class ASTChecker implements Checker<URI> {
 		} catch (FileNotFoundException e) {
 			return false;
 		} catch (ParseException e) {
+			return false;
+		} catch(Exception e){
 			return false;
 		}
 		return false;

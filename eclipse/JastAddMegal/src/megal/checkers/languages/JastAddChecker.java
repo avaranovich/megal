@@ -1,11 +1,14 @@
 package megal.checkers.languages;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.net.URI;
 
 import jrag.AST.JragParser;
 
 import org.jastadd.JastAddConfiguration;
+
+import util.Net;
 
 import ast.AST.Grammar;
 import megal.checkers.Checker;
@@ -17,9 +20,12 @@ public class JastAddChecker implements Checker<URI> {
 
 		FileInputStream fis;
 		try {
-			System.out.println("*********file path: " + file.getPath());
-
-			fis = new FileInputStream(file.getPath());
+			if(file.toString().startsWith("http")){
+				Net.safeFileFromURI(new File("temp.jadd"), file);
+				fis = new FileInputStream("temp.jadd");
+			}else{
+				fis = new FileInputStream(file.getPath());
+			}
 			JragParser jp = new JragParser(fis);
 			jp.inputStream = fis;
 			jp.setFileName(file.getPath());

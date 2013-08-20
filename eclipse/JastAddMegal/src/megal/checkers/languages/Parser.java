@@ -26,7 +26,8 @@ public class Parser implements Checker<URI> {
 		    		return false;
 		    	}
 			}
-			return compile(file.getPath());
+			else
+				return compile(file.getPath());
 		} catch (Exception e) {
 			return false;
 		}
