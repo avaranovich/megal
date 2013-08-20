@@ -1,5 +1,4 @@
 import AST.List;
-asdasdasd
 aspect GetYieldId {
 	eq YieldReturnStmt.modifiedInScope(Variable var) = getExpr().modifiedInScope(var);
 	eq YieldBreakStmt.modifiedInScope(Variable var) = false;
