@@ -12,7 +12,8 @@ import megal.events.RelationshipEvaluationSucceeded;
 import megal.model.RTypeDecl;
 
 import static megal.Context.*;
-import megal.providers.Provider;
+import megal.providers.GitHubProvider;
+import megal.providers.ProviderFactory;
 
 public class FileElementOfLanguage extends elementOf<File, Language> {
 
@@ -52,7 +53,7 @@ public class FileElementOfLanguage extends elementOf<File, Language> {
                         }
                         try {
                             Checker<URI> tool = (Checker<URI>) clazz.newInstance();
-                            success = tool.check(new Provider(first.getResource()).getUris());
+                            success = tool.check(ProviderFactory.getForUrl(first.getResource()).getUris());
                             eventBus.post(new RelationshipEvaluationSucceeded(first, second, this, success));
 
                         } catch (Exception e) {
