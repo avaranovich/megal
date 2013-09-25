@@ -13,6 +13,10 @@ public class EDecl extends Decl {
 	private String parent;
 	private Entity entity;
 	public EDecl(Modifier modifier, EType type, String name, String uqref, String parent) {
+		//TODO: do we need to consider "external" as a defaul modifier on the grammar level?
+		if (modifier == null){
+			modifier = Modifier.Extern;
+		}
 		this.modifier = modifier;
 		this.type = type;
 		this.name = name;
