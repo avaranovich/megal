@@ -30,7 +30,7 @@ public class RelationshipsTest extends BaseTest {
 	@Test
 	public void customRelationshipsShouldBeAddedToTheGraph(){
 		List<RTypeDecl> customRels =  Context.runtime.getCustomRDecls();
-		assertEquals(2, customRels.size());	
+		assertEquals(9, customRels.size());	
 		
 		for (RTypeDecl rTypeDecl: customRels){
 			if(rTypeDecl.getClass().isAssignableFrom(elementOf.class)){
@@ -45,8 +45,17 @@ public class RelationshipsTest extends BaseTest {
 	@Test
 	public void allRelationshipsFromPreludeShouldBeAddedToTheGraphBeforeBootstrap(){
 		Tool.analyze();
-		
-		assertEquals(7, Context.rTypeDecls.size());
+		/*
+		  subsetOf=[(Set,Set)],
+		  conformsTo=[(Artifact,Artifact)],
+		  definitionOf=[(Artifact,Language)], 
+		  elementOf=[(Entity,Set)], 
+		  partOf=[(Artifact,Artifact)], 
+		  isA=[(Concept,Concept)], 
+		  instanceOf=[(Concept,Concept)] 
+		  hasOutput=[(Technology,Artifact) (Artifact,Artifact)]
+		*/
+		assertEquals(9, Context.rTypeDecls.size());
 	}
 	
 	@Test
@@ -59,12 +68,17 @@ public class RelationshipsTest extends BaseTest {
 		for (Entry<String, List<Pair<String, String>>> entry : Context.rTypeDecls.entrySet()) {
 			String key = entry.getKey();
 		    System.out.println("Key = " + key + ", Value = " + entry.getValue());
-		    if (key.equals("elementOf") || key.equals("partOf")){
-		    	// we have a custom relationships, so there should be 2 relationships for elementOf and partOf
+		    if (key.equals("subsetOf") || key.equals("conformsTo") || key.equals("definitionOf") || key.equals("isA") || key.equals("instanceOf")){
+				assertEquals(1, entry.getValue().size());	
+		    }
+		    else if (key.equals("elementOf") || key.equals("partOf")){
 				assertEquals(2, entry.getValue().size());	
 		    }
+		    else if (key.equals("inputOf")){
+				assertEquals(4, entry.getValue().size());	
+		    }
 		    else{
-		    		assertEquals(1, entry.getValue().size());	
+		    		assertEquals(2, entry.getValue().size());	
 		    }
 		}
 	}

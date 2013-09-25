@@ -28,7 +28,9 @@ public class ConfigTest extends BaseTest {
 		Config conf = ConfigFactory.load();
 		@SuppressWarnings("unchecked")
 		List<Config> rels = (List<Config>) conf.getConfigList("relationships");
-		assertEquals(1, rels.size());
+		
+		// FileElementOfLanguage, FolderPartOfFolder
+		assertEquals(2, rels.size());
 	}
 	
 	@Test

@@ -31,6 +31,5 @@ public class BasicMegamodelsTest extends BaseTest {
         Tool.check();
         
         System.out.println("JSON:" + Tool.getEvents().getJson());
-
     }
 }
