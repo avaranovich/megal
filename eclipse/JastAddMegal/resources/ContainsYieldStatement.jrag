@@ -1,0 +1,74 @@
+aspect ContainsYieldStatement{
+	syn lazy boolean Stmt.containsYieldStatement();
+	eq YieldReturnStmt.containsYieldStatement() = true;
+	eq YieldBreakStmt.containsYieldStatement()=true;
+	eq YieldReturnRewritten.containsYieldStatement()=true;
+	eq YieldBreakRewritten.containsYieldStatement()=true;
+	eq VarDeclStmt.containsYieldStatement()=false;
+	eq VariableDeclaration.containsYieldStatement()=false;
+	eq LabeledStmt.containsYieldStatement()=getStmt().containsYieldStatement();
+	eq SwitchStmt.containsYieldStatement()=getBlock().containsYieldStatement();
+	eq WhileStmt.containsYieldStatement()=getStmt().containsYieldStatement();
+	eq DoStmt.containsYieldStatement()=getStmt().containsYieldStatement();
+	eq ForStmt.containsYieldStatement(){
+		if (getStmt().containsYieldStatement())
+			return true;
+		for(Stmt stmt:getUpdateStmts()){
+			if(stmt.containsYieldStatement())
+				return true;
+		}
+		return false;
+	}
+	eq EnhancedForStmt.containsYieldStatement()=getStmt().containsYieldStatement();
+	eq ExprStmt.containsYieldStatement()=false;
+	eq Case.containsYieldStatement()=false;
+	eq IfStmt.containsYieldStatement()=getThen().containsYieldStatement()&&(hasElse()?getElse().containsYieldStatement():false);
+	eq BreakStmt.containsYieldStatement()=false;
+	eq ContinueStmt.containsYieldStatement()=false;
+	eq ReturnStmt.containsYieldStatement()=false;
+	eq ThrowStmt.containsYieldStatement()=false;
+	eq SynchronizedStmt.containsYieldStatement()=getBlock().containsYieldStatement();
+	eq TryStmt.containsYieldStatement(){
+		if(getBlock().containsYieldStatement())
+			return true;
+		if(hasFinally())
+			if(getFinally().containsYieldStatement())
+				return true;
+		List<CatchClause> clauses = getCatchClauses();
+		for(CatchClause clause : clauses){
+			if(clause.getBlock().containsYieldStatement())
+				return true;
+		}
+		return false;
+	}
+	eq EmptyStmt.containsYieldStatement()=false;
+	eq AssertStmt.containsYieldStatement()=false;
+	eq LocalClassDeclStmt.containsYieldStatement()=false;
+	/* NOT SHURE IF I SHOULDNT TEST VARIABLE IN NEW CLASS{
+		List<BodyDecl> bodys=getClassDecl().getBodyDecls();
+		for(BodyDecl decl:decls){
+			if(!decl.containsYieldStatement())
+				return false;
+		}
+		return true;
+	}*/
+	eq BasicTWR.containsYieldStatement() = getBlock().containsYieldStatement();
+	
+	syn lazy boolean MethodDecl.containsYieldStatement(){
+		if(hasBlock()){
+			Block block=getBlock();
+			if(block.containsYieldStatement())
+				return true;
+		}
+		return false;
+	}
+	
+	syn lazy boolean Block.containsYieldStatement(){
+		List<Stmt> stmts=getStmtList();
+		for(Stmt stmt:stmts){
+			if(stmt.containsYieldStatement())
+				return true;
+		}
+		return false;
+	}
+}

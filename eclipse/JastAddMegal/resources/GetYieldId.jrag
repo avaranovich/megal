@@ -1,0 +1,37 @@
+import AST.List;
+aspect GetYieldId {
+	eq YieldReturnStmt.modifiedInScope(Variable var) = getExpr().modifiedInScope(var);
+	eq YieldBreakStmt.modifiedInScope(Variable var) = false;
+	
+	/** YIELD_ID Attribuites **/
+	inh lazy String YieldReturnStmt.getYieldId();
+	inh lazy String YieldBreakStmt.getYieldId();
+	inh lazy String Block.getYieldId();
+	eq InstanceInitializer.getBlock().getYieldId()=getYieldId();
+	eq StaticInitializer.getBlock().getYieldId()=getYieldId();
+	eq ConstructorDecl.getBlock().getYieldId()=getYieldId();
+	eq MethodDecl.getBlock().getYieldId()=getYieldId();
+	eq ConstructorDecl.getConstructorInvocation().getYieldId() = getYieldId();
+	eq Block.getStmt(int i).getYieldId() = getYieldId();
+	
+	String MethodDecl.yield_id=null;
+	void MethodDecl.setYieldId(String name){
+		yield_id=name;
+	}
+	syn lazy String MethodDecl.getYieldId(){
+		if(yield_id==null){
+			String prefix="_____yield___list___";
+			String result_ID=prefix;
+			int count=0;
+			while(!isFreshVariable(result_ID)){
+				result_ID=prefix+count;
+				count++;
+			}
+			yield_id=result_ID;
+			return result_ID;
+		}else
+			return yield_id;
+	}
+	
+	syn lazy String BodyDecl.getYieldId()=null;
+}

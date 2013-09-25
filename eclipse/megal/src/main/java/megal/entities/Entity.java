@@ -54,14 +54,14 @@ public abstract class Entity {
 	 * Lookup the config file and try to find a related resource for a given entity.
 	 * @return true if the entity is linked, false otherwise.
 	 */
+	@SuppressWarnings("unchecked")
 	public boolean tryLink(){
-		
 		// we don't link internal entities
 		if (this.edecl.getModifier().equals(Modifier.Intern)){
 			try {
 				this.link(new URI("http://megal.org/resources/" + this.getName()));
 				return true;
-			} catch (URISyntaxException e) {
+			} catch (final URISyntaxException e) {
 				return false;
 			}
 		}

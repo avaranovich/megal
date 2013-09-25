@@ -1,6 +1,4 @@
-*.class
-*.jar
-*.log
-
-/bin
-dist/
+.metadata
+.DS_Store
+bin
+/eclipse/JastAddMegal/target

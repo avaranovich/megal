@@ -72,12 +72,22 @@ public class Runtime {
 				return null;
 			}
 		}
+		
+		private ParameterizedType getGenericSuperClass(Class clazz){
+			Type superClass = clazz.getGenericSuperclass();
+			try{
+				return (ParameterizedType) superClass;
+			}
+			catch(ClassCastException ex){
+				return this.getGenericSuperClass(clazz.getSuperclass());
+			}			
+		}
 
 		public RTypeDecl toRTypeDecl(){
 			Class<?> coreRel = getClass(typedRelationship);
 			String name = getCore().typedRelationship.getSimpleName();
 
-			ParameterizedType ptString = (ParameterizedType) coreRel.getGenericSuperclass();
+			ParameterizedType ptString = getGenericSuperClass(coreRel); //(ParameterizedType) coreRel.getGenericSuperclass();
 
 			RTypeDecl rdecl = new RTypeDecl(
 					name, 

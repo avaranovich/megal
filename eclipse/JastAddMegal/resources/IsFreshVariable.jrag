@@ -1,0 +1,86 @@
+aspect IsFreshVariable{
+	/** isFreshVariable Attributes **/
+	syn lazy boolean Expr.isFreshVariable(String name)=lookupVariable(name).isEmpty();
+	syn lazy boolean Stmt.isFreshVariable(String name);
+	eq YieldBreakStmt.isFreshVariable(String name)=true;
+	eq VarDeclStmt.isFreshVariable(String name){
+		for(VariableDecl decl:getVariableDecls()){
+			if(!decl.getID().equals(name)&&(decl.hasInit()?decl.getInit().isFreshVariable(name):true))
+				return false;
+		}
+		return true;
+	}
+	eq VariableDeclaration.isFreshVariable(String name)=getID().equals(name)&&(hasInit()?getInit().isFreshVariable(name):true);
+	eq LabeledStmt.isFreshVariable(String name)=getStmt().isFreshVariable(name);
+	eq SwitchStmt.isFreshVariable(String name)=getExpr().isFreshVariable(name)&&getBlock().isFreshVariable(name);
+	eq WhileStmt.isFreshVariable(String name)=getCondition().isFreshVariable(name)&&getStmt().isFreshVariable(name);
+	eq DoStmt.isFreshVariable(String name)=getCondition().isFreshVariable(name)&&getStmt().isFreshVariable(name);
+	eq ForStmt.isFreshVariable(String name){
+		if (!getCondition().isFreshVariable(name)&&getStmt().isFreshVariable(name))
+			return false;
+		for(Stmt stmt:getUpdateStmts()){
+			if(!stmt.isFreshVariable(name))
+				return false;
+		}
+		return true;
+	}
+	eq EnhancedForStmt.isFreshVariable(String name)=getExpr().isFreshVariable(name)&&getStmt().isFreshVariable(name);
+	eq ExprStmt.isFreshVariable(String name)=getExpr().isFreshVariable(name);
+	eq Case.isFreshVariable(String name)=true;
+	eq IfStmt.isFreshVariable(String name)=getCondition().isFreshVariable(name)&&getThen().isFreshVariable(name)&&(hasElse()?getElse().isFreshVariable(name):true);
+	eq BreakStmt.isFreshVariable(String name)=true;
+	eq ContinueStmt.isFreshVariable(String name)=true;
+	eq ReturnStmt.isFreshVariable(String name)=hasResult()?getResult().isFreshVariable(name):true;
+	eq ThrowStmt.isFreshVariable(String name)=getExpr().isFreshVariable(name);
+	eq SynchronizedStmt.isFreshVariable(String name)=getBlock().isFreshVariable(name)&&getExpr().isFreshVariable(name);
+	eq TryStmt.isFreshVariable(String name){
+		if(!getBlock().isFreshVariable(name))
+			return false;
+		if(hasFinally())
+			if(!getFinally().isFreshVariable(name))
+				return false;
+		List<CatchClause> clauses = getCatchClauses();
+		for(CatchClause clause : clauses){
+			if(!clause.getBlock().isFreshVariable(name))
+				return false;
+		}
+		return true;
+	}
+	eq EmptyStmt.isFreshVariable(String name)=true;
+	eq AssertStmt.isFreshVariable(String name){
+		if(hasExpr())
+			return getExpr().isFreshVariable(name);
+		return true;
+	}
+	eq LocalClassDeclStmt.isFreshVariable(String name)=true;
+	/* NOT SHURE IF I SHOULDNT TEST VARIABLE IN NEW CLASS{
+		List<BodyDecl> bodys=getClassDecl().getBodyDecls();
+		for(BodyDecl decl:decls){
+			if(!decl.isFreshVariable(name))
+				return false;
+		}
+		return true;
+	}*/
+	eq BasicTWR.isFreshVariable(String name) = getBlock().isFreshVariable(name);
+	eq YieldReturnStmt.isFreshVariable(String name) = lookupVariable(name).isEmpty();
+	
+	syn lazy boolean MethodDecl.isFreshVariable(String name){
+		if(hasBlock()){
+			Block block=getBlock();
+			if(!block.isFreshVariable(name))
+				return false;
+		}
+		return true;
+	}
+	
+	syn lazy boolean Block.isFreshVariable(String name){
+		if (!lookupVariable(name).isEmpty())
+			return false;
+		List<Stmt> stmts=getStmtList();
+		for(Stmt stmt:stmts){
+			if(!stmt.isFreshVariable(name))
+				return false;
+		}
+		return true;
+	}
+}
