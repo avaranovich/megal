@@ -66,7 +66,8 @@ public abstract class Entity {
 			}
 		}
 		
-		Config conf = ConfigFactory.load();
+		Config conf = ConfigFactory.load("mega").withFallback(ConfigFactory.load());
+		//Config conf = ConfigFactory.load();
 		List<Config> rels = (List<Config>) conf.getConfigList("linking");
 		for(Config c: rels){
 			String type = c.getString("type");

@@ -84,7 +84,7 @@ public abstract class Relationship<X extends Entity, Y extends Entity> {
 	 */
 	@SuppressWarnings("unchecked")
 	public Config getConfig(){
-		Config conf = ConfigFactory.load();
+		Config conf = ConfigFactory.load("mega").withFallback(ConfigFactory.load());
 		List<Config> rels = (List<Config>) conf.getConfigList("relationships");
 		for (Config rel : rels){
 			String name = rel.getString("relationship");

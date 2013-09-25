@@ -19,8 +19,15 @@ public class ConfigTest extends BaseTest {
 	
 	@Test
 	public void readFromFileTest() throws IOException {
+		// checking default config
 		Config conf = ConfigFactory.load();
 		assertNotNull(conf);
+		
+		// checking custom config
+		Config customConf = ConfigFactory.load("mega");
+		assertNotNull(customConf);
+		String bar = customConf.getString("foo");
+		assertEquals("bar", bar);
 	}
 	
 	@Test
