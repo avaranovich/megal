@@ -105,6 +105,13 @@ public class Tool {
 
 		link();
 		
+		// Write event log back next to input file
+		 String output = input.replaceFirst(".megal", ".json");
+		 PrintStream ps = new PrintStream(output);
+	     ps.println(Tool.getEvents().getJson());
+		 ps.close();
+		
+		
 		// Write log back next to input file
 		/*String output = input.replaceFirst(".megal", ".log");
 		if (input!=output) {
