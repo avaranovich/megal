@@ -5,6 +5,7 @@ import java.util.List;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
+import megal.Context;
 import megal.entities.Entity;
 import megal.events.RelationshipEvaluationStarted;
 import megal.model.EDecl;
@@ -84,7 +85,7 @@ public abstract class Relationship<X extends Entity, Y extends Entity> {
 	 */
 	@SuppressWarnings("unchecked")
 	public Config getConfig(){
-		Config conf = ConfigFactory.load("mega").withFallback(ConfigFactory.load());
+		Config conf = Context.config;
 		List<Config> rels = (List<Config>) conf.getConfigList("relationships");
 		for (Config rel : rels){
 			String name = rel.getString("relationship");

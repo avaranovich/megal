@@ -1,3 +1,3 @@
 package megal.model;
 
-public enum Modifier {Extern, Intern}
+public enum Modifier {Extern, Intern, Parameter, Dependent}

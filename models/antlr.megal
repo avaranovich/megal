@@ -1,0 +1,37 @@
+AntlrTool : Technology
+AntlrNotation : Language
+Java : Language
+?aLanguage : Language
+?aGrammar : Artifact
+!aParser : Artifact
+?anInput : Artifact
+
+aGrammar elementOf AntlrNotation
+aGrammar defines aLanguage
+AntlrTool(aGrammar) |-> aParser
+
+/*
+:Language domainOf :Function
+:Function hasRange :Language
+*/
+
+aParser elementOf Java
+anInput elementOf aLanguage # aParser 
+anInput conformsTo aGrammar # aParser
+
+// TODO
+Artifact defnitionOf :Language
+
+?newLanuage : Language
+?aGrammar : File
+ANTLR : Technology
+
+ANTLR defines antlrCodeGenerator
+antlrCodeGenerator : Function 
+antlrCodeGenerator : Grammar -> Java
+aGrammar domainOf antlrCodeGenerator
+antlrCodeGenerator hasRange Java
+
+?aParser : File
+aParser elementOf Java
+antlrCodeGenerator(aGrammar) |-> aParser

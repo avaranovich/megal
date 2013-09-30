@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.antlr.v4.runtime.*;
 import com.google.gson.Gson;
+import com.typesafe.config.ConfigFactory;
 
 /**
  * Parse the megamodel. Analyze it in all kinds of ways. Resolve it, of course.
@@ -92,6 +93,8 @@ public class Tool {
 			System.out.print("Please provide the following arguments: a megamodel file");
 			System.exit(-1);
 		}
+		
+		Context.config = ConfigFactory.load("mega").withFallback(Context.config);
 		
 		String input = args[0];
 				

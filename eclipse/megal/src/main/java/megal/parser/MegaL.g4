@@ -54,6 +54,8 @@ rdecl returns [RDecl d]:
 modifier returns [Modifier m] :
 	  'extern' { $m = Modifier.Extern; }
 	| 'intern' { $m = Modifier.Intern; }
+	| '?'	   { $m = Modifier.Parameter; }
+	| '!'	   { $m = Modifier.Dependent; }	
 	;
 
 // Entity types for entity declarations

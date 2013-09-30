@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.eventbus.EventBus;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 
 /**
  * Analyses semi-persist results in this context class.
@@ -39,16 +41,21 @@ public final class Context {
 	public static Map<String,List<Pair<String,String>>> rTypeDecls = new HashMap<String,List<Pair<String,String>>>();
 	
 	public static EventBus eventBus = new EventBus();
+	
+	public static Config config = null;
 
 	// Registry of the Entity base type
 	static {
 		eTypeDecls.put("Entity",null);
+		
+		// loading default application.conf
+		config = ConfigFactory.load();
 	}
 	
 	public static void register(EventBusChangeRecorder recorder){
 		eventBus.register(recorder);
 	}
-
+	
 	public static Map<String,EDecl> customEDecls = new HashMap<String,EDecl>(); 
 	// The Context class is used as a global variable.
 	private Context() { 
