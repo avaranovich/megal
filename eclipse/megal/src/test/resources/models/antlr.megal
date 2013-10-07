@@ -22,7 +22,7 @@ Java rangeOf codeGeneration
 */
 
 aGrammar defines aLanguage .
-//codeGeneration(aGrammar) |-> aParser .
+codeGeneration(aGrammar) |-> aParser .
 
 /*
 codeGenerationApp1 : FunctionApplication
