@@ -1,8 +1,9 @@
-package megal.relationships;
+package megal.relationships.core;
 
 import megal.entities.Entity;
 import megal.entities.Set;
 import megal.model.RTypeDecl;
+import megal.relationships.WeakRel;
 
 import static megal.Context.*;
 

@@ -3,7 +3,7 @@ package megal.events;
 import java.util.List;
 
 import megal.model.RDecl;
-import megal.relationships.Relationship;
+import megal.relationships.core.Relationship;
 
 public class AmbiguousRelationshipDetected extends Event {
 

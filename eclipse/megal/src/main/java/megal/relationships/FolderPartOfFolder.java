@@ -4,6 +4,7 @@ import static megal.Context.eventBus;
 import megal.entities.Folder;
 import megal.events.RelationshipEvaluationSucceeded;
 import megal.model.RTypeDecl;
+import megal.relationships.core.partOf;
 
 public class FolderPartOfFolder extends partOf<Folder, Folder> {
 

@@ -6,8 +6,8 @@ import megal.events.RelationshipEvaluationFailed;
 import megal.events.RelationshipEvaluationStarted;
 import megal.model.RDecl;
 import megal.model.Visitor;
-import megal.relationships.Relationship;
 import megal.relationships.WeakRel;
+import megal.relationships.core.Relationship;
 
 /*
  * Checks all the relationships in the megamodel.

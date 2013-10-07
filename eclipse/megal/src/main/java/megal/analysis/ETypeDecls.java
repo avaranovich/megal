@@ -13,6 +13,6 @@ public class ETypeDecls extends Visitor {
 		if (eTypeDecls.containsKey(name))
 			log.problems.add(new ProblemWithName(ProblemCode.doubleDeclaration, name));
 		else
-			eTypeDecls.put(name,decl);
+			eTypeDecls.put(name, decl);
 	}
 }

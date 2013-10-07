@@ -11,8 +11,8 @@ import megal.model.Decl;
 import megal.model.RDecl;
 import megal.model.RTypeDecl;
 import megal.relationships.FileElementOfLanguage;
-import megal.relationships.Relationship;
-import megal.relationships.elementOf;
+import megal.relationships.core.Relationship;
+import megal.relationships.core.elementOf;
 import megal.trivia.Pair;
 
 import org.junit.Before;

@@ -1,7 +1,7 @@
 package megal.events;
 
 import megal.entities.Entity;
-import megal.relationships.Relationship;
+import megal.relationships.core.Relationship;
 
 /*
  * Represents an event, when the framework fails to evaluate a given relationship.

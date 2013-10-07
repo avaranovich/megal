@@ -14,6 +14,7 @@ import megal.model.RTypeDecl;
 import static megal.Context.*;
 import megal.providers.GitHubProvider;
 import megal.providers.ProviderFactory;
+import megal.relationships.core.elementOf;
 
 public class FileElementOfLanguage extends elementOf<File, Language> {
 

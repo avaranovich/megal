@@ -1,17 +1,22 @@
 package megal.model;
 
 import static megal.Context.*;
+
+import java.util.LinkedList;
+import java.util.List;
+
 import megal.entities.Entity;
 import megal.events.EntityLookupStarted;
 import megal.events.EntityNotFound;
 
-public class EDecl extends Decl {
+public class EDecl extends megal.model.Decl {
 	private Modifier modifier;
 	private EType type;
 	private String name;
 	private String uqref;
 	private String parent;
 	private Entity entity;
+	private List<Decl> expanded = null;
 	public EDecl(Modifier modifier, EType type, String name, String uqref, String parent) {
 		//TODO: do we need to consider "external" as a defaul modifier on the grammar level?
 		if (modifier == null){
@@ -22,6 +27,7 @@ public class EDecl extends Decl {
 		this.name = name;
 		this.uqref = uqref;
 		this.parent = parent;
+		this.expanded = new LinkedList<Decl>();
 	}
 	public Modifier getModifier() { return modifier; }
 	public EType getType() { return type; }
@@ -63,5 +69,28 @@ public class EDecl extends Decl {
 		
 		
 		return this.entity;
+	}
+
+	/*
+	 * Expands entity declarations for functions and function applications.
+	 * For example:
+	 * codeGeneration: Function[AntlrNotation -> Java] 
+	 * becomes
+	 * AntlrNotation domainOf codeGeneration
+	 * Java rangeOf codeGeneration
+	 */
+	public List<Decl> expand(){
+		if (expanded.size() > 0){
+			return expanded;
+		}
+		GenericArguments args = this.getType().getGenericArguments();
+		if (this.getType().getName().equals("Function") && ((args != null))){
+			RDecl domainOf = new RDecl("domainOf", args.getLeft(), this.getName(), null);
+			RDecl rangeOf = new RDecl("rangeOf", args.getRight(), this.getName(), null);
+			expanded.add(domainOf);
+			expanded.add(rangeOf);
+		}
+		
+		return expanded;
 	}
 }

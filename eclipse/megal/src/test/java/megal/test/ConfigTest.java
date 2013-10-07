@@ -8,7 +8,7 @@ import megal.entities.File;
 import megal.entities.Language;
 import megal.model.RTypeDecl;
 import megal.relationships.FileElementOfLanguage;
-import megal.relationships.Relationship;
+import megal.relationships.core.Relationship;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package megal.relationships;
+package megal.relationships.core;
 
 import java.util.List;
 

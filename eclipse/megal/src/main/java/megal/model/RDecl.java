@@ -7,7 +7,7 @@ import java.util.List;
 import megal.entities.Entity;
 import megal.events.AmbiguousRelationshipDetected;
 import megal.events.RelationshipLookupStarted;
-import megal.relationships.Relationship;
+import megal.relationships.core.Relationship;
 
 import static megal.Context.*;
 

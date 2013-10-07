@@ -86,7 +86,7 @@ public class Tool {
 		new RDecls();
 		new RTypeDecls();
 	}
-	
+
 	public static void main(String[] args) throws IOException {
 		
 		if (args.length < 1){

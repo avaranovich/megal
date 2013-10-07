@@ -36,14 +36,14 @@ public class Runtime {
 		/*
 		 * Creates a new instance of the relationship, parametrized with two entities and current relationship type declaration.
 		 */
-		public megal.relationships.Relationship<?,?> newInstance(Entity first, Entity second, RTypeDecl rTypeDecl) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException{
+		public megal.relationships.core.Relationship<?,?> newInstance(Entity first, Entity second, RTypeDecl rTypeDecl) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException{
 			@SuppressWarnings("rawtypes")
 			Class[] types = {first.getClass(), second.getClass(), rTypeDecl.getClass()};
 			
 			Object[] params = {first, second, rTypeDecl};
 			
 
-			return (megal.relationships.Relationship<?, ?>) typedRelationship.getConstructor(types).newInstance(params);
+			return (megal.relationships.core.Relationship<?, ?>) typedRelationship.getConstructor(types).newInstance(params);
 		}
 
 		/**
@@ -108,7 +108,7 @@ public class Runtime {
 			do{
 				rel = new Runtime.Relationship(superClass);
 				superClass = getSuperClass(superClass);
-			} while (superClass != megal.relationships.Relationship.class);
+			} while (superClass != megal.relationships.core.Relationship.class);
 
 			return rel;			
 		}
@@ -123,7 +123,7 @@ public class Runtime {
 
 		Reflections reflections = new Reflections("megal.relationships");
 		@SuppressWarnings("rawtypes")
-		Set<Class<? extends megal.relationships.Relationship>> subTypes = reflections.getSubTypesOf(megal.relationships.Relationship.class);
+		Set<Class<? extends megal.relationships.core.Relationship>> subTypes = reflections.getSubTypesOf(megal.relationships.core.Relationship.class);
 
 		@SuppressWarnings("unchecked")
 		Set<Class<?>> wr = reflections.getTypesAnnotatedWith(WeakRel.class);

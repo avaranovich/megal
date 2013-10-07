@@ -2,10 +2,12 @@ package megal.test;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
 import java.util.Map.Entry;
 
 import megal.Context;
 import megal.Tool;
+import megal.model.Decl;
 import megal.model.EDecl;
 import megal.model.GenericArguments;
 import megal.model.RDecl;
@@ -48,5 +50,17 @@ public class AdvancedMegamodelsTest extends BaseTest {
     			assertEquals("aParser", ann);
     		}
     	}
+    }
+    
+    @Test
+    public void testSyntacticExpansionForGenericFucntion(){
+     	for (Entry<String, EDecl> entry: Context.eDecls.entrySet()){
+    		String key = entry.getKey();
+    		if (key.equals("codeGeneration")){
+    			List<Decl> expanded = entry.getValue().expand();
+    			assertNotNull(expanded);
+    			assertEquals(2, expanded.size());
+    		}
+     	}
     }
 }

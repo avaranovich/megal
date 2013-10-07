@@ -1,7 +1,7 @@
 package megal.events;
 
 import megal.entities.Entity;
-import megal.relationships.Relationship;
+import megal.relationships.core.Relationship;
 
 public abstract class RelationshipEvaluation extends Event {
 	protected Entity first;

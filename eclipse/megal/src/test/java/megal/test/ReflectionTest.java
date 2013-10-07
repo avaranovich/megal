@@ -8,7 +8,7 @@ import java.util.Set;
 
 import megal.model.RDecl;
 import megal.model.RTypeDecl;
-import megal.relationships.Relationship;
+import megal.relationships.core.Relationship;
 
 import org.junit.Before;
 import org.junit.Test;
