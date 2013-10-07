@@ -15,16 +15,19 @@ public class RDecl extends Decl {
 	private RTypeRef rel;
 	private ERef left;
 	private ERef right;
+	private String annotation;
 	
-	public RDecl(String name, String left, String right)  {
+	public RDecl(String name, String left, String right, String annotation)  {
 		this.rel = new RTypeRef(name);
 		this.left = new ERef(left);
 		this.right = new ERef(right);
+		this.annotation = annotation;
 	}
 		
 	public RTypeRef getRel() { return rel; }
 	public ERef getLeft() { return left; }
 	public ERef getRight() { return right; }
+	public String getAnnotation() { return annotation; }
 	
 	/**
 	 * Lookups the relationship for the relationship declaration.

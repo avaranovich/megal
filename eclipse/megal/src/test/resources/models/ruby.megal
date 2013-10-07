@@ -4,17 +4,17 @@ extern RubyProgram : File .
 
 extern RubyOnRailsApp : Folder .
 RubyOnRailsViews @ RubyOnRailsApp : Folder .
-RubyOnRailsModels @ RubyOnRailsApp : Folder.
+RubyOnRailsModels @ RubyOnRailsApp : Folder .
 RubyOnRailsControllers @ RubyOnRailsApp : Folder .
 
 RubyOnRailsViews partOf RubyOnRailsApp .
 RubyOnRailsModels partOf RubyOnRailsApp .
-RubyOnRailsControllers partOf RubyOnRailsApp.
+RubyOnRailsControllers partOf RubyOnRailsApp .
 
 mfiles @ RubyOnRailsModels : File+ .
-vfiles @ RubyOnRailsViews : File+.
+vfiles @ RubyOnRailsViews : File+ .
 cfiles @ RubyOnRailsControllers : File+ .
 
 mfiles  elementOf Ruby .
 vfiles  elementOf Ruby .
-cfiles  elementOf Ruby.
+cfiles  elementOf Ruby .

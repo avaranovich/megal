@@ -43,12 +43,22 @@ edecl returns [EDecl d] :
 	; 
 	
 // Relationship declarations
-rdecl returns [RDecl d]:
+rdecl returns [RDecl d] :
 	left=ename 
 	rname
 	right=ename 
-	{ $d = new RDecl($rname.n, $left.n, $right.n); }
+	ann=annotation
+	{ $d = new RDecl($rname.n, $left.n, $right.n, $ann.s); }
 	;
+
+annotation returns [String s] :	
+	{ $s = null; }
+	(
+	 '#'
+	 ename { $s = $ename.n; }
+	)?	
+	;
+	
 
 // Modifiers for entities
 modifier returns [Modifier m] :
@@ -62,10 +72,24 @@ modifier returns [Modifier m] :
 etype returns [EType t] :
 	{ EType.Cardinality c = EType.Cardinality.None; }
 	etypename
+	genericarguments
 	( '+' { c = EType.Cardinality.Plus; }
 	| '*' { c = EType.Cardinality.Star; }
 	)?
-	{ $t = new EType($etypename.n, c); }
+	{ $t = new EType($etypename.n, c, $genericarguments.g); }
+	;
+
+// Generic arguments for entity types
+genericarguments returns [GenericArguments g] :
+	{ $g = null; String left = null; String right = null; }
+	(
+		'['
+		etypename {left = $etypename.n; }
+		'->'
+		etypename {right = $etypename.n; }
+		']'
+	)?
+	{ $g = new GenericArguments(left, right); }
 	;
 
 // Entity names
@@ -131,3 +155,5 @@ WS : (' '|'\r'? '\n'|'\t')+ { skip(); };
 
 // Comments to be allowed and skipped anywhere
 COMMENT : ('/*' ((~'*')|'-'*'/')* '*/' | '/' '/' (~('\n'|'\r'))*) { skip(); };
+
+NEWLINE: ('\r\n'|'\n'|'\r');

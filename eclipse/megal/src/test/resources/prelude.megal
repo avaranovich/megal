@@ -11,7 +11,7 @@ Folder < Artifact .
 elementOf < Entity * Set .
 subsetOf < Set * Set .
 partOf < Artifact * Artifact .
-instanceOf < Concept * Concept . 
-isA < Concept * Concept . 
+instanceOf < Concept * Concept .
+isA < Concept * Concept .
 conformsTo < Artifact * Artifact .
 definitionOf < Artifact * Language .
