@@ -63,4 +63,14 @@ public class AdvancedMegamodelsTest extends BaseTest {
     		}
      	}
     }
+    
+    @Test
+    public void testFunctionApplicationDeclaration(){
+    	assertEquals(false, true);
+    }
+    
+    @Test
+    public void testExpansionLinkingForFunction(){
+    	Tool.link();
+    }
 }

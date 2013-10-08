@@ -29,6 +29,10 @@ public abstract class Visitor {
 				RTypeDecl rtdecl = (RTypeDecl)decl;
 				visit(rtdecl);
 			}
+			else if (decl instanceof FunAppDecl) {
+				FunAppDecl fappdecl = (FunAppDecl)decl;
+				visit(fappdecl);
+			}
 		}
 	}
 	public void visit(EDecl edecl){}
@@ -36,4 +40,5 @@ public abstract class Visitor {
 	public void visit(RDecl rdecl){}
 	public void visit(ETypeDecl etdecl){}
 	public void visit(RTypeDecl rtdecl){}	
+	public void visit(FunAppDecl fappdecl){}
 }

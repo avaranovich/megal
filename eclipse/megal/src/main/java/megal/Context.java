@@ -30,6 +30,9 @@ public final class Context {
 
 	// The declared entities
 	public static Map<String,EDecl> eDecls = new HashMap<String,EDecl>();
+	
+	// The declated function applications
+	public static Map<String, FunAppDecl> funAppDecls = new HashMap<String, FunAppDecl>();
 
 	// The declared entity types
 	public static Map<String,ETypeDecl> eTypeDecls = new HashMap<String,ETypeDecl>();

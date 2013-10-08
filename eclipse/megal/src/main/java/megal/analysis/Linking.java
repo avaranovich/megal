@@ -1,5 +1,7 @@
 package megal.analysis;
 
+import java.util.List;
+
 import megal.model.*;
 import megal.entities.Entity;
 import megal.logging.Log;
@@ -15,13 +17,25 @@ public class Linking extends Visitor {
 		super();
 	}
 
-	public void visit(EDecl edecl) { 
-		Entity e = edecl.getEntity();
-				
-		boolean isLinked = e.tryLink();
-		System.out.println(isLinked);
-		if (!isLinked){
-			this.allLinked = false;
+	public void visit(@SuppressWarnings("rawtypes") EDecl edecl) { 
+		boolean isLinked = false;
+		
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		List<EDecl> expanded = edecl.expand();
+		if (expanded.size() > 0){
+			for(@SuppressWarnings("rawtypes") EDecl ed: expanded){
+				Entity e = ed.getEntity();
+				isLinked &= e.tryLink();
+			}
+		}
+		else{
+			Entity e = edecl.getEntity();
+					
+			isLinked &= e.tryLink();
+			System.out.println(isLinked);
+			if (!isLinked){
+				this.allLinked = false;
+			}
 		}
 	}
 

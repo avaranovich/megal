@@ -9,7 +9,7 @@ import megal.entities.Entity;
 import megal.events.EntityLookupStarted;
 import megal.events.EntityNotFound;
 
-public class EDecl extends megal.model.Decl {
+public class EDecl<T> extends megal.model.Decl {
 	private Modifier modifier;
 	private EType type;
 	private String name;
@@ -72,14 +72,14 @@ public class EDecl extends megal.model.Decl {
 	}
 
 	/*
-	 * Expands entity declarations for functions and function applications.
+	 * Expands entity declarations for functions.
 	 * For example:
 	 * codeGeneration: Function[AntlrNotation -> Java] 
 	 * becomes
 	 * AntlrNotation domainOf codeGeneration
 	 * Java rangeOf codeGeneration
 	 */
-	public List<Decl> expand(){
+	public List<? extends Decl> expand(){
 		if (expanded.size() > 0){
 			return expanded;
 		}

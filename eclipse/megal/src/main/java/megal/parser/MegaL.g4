@@ -26,6 +26,7 @@ decl returns [Decl d] :
 	| rdecl { $d = $rdecl.d; }
 	| etypedecl { $d = $etypedecl.d; }
 	| rtypedecl { $d = $rtypedecl.d; }
+	| funappdecl { $d = $funappdecl.d; }
 	)
 	'.'
 	;
@@ -51,6 +52,7 @@ rdecl returns [RDecl d] :
 	{ $d = new RDecl($rname.n, $left.n, $right.n, $ann.s); }
 	;
 
+// Relationship annotation
 annotation returns [String s] :	
 	{ $s = null; }
 	(
@@ -79,7 +81,7 @@ etype returns [EType t] :
 	{ $t = new EType($etypename.n, c, $genericarguments.g); }
 	;
 
-// Generic arguments for entity types
+// Generic arguments for entity types (at the moment only Function can have them)
 genericarguments returns [GenericArguments g] :
 	{ $g = null; String left = null; String right = null; }
 	(
@@ -90,6 +92,18 @@ genericarguments returns [GenericArguments g] :
 		']'
 	)?
 	{ $g = new GenericArguments(left, right); }
+	;
+
+//codeGeneration(aGrammar) |-> aParser .
+
+funappdecl returns [FunAppDecl d] :
+	{ $d = null; String n = null; String arg = null; String res = null; }
+	ename { n = $ename.n; }
+	'('
+	ename { arg = $ename.n; }
+	')' '|' '->'
+	ename { res = $ename.n; }
+	{ $d = new FunAppDecl(n, arg, res); }
 	;
 
 // Entity names

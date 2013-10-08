@@ -6,6 +6,8 @@ Technology < Entity .
 Concept < Entity .
 File < Artifact .
 Folder < Artifact .
+Function < Entity .
+FunctionApplication < Entity .
 
 // Relationship types
 elementOf < Entity * Set .

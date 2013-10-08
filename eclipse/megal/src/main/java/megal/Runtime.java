@@ -16,6 +16,8 @@ import megal.model.RTypeDecl;
 import megal.relationships.WeakRel;
 
 import org.reflections.Reflections;
+import org.reflections.util.ConfigurationBuilder;
+import org.reflections.util.FilterBuilder;
 
 public class Runtime {
 
@@ -121,20 +123,19 @@ public class Runtime {
 		weakRels = new ArrayList<Relationship>();
 		customRels = new ArrayList<Relationship>();
 
+		Reflections coreReflections = new Reflections("megal.relationships.core");
 		Reflections reflections = new Reflections("megal.relationships");
+ 
 		@SuppressWarnings("rawtypes")
-		Set<Class<? extends megal.relationships.core.Relationship>> subTypes = reflections.getSubTypesOf(megal.relationships.core.Relationship.class);
-
-		@SuppressWarnings("unchecked")
-		Set<Class<?>> wr = reflections.getTypesAnnotatedWith(WeakRel.class);
+		Set<Class<? extends megal.relationships.core.Relationship>> subTypes = coreReflections.getSubTypesOf(megal.relationships.core.Relationship.class);
+		subTypes.addAll(reflections.getSubTypesOf(megal.relationships.core.Relationship.class));
 		
 		for(Class<?> c: subTypes){
-
-			if (wr.contains(c)){
-				System.out.println("Weak relationship: " + c);
+			if (c.isAnnotationPresent(WeakRel.class)){
+				//System.out.println("Weak relationship: " + c);
 				weakRels.add(new Relationship(c));
 			} else {
-				System.out.println("Custom relationship: " + c);
+				//System.out.println("Custom relationship: " + c);
 				customRels.add(new Relationship(c));
 			}
 		}

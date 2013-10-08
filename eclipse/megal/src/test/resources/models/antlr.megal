@@ -2,9 +2,9 @@ AntlrTool : Technology .
 AntlrNotation : Language .
 Java : Language .
 ?aLanguage : Language .
-?aGrammar : Artifact .
-?aParser : Artifact .
-?anInput : Artifact .
+?aGrammar : File .
+?aParser : File .
+?anInput : File .
 
 // elementOf for atrifacts should be a globally unique constraint
 aGrammar elementOf AntlrNotation .
@@ -22,7 +22,7 @@ Java rangeOf codeGeneration
 */
 
 aGrammar defines aLanguage .
-//codeGeneration(aGrammar) |-> aParser .
+codeGeneration(aGrammar) |-> aParser .
 
 /*
 codeGenerationApp1 : FunctionApplication

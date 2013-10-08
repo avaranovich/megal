@@ -85,6 +85,7 @@ public class Tool {
 		new ETypeRefs();
 		new RDecls();
 		new RTypeDecls();
+		new FunAppDecls();
 	}
 
 	public static void main(String[] args) throws IOException {
