@@ -9,9 +9,11 @@ import java.util.List;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
+import megal.Context;
 import megal.events.EntityLinkingFailed;
 import megal.events.EntityLinkingStarted;
 import megal.events.EntityLinkingSucceeded;
+import megal.events.ResourceForEntityLinkingIsNotConfigured;
 import megal.model.EDecl;
 import megal.model.EType;
 import megal.model.Modifier;
@@ -66,7 +68,7 @@ public abstract class Entity {
 			}
 		}
 		
-		Config conf = ConfigFactory.load("mega").withFallback(ConfigFactory.load());
+		Config conf = Context.config;
 		//Config conf = ConfigFactory.load();
 		List<Config> rels = (List<Config>) conf.getConfigList("linking");
 		for(Config c: rels){
@@ -88,6 +90,8 @@ public abstract class Entity {
 				return true;
 			}
 		}
+		
+		eventBus.post(new ResourceForEntityLinkingIsNotConfigured(this.edecl));
 		return false;
 	}
 	

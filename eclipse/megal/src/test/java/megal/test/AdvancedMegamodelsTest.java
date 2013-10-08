@@ -15,11 +15,14 @@ import megal.model.RDecl;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.typesafe.config.ConfigFactory;
+
 public class AdvancedMegamodelsTest extends BaseTest {
 	
     @Before
     public void setUp() {
         super.setUp();
+        Context.config = ConfigFactory.load("configs/antlr.conf").withFallback(Context.config);
     	String input = getResorucePath("/models/antlr.megal");
 		Tool.parse(input);
 		Tool.analyze();
@@ -27,7 +30,8 @@ public class AdvancedMegamodelsTest extends BaseTest {
 		Tool.analyze();
     }
 
-    @Test
+    @SuppressWarnings("rawtypes")
+	@Test
 	public void genericArgumentsForFunctionShouldBeSupported(){
     	for (Entry<String, EDecl> entry: Context.eDecls.entrySet()){
     		String key = entry.getKey();
@@ -52,12 +56,14 @@ public class AdvancedMegamodelsTest extends BaseTest {
     	}
     }
     
-    @Test
+    @SuppressWarnings("rawtypes")
+	@Test
     public void testSyntacticExpansionForGenericFucntion(){
      	for (Entry<String, EDecl> entry: Context.eDecls.entrySet()){
     		String key = entry.getKey();
     		if (key.equals("codeGeneration")){
-    			List<Decl> expanded = entry.getValue().expand();
+    			@SuppressWarnings("unchecked")
+				List<Decl> expanded = entry.getValue().expand();
     			assertNotNull(expanded);
     			assertEquals(2, expanded.size());
     		}

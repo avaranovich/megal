@@ -24,7 +24,7 @@ public class ConfigTest extends BaseTest {
 		assertNotNull(conf);
 		
 		// checking custom config
-		Config customConf = ConfigFactory.load("mega");
+		Config customConf = ConfigFactory.load("configs/ruby");
 		assertNotNull(customConf);
 		String bar = customConf.getString("foo");
 		assertEquals("bar", bar);

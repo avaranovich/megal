@@ -21,21 +21,20 @@ public class Linking extends Visitor {
 		boolean isLinked = false;
 		
 		@SuppressWarnings({ "rawtypes", "unchecked" })
-		List<EDecl> expanded = edecl.expand();
+		List<RDecl> expanded = edecl.expand();
 		if (expanded.size() > 0){
-			for(@SuppressWarnings("rawtypes") EDecl ed: expanded){
-				Entity e = ed.getEntity();
+			/*for(@SuppressWarnings("rawtypes") RDecl rd: expanded){
+				Entity e = rd.getEntity();
 				isLinked &= e.tryLink();
-			}
+			}*/
+			//TODO: propagate a proper event here
 		}
 		else{
 			Entity e = edecl.getEntity();
 					
 			isLinked &= e.tryLink();
-			System.out.println(isLinked);
-			if (!isLinked){
-				this.allLinked = false;
-			}
+			//System.out.println(isLinked);
+			this.allLinked = isLinked;
 		}
 	}
 

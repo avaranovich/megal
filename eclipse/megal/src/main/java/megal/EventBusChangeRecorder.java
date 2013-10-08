@@ -14,6 +14,7 @@ import megal.events.Event;
 import megal.events.RelationshipEvaluationFailed;
 import megal.events.RelationshipEvaluationStarted;
 import megal.events.RelationshipEvaluationSucceeded;
+import megal.events.ResourceForEntityLinkingIsNotConfigured;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -80,6 +81,11 @@ public class EventBusChangeRecorder {
 	}
 	
 	@Subscribe public void recordEvent(RelationshipEvaluationSucceeded e){
+		log(e);
+		events.add(e);
+	}
+	
+	@Subscribe public void recordEvent(ResourceForEntityLinkingIsNotConfigured e){
 		log(e);
 		events.add(e);
 	}
