@@ -15,8 +15,10 @@ public class BasicMegamodelsTest extends BaseTest {
         super.setUp();
     }
 
+    @Test
     public void javaTest() {
         Tool.parse(getResorucePath("/models/java.megal"));
+        Context.config = ConfigFactory.load("configs/java.conf").withFallback(Context.config);
         Tool.extend();
         Tool.analyze();
         Tool.link();

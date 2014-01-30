@@ -2,36 +2,24 @@ package megal.entities;
 
 import static megal.Context.eventBus;
 
+import java.lang.reflect.InvocationTargetException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import megal.Context;
 import megal.events.EntityLinkingFailed;
 import megal.events.EntityLinkingStarted;
 import megal.events.EntityLinkingSucceeded;
 import megal.model.EDecl;
 
+import megal.providers.*;
+
 public class Language extends Set {
 
     public Language(EDecl edecl) {
         super(edecl);
-    }
-
-    /**
-     * @return Base URL of 101companies discovery servicy, depending on the entity type.
-     */
-    private String getBaseUrl(){
-        String base = "http://101companies.org/resources/";
-        String typeName = getEdecl().getType().getName();
-        
-        // TODO: name does not always represent the actual resource. Think about
-        // Rails: Technology
-        // the solution is to use Rails ["Ruby on Rails"]: Technology
-        if (typeName.equals("Language")) return base + "languages/" + getEdecl().getName();;
-        if (typeName.equals("Technology")) return base + "technologies/" + getEdecl().getName();;
-        
-        return "";
     }
 
     /**
@@ -47,7 +35,12 @@ public class Language extends Set {
         }
 
         int code = 404;
-        String url = getBaseUrl();
+        String url = null;
+		try {
+			url = ((IResourceProvider) (Class.forName(Context.config.getString("provider")).getConstructor().newInstance())).getURL(this.edecl);
+		} catch (Exception ex){
+			return false;
+		}
 
         eventBus.post(new EntityLinkingStarted(url, edecl));
 

@@ -5,7 +5,7 @@ import megal.model.RTypeDecl;
 import megal.relationships.WeakRel;
 
 @WeakRel
-public class inputOf<X extends Entity, Y extends Entity> extends Relationship<X, Y> {
+public class inputOf<X extends Entity, Y extends Entity> extends Relationship<Entity, Entity> {
 	protected inputOf(X first, Y second, RTypeDecl rTypeDecl) {
 		super(first, second, rTypeDecl);
 	}	

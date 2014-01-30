@@ -20,7 +20,7 @@ public class Linking extends Visitor {
 	public void visit(@SuppressWarnings("rawtypes") EDecl edecl) { 
 		boolean isLinked = false;
 		
-		@SuppressWarnings({ "rawtypes", "unchecked" })
+		@SuppressWarnings({ "unchecked" })
 		List<RDecl> expanded = edecl.expand();
 		if (expanded.size() > 0){
 			/*for(@SuppressWarnings("rawtypes") RDecl rd: expanded){
@@ -33,7 +33,6 @@ public class Linking extends Visitor {
 			Entity e = edecl.getEntity();
 					
 			isLinked &= e.tryLink();
-			//System.out.println(isLinked);
 			this.allLinked = isLinked;
 		}
 	}

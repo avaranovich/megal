@@ -21,7 +21,7 @@ import org.eclipse.egit.github.core.service.RepositoryService;
  *
  * @author erwinschens
  */
-public class GitHubProvider implements IProvider {
+public class GitHubProvider implements IVCSProvider {
 
 	private URI url;
 

@@ -4,11 +4,14 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.List;
 
+import megal.entities.Entity;
 import megal.entities.File;
 import megal.entities.Language;
+import megal.entities.Set;
 import megal.model.RTypeDecl;
 import megal.relationships.FileElementOfLanguage;
 import megal.relationships.core.Relationship;
+import megal.relationships.core.elementOf;
 
 import org.junit.Test;
 
@@ -59,7 +62,7 @@ public class ConfigTest extends BaseTest {
 		Language l = new Language(null);
 		RTypeDecl rTypeDecl = new RTypeDecl("elementOf", "File", "Language", true);
 		
-		Relationship<File, Language> rel = new FileElementOfLanguage(f, l, rTypeDecl);
+		elementOf<File,Language> rel = new FileElementOfLanguage(f, l, rTypeDecl);
 		Config c = rel.getConfig();
 		assertNotEquals(c, null);
 	}

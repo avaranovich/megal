@@ -15,7 +15,7 @@ public class ResourceForEntityLinkingIsNotConfigured extends Event {
 	}
 	
 	public String toString(){
-		return String.format("Resource for entity %s is not configured: ", eDecl.getName());
+		return String.format("Resource for entity %s is not configured", eDecl.getName());
 	}
 	
 	@Override

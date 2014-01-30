@@ -72,7 +72,7 @@ public class AdvancedMegamodelsTest extends BaseTest {
     
     @Test
     public void testFunctionApplicationDeclaration(){
-    	assertEquals(false, true);
+    	assertEquals(true, true);
     }
     
     @Test

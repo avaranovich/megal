@@ -30,7 +30,7 @@ public class RelationshipsTest extends BaseTest {
 	@Test
 	public void customRelationshipsShouldBeAddedToTheGraph(){
 		List<RTypeDecl> customRels =  Context.runtime.getCustomRDecls();
-		assertEquals(9, customRels.size());	
+		assertEquals(11, customRels.size());	
 		
 		for (RTypeDecl rTypeDecl: customRels){
 			if(rTypeDecl.getClass().isAssignableFrom(elementOf.class)){
@@ -55,7 +55,7 @@ public class RelationshipsTest extends BaseTest {
 		  instanceOf=[(Concept,Concept)] 
 		  hasOutput=[(Technology,Artifact) (Artifact,Artifact)]
 		*/
-		assertEquals(9, Context.rTypeDecls.size());
+		assertEquals(10, Context.rTypeDecls.size());
 	}
 	
 	@Test
@@ -68,8 +68,11 @@ public class RelationshipsTest extends BaseTest {
 		for (Entry<String, List<Pair<String, String>>> entry : Context.rTypeDecls.entrySet()) {
 			String key = entry.getKey();
 		    System.out.println("Key = " + key + ", Value = " + entry.getValue());
-		    if (key.equals("subsetOf") || key.equals("conformsTo") || key.equals("definitionOf") || key.equals("isA") || key.equals("instanceOf")){
+		    if (key.equals("subsetOf") || key.equals("definitionOf") || key.equals("isA") || key.equals("instanceOf") || key.equals("corresponds")){
 				assertEquals(1, entry.getValue().size());	
+		    }
+		    else if (key.equals("conformsTo")){
+				assertEquals(2, entry.getValue().size());	
 		    }
 		    else if (key.equals("elementOf") || key.equals("partOf")){
 				assertEquals(2, entry.getValue().size());	
@@ -78,7 +81,7 @@ public class RelationshipsTest extends BaseTest {
 				assertEquals(4, entry.getValue().size());	
 		    }
 		    else{
-		    		assertEquals(2, entry.getValue().size());	
+		    	assertEquals(2, entry.getValue().size());	
 		    }
 		}
 	}

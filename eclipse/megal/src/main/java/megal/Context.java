@@ -53,6 +53,7 @@ public final class Context {
 		
 		// loading default application.conf
 		config = ConfigFactory.load();
+		config.resolve();
 	}
 	
 	public static void register(EventBusChangeRecorder recorder){

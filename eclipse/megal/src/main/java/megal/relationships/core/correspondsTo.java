@@ -5,8 +5,10 @@ import megal.model.RTypeDecl;
 import megal.relationships.WeakRel;
 
 @WeakRel
-public class definitionOf<X extends Entity, Y extends Entity> extends Relationship<Entity, Entity> {
-	protected definitionOf(X first, Y second, RTypeDecl rTypeDecl) {
+public class correspondsTo<X extends Entity, Y extends Entity> extends Relationship<Entity, Entity>  {
+
+	protected correspondsTo(X first, Y second, RTypeDecl rTypeDecl) {
 		super(first, second, rTypeDecl);
-	}	
+	}
+
 }

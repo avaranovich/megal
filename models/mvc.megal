@@ -5,13 +5,13 @@ Those subconcepts depend on the main concept.
 MVC is a design pattern.
 */
 
-MVC : Concept . 
-Model @ MVC : Concept .
-View @ MVC : Concept .
-Controller @ MVC : Concept .
-DP ["Design pattern"] : Concept .
+MVC : Concept
+Model @ MVC : Concept
+View @ MVC : Concept
+Controller @ MVC : Concept
+DP ["Design pattern"] : Concept
 
-Model partOf MVC .
-View partOf MVC .
-Controller partOf MVC .
-MVC instanceOf DP .
+Model partOf MVC
+View partOf MVC
+Controller partOf MVC
+MVC instanceOf DP

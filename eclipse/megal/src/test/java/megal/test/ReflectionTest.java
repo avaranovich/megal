@@ -28,10 +28,15 @@ public class ReflectionTest {
 	}
 	
 	@Test
-	public void findAllRuntimeRelationships(){
-		assertSame(8, coreRels.size());
-		assertSame(9, customRels.size());
+	public void findAllRuntimeRelationships(){		
+		assertSame(9, coreRels.size());
 		
+		for(megal.Runtime.Relationship rel : customRels){
+			System.out.println(rel.toRTypeDecl().getName());
+		}
+		
+		assertSame(11, customRels.size());
+
 		assertSame(false, customRels.get(0).isWeak());
 	}	
 	

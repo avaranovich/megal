@@ -1,6 +1,5 @@
 package megal.relationships.core;
 
-import megal.entities.Entity;
 import megal.entities.Function;
 import megal.entities.Language;
 import megal.model.RTypeDecl;

@@ -4,7 +4,10 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
@@ -70,13 +73,31 @@ public abstract class Entity {
 		
 		Config conf = Context.config;
 		//Config conf = ConfigFactory.load();
-		List<Config> rels = (List<Config>) conf.getConfigList("linking");
+		List<Config> rels = (List<Config>) conf.getConfigList("links");
 		for(Config c: rels){
 			String type = c.getString("type");
 			String name = c.getString("name");
 			URI uri = null;
 			try {
 				String res = c.getString("resource");
+				// here we handle URLs like ${repos.megal}
+				if (res.startsWith("$")){
+					 String pattern = "(\\$\\{)(.+)(\\})";
+				     // Create a Pattern object
+				     Pattern r = Pattern.compile(pattern);
+
+				      // Now create matcher object.
+				      Matcher m = r.matcher(res);
+				      if (m.find( )) {
+				    	  String toReplace = m.group(2);
+				    	  //System.out.println(toReplace);
+				    	  String[] parts = toReplace.split("\\.");
+				    	  Config replaced = conf.getConfig(parts[0]);
+				    	  String target = replaced.getString(parts[1]);
+						  //System.out.println(target);
+				    	  res = res.replace("${"+toReplace+"}", target);
+				      }					
+				}
 				uri = new URI(res);
 			} catch (URISyntaxException ex) {
 				eventBus.post(new EntityLinkingFailed(ex, edecl));
@@ -91,7 +112,9 @@ public abstract class Entity {
 			}
 		}
 		
-		eventBus.post(new ResourceForEntityLinkingIsNotConfigured(this.edecl));
+		if (!isLinked()){
+			eventBus.post(new ResourceForEntityLinkingIsNotConfigured(this.edecl));
+		}
 		return false;
 	}
 	
@@ -109,7 +132,7 @@ public abstract class Entity {
 	@SuppressWarnings("unchecked")
 	public Config getConfig(){
 		Config conf = ConfigFactory.load();
-		List<Config> rels = (List<Config>) conf.getConfigList("linking");
+		List<Config> rels = (List<Config>) conf.getConfigList("links");
 		for (Config rel : rels){
 			String name = rel.getString("relationship");
 			//System.out.println(this.getClass().getName());

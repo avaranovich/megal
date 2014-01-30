@@ -6,6 +6,7 @@ import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -90,12 +91,17 @@ public class Runtime {
 			String name = getCore().typedRelationship.getSimpleName();
 
 			ParameterizedType ptString = getGenericSuperClass(coreRel); //(ParameterizedType) coreRel.getGenericSuperclass();
+			
+			Boolean isCore = false;
+			if(ptString.getRawType() == megal.relationships.core.Relationship.class){
+				isCore = true;
+			}
 
 			RTypeDecl rdecl = new RTypeDecl(
 					name, 
 					getClass(ptString.getActualTypeArguments()[0]).getSimpleName(), 
 					getClass(ptString.getActualTypeArguments()[1]).getSimpleName(),
-					false);
+					isCore);
 
 			return rdecl;
 		}
@@ -107,6 +113,13 @@ public class Runtime {
 		public Relationship getCore(){
 			Class<?> superClass = getSuperClass(typedRelationship);
 			Runtime.Relationship rel = this;
+			
+			// in case this is already a core relationship
+			if (superClass == megal.relationships.core.Relationship.class){
+				return rel;
+			}
+			
+			// otherwise go deep into the hiherarchy and search for the core relationhip
 			do{
 				rel = new Runtime.Relationship(superClass);
 				superClass = getSuperClass(superClass);
