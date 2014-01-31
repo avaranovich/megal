@@ -1,5 +1,15 @@
 package megal.test;
 
+import static org.junit.Assert.*;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+
+import megal.checkers.Fragment;
+import megal.checkers.correspondance.ParserCorrespondsToAntlrGrammar;
+import megal.trivia.Pair;
+
 import org.junit.Test;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.Tree;
@@ -56,5 +66,24 @@ public class AntlrTest extends BaseTest {
     
     private String toStringTree(Tree ast){
     	return null;
+    }
+    
+    @Test
+    public void correspondanceTest(){
+    	ParserCorrespondsToAntlrGrammar c = new ParserCorrespondsToAntlrGrammar(null, null);
+    	try {
+		
+    		Pair<java.lang.Boolean, List<Pair<Fragment, Fragment>>> res =
+    				c.check(
+    						new URI("https://raw2.github.com/avaranovich/megal/master/eclipse/megal/src/main/java/megal/parser/MegaL.g4"), 
+    						new URI("https://raw2.github.com/avaranovich/megal/master/eclipse/megal/src/main/java/megal/parser/MegaLParser.java"));
+    		
+    		assertEquals(true, res.first);
+    		assertEquals(18, res.second.size());
+    		
+    		
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
     }
 }

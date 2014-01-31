@@ -15,4 +15,8 @@ public class BasicHttpProvider implements IVCSProvider {
 	public List<URI> getUris() {
 		return Arrays.asList(this.url);
 	}
+
+	public URI getUri() {
+		return url;
+	}
 }

@@ -79,4 +79,9 @@ public class GitHubProvider implements IVCSProvider {
 
 	}
 
+	public URI getUri() {
+		List<URI> files = listAllFilesFromDirectory(url.toString());
+		return files.get(0);
+	}
+
 }
