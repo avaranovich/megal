@@ -13,9 +13,17 @@ import megal.checkers.Fragment
 import japa.parser.ast.body.ClassOrInterfaceDeclaration
 import org.antlr.v4.tool.Grammar
 import com.google.common.base.Charsets
+import japa.parser.ast.expr.NameExpr
+import japa.parser.ast.`type`.ClassOrInterfaceType
+import japa.parser.ast.body.BodyDeclaration
 
 class ParserCorrespondsToAntlrGrammar(first: URI, second: URI) extends CorrespondanceChecker[URI, URI] {
 	
+	implicit def javaListToScalaList(x: java.util.List[japa.parser.ast.body.TypeDeclaration]) = x.asScala.toList
+  implicit def javaListToScalaList(x: java.util.List[ClassOrInterfaceType]) = x.asScala.toList
+  implicit def javaListToScalaList(x: java.util.List[NameExpr]) = x.asScala.toList
+  implicit def javaListToScalaList(x: java.util.List[BodyDeclaration]) = x.asScala.toList
+
 	override def check(first: URI, second: URI) = {	  
 	  
 	  var parser: URI = first
@@ -30,7 +38,7 @@ class ParserCorrespondsToAntlrGrammar(first: URI, second: URI) extends Correspon
 	  
 	  val in = Resources.newInputStreamSupplier(parser.toURL()).getInput()
       val cu = JavaParser.parse(in);
-      val types: List[TypeDeclaration] = cu.getTypes().asScala.toList
+      val types: List[TypeDeclaration] = cu.getTypes()
               
       if (types.length > 1){
         new megal.trivia.Pair[java.lang.Boolean, java.util.List[megal.trivia.Pair[Fragment, Fragment]]](false, null) 
@@ -48,25 +56,47 @@ class ParserCorrespondsToAntlrGrammar(first: URI, second: URI) extends Correspon
       val root = types(0)
       val classes = root.getMembers().asScala.toList.filter(p => p.isInstanceOf[ClassOrInterfaceDeclaration])
       												.map(x => x.asInstanceOf[ClassOrInterfaceDeclaration])	
-      												.filter(x => x.getExtends().asScala.toList.map(y => y.getName()).contains("ParserRuleContext"))
-      
-      classes.foreach(c => println(c.getName()))
-      
+      												.filter(x => x.getExtends().map(y => y.getName()).contains("ParserRuleContext"))
+      												
+      //classes.foreach(c => println(c.getName()))
+												
+      val methods = root.getMembers().filter(x => x.isInstanceOf[MethodDeclaration])
+      												.map(x =>x.asInstanceOf[MethodDeclaration])
+      												.filter(
+      												    x => ((x.getThrows() != null) && 
+      												         (x.getThrows().map(y => y.getName()).contains("RecognitionException"))))
+      														         
+      methods.foreach(m => println(m.getName()))			
+      												
       val g = Resources.toString(grammar.toURL(), Charsets.UTF_8)
       val antrlGrammar = new Grammar(g)
       val rules = antrlGrammar.rules.asScala
       
       val ruleNames = rules.map(r => r._1)
-     
-      ruleNames.foreach(n => println(n))
       
-      if (rules.size != classes.size){
+       if (rules.size != methods.size){
     	  new megal.trivia.Pair[java.lang.Boolean, java.util.List[megal.trivia.Pair[Fragment, Fragment]]](false, null) 
       }
       
+      val isAlligned = methods.zip(ruleNames).forall(x => x._1.getName().equals(x._2))
+      
+      val res = new java.util.ArrayList[megal.trivia.Pair[Fragment, Fragment]]();
+      
+      if (isAlligned){
+        methods.zip(rules).foreach(x =>{
+          var m = x._1.toString();
+          var r = x._2._2.ast.toStringTree();
+          
+          res.add(new megal.trivia.Pair[Fragment, Fragment](
+              new Fragment(x._1.getName(), r, null), 
+              new Fragment(x._2._1, m, null)));
+        });
+      }
+     /*
+      ruleNames.foreach(n => println(n))
+      
       val isAlligned = classes.map(c => c.getName()).zip(rules.map(r => r._1)).forall(x => x._1.startsWith(x._2.capitalize))
       
-      val res = new java.util.ArrayList[megal.trivia.Pair[Fragment, Fragment]]()
       
       if (isAlligned){
         classes.zip(rules).foreach(x => {
@@ -75,9 +105,8 @@ class ParserCorrespondsToAntlrGrammar(first: URI, second: URI) extends Correspon
           res.add(new megal.trivia.Pair[Fragment, Fragment](
               new Fragment(r), 
               new Fragment(c)))
-          
         })
-      }
+      }*/
  
 	  new megal.trivia.Pair[java.lang.Boolean, java.util.List[megal.trivia.Pair[Fragment, Fragment]]](true, res) 
 	}
