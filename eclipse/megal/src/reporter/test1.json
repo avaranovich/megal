@@ -1,9 +1,0 @@
-{"events":
-[{"event":"EntityLookupStarted", "entity":"Java"},
- {"event":"EntityLinkingStarted", "resource":"http://101companies.org/resources/languages/Java"},
- {"event":"EntityLinkingSucceeded", "entity":"Java", "resource":"http://101companies.org/resources/languages/Java"},
- {"event":"EntityLookupStarted", "entity":"JavaProgram"},
- {"event":"EntityLinkingSucceeded", "entity":"JavaProgram", "resource":"https://raw.github.com/avaranovich/megal/master/eclipse/megal/src/test/resources/files/basic.java"},
- {"event":"RelationshipEvaluationStarted", "left":"JavaProgram", "rel":"megal.relationships.FileElementOfLanguage", "right":"Java"},
- {"event":"RelationshipEvaluationSucceeded", "left":"JavaProgram", "rel":"megal.relationships.FileElementOfLanguage", "right":"Java"}
- ]}

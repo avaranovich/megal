@@ -1,4 +1,0 @@
-/* Models, metamodels, and conformance */
-Model : Artifact
-Metamodel : Model
-conformsTo : Model * Metamodel
