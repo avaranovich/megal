@@ -85,8 +85,7 @@ public abstract class Relationship<X extends Entity, Y extends Entity> {
 	 */
 	@SuppressWarnings("unchecked")
 	public Config getConfig(){
-		Config conf = Context.config;
-		List<Config> rels = (List<Config>) conf.getConfigList("relationships");
+		/*List<Config> rels = (List<Config>) conf.getConfigList("relationships");
 		for (Config rel : rels){
 			String name = rel.getString("relationship");
 			//System.out.println(this.getClass().getName());
@@ -95,8 +94,7 @@ public abstract class Relationship<X extends Entity, Y extends Entity> {
 				if (rel.hasPath("config"))
 					return rel.getConfig("config");	
 			}
-		}
-		
-		return null;
+		}    */
+        return ConfigFactory.load(this.getClass().getName()).withFallback(Context.config);
 	}
 }

@@ -20,9 +20,9 @@ import japa.parser.ast.body.BodyDeclaration
 class ParserCorrespondsToAntlrGrammar(first: URI, second: URI) extends CorrespondanceChecker[URI, URI] {
 	
 	implicit def javaListToScalaList(x: java.util.List[japa.parser.ast.body.TypeDeclaration]) = x.asScala.toList
-  implicit def javaListToScalaList(x: java.util.List[ClassOrInterfaceType]) = x.asScala.toList
-  implicit def javaListToScalaList(x: java.util.List[NameExpr]) = x.asScala.toList
-  implicit def javaListToScalaList(x: java.util.List[BodyDeclaration]) = x.asScala.toList
+  implicit def javaListToScalaList1(x: java.util.List[ClassOrInterfaceType]) = x.asScala.toList
+  implicit def javaListToScalaLis2(x: java.util.List[NameExpr]) = x.asScala.toList
+  implicit def javaListToScalaLis3(x: java.util.List[BodyDeclaration]) = x.asScala.toList
 
 	override def check(first: URI, second: URI) = {	  
 	  

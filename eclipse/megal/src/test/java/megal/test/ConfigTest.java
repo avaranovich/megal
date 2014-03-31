@@ -34,28 +34,15 @@ public class ConfigTest extends BaseTest {
 	}
 	
 	@Test
-	public void relationshipsShouldExist(){
+	public void evaluatorsShouldExist(){
 		Config conf = ConfigFactory.load();
 		@SuppressWarnings("unchecked")
-		List<Config> rels = (List<Config>) conf.getConfigList("relationships");
+		List<Config> rels = (List<Config>) conf.getConfigList("evaluators");
 		
 		// FileElementOfLanguage, FolderPartOfFolder
 		assertEquals(2, rels.size());
 	}
-	
-	@Test
-	public void relationshipsShouldBeValidExist(){
-		Config conf = ConfigFactory.load();
-		@SuppressWarnings("unchecked")
-		List<Config> rels = (List<Config>) conf.getConfigList("relationships");
-		for (Config rel : rels){
-			String name = rel.getString("relationship");
-			assertNotNull(name);
-			Config relConfig = rel.getConfig("config");	
-			assertNotNull(relConfig);
-		}
-	}
-	
+
 	@Test
 	public void configForRelationshipTypeShouldBeDiscoveredIfExists(){
 		File f = new File(null);
