@@ -19,4 +19,9 @@ public class BasicHttpProvider implements IVCSProvider {
 	public URI getUri() {
 		return url;
 	}
+
+    @Override
+    public String getContent() {
+        return null;
+    }
 }

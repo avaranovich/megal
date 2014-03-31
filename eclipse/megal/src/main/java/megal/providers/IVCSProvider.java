@@ -7,4 +7,6 @@ public interface IVCSProvider {
 	List<URI> getUris();
 	
 	URI getUri();
+
+    String getContent();
 }

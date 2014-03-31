@@ -39,7 +39,8 @@ public class Runtime {
 		/*
 		 * Creates a new instance of the relationship, parametrized with two entities and current relationship type declaration.
 		 */
-		public megal.relationships.core.Relationship<?,?> newInstance(Entity first, Entity second, RTypeDecl rTypeDecl) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException{
+		public megal.relationships.core.Relationship<?,?> newInstance(Entity first, Entity second, RTypeDecl rTypeDecl) throws IllegalArgumentException,
+                SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 			@SuppressWarnings("rawtypes")
 			Class[] types = {first.getClass(), second.getClass(), rTypeDecl.getClass()};
 			

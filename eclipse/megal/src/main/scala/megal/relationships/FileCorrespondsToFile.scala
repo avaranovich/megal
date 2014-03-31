@@ -22,8 +22,8 @@ class FileCorrespondsToFile(first: megal.entities.File,
 	  val r1  = ProviderFactory.getForUrl(first.getResource()).getUri()
 	  val r2  = ProviderFactory.getForUrl(second.getResource()).getUri()
 	  
-      val success = tool.check(r1, r2)
+    val success = tool.check(r1, r2)
       
-      false
+    false
 	}
 }

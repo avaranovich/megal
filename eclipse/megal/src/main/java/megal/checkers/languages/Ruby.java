@@ -1,11 +1,13 @@
 package megal.checkers.languages;
 
 import com.google.common.io.Resources;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+
+import java.io.*;
 import java.net.URI;
 import java.util.List;
 import megal.checkers.Checker;
+import megal.providers.IVCSProvider;
+import megal.providers.ProviderFactory;
 import org.jruby.parser.Parser;
 
 /**
@@ -16,14 +18,15 @@ public class Ruby implements Checker<URI> {
 
     public boolean check(URI target) {
         try {
-            InputStream in = null;
-            in = Resources.newInputStreamSupplier(target.toURL()).getInput();
-            
+            String content = ProviderFactory.getForUrl(target).getContent();
+            // in = Resources.newInputStreamSupplier(uri.toURL()).getInput();
+
+            // convert String into InputStream
+            InputStream in = new ByteArrayInputStream(content.getBytes());
+
             org.jruby.Ruby ruby = org.jruby.Ruby.newInstance();
-            ruby.loadFile("rubyChecker",in,true);
-            new Parser(ruby); 
-        } catch (FileNotFoundException fnfex) {
-            return false;
+            ruby.loadFile("rubyChecker", in, true);
+            new Parser(ruby);
         } catch (Exception ex) {
             return false;
         }

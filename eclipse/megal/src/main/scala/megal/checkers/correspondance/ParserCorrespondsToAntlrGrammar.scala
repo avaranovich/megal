@@ -29,34 +29,35 @@ class ParserCorrespondsToAntlrGrammar(first: URI, second: URI) extends Correspon
 	  var parser: URI = first
 	  var grammar: URI = second
 	  
-	  if (first.toString().endsWith(".g4")){
-		grammar = first  
+	  if (first.toString.endsWith(".g4")){
+		  grammar = first
 	  }
-	  if (second.toString().endsWith(".java")){
-	    parser = second;
+
+	  if (second.toString.endsWith(".java")){
+	    parser = second
 	  }
 	  
-	  val in = Resources.newInputStreamSupplier(parser.toURL()).getInput()
-      val cu = JavaParser.parse(in);
-      val types: List[TypeDeclaration] = cu.getTypes()
+	  val in = Resources.newInputStreamSupplier(parser.toURL).getInput
+      val cu = JavaParser.parse(in)
+      val types: List[TypeDeclaration] = cu.getTypes
               
       if (types.length > 1){
         new megal.trivia.Pair[java.lang.Boolean, java.util.List[megal.trivia.Pair[Fragment, Fragment]]](false, null) 
       }
       
-      val comments = cu.getComments().asScala.toList
+      val comments = cu.getComments.asScala.toList
       val firstComment = comments(0)
-      val onTheSameLine = ((firstComment.getBeginLine() == 1) && (firstComment.getEndLine() == 1))
-      val antlrHint = firstComment.getContent().contains("by ANTLR 4.0")
+      val onTheSameLine = ((firstComment.getBeginLine == 1) && (firstComment.getEndLine == 1))
+      val antlrHint = firstComment.getContent.contains("by ANTLR 4.0")
       
       if (!onTheSameLine || !antlrHint){
     	  new megal.trivia.Pair[java.lang.Boolean, java.util.List[megal.trivia.Pair[Fragment, Fragment]]](false, null) 
       }
       
       val root = types(0)
-      val classes = root.getMembers().asScala.toList.filter(p => p.isInstanceOf[ClassOrInterfaceDeclaration])
+      val classes = root.getMembers.asScala.toList.filter(p => p.isInstanceOf[ClassOrInterfaceDeclaration])
       												.map(x => x.asInstanceOf[ClassOrInterfaceDeclaration])	
-      												.filter(x => x.getExtends().map(y => y.getName()).contains("ParserRuleContext"))
+      												.filter(x => x.getExtends.map(y => y.getName).contains("ParserRuleContext"))
       												
       //classes.foreach(c => println(c.getName()))
 												
@@ -89,8 +90,8 @@ class ParserCorrespondsToAntlrGrammar(first: URI, second: URI) extends Correspon
           
           res.add(new megal.trivia.Pair[Fragment, Fragment](
               new Fragment(x._1.getName(), r, null), 
-              new Fragment(x._2._1, m, null)));
-        });
+              new Fragment(x._2._1, m, null)))
+        })
       }
      /*
       ruleNames.foreach(n => println(n))

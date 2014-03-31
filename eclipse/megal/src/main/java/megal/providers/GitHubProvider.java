@@ -45,6 +45,7 @@ public class GitHubProvider implements IVCSProvider {
 		List<URI> files = new ArrayList<URI>();
 		try {
 
+            //TODO: extract username and repo name from gitHubUrl
 			gitHubUrl = gitHubUrl.replaceAll("https://github.com/.*/master/", "");
 			RepositoryService repositoryService = new RepositoryService();
 			Repository repo = repositoryService.getRepository("avaranovich", "megal");
@@ -84,4 +85,8 @@ public class GitHubProvider implements IVCSProvider {
 		return files.get(0);
 	}
 
+    @Override
+    public String getContent() {
+        return null;
+    }
 }
