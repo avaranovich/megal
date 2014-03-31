@@ -7,6 +7,9 @@ public class ProviderFactory {
 		if(url.toString().contains("github")){
 			return new GitHubProvider(url);
 		}
+        else if (url.toString().contains("bitbucket")){
+            return new BitbucketProvider(url);
+        }
 		else{
 			return new BasicHttpProvider(url);
 		}

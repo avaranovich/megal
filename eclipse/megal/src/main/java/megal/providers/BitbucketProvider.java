@@ -5,6 +5,14 @@ import java.util.List;
 
 //TODO: needs to be implemented
 public class BitbucketProvider implements IVCSProvider {
+
+    private URI url;
+
+    public BitbucketProvider(URI url){
+        this.url = url;
+
+    }
+
     @Override
     public List<URI> getUris() {
         return null;
