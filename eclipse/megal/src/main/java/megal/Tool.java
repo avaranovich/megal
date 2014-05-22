@@ -1,6 +1,7 @@
 package megal;
 
 import static megal.Context.*;
+
 import megal.analysis.*;
 import megal.model.RDecl;
 import megal.model.RTypeDecl;
@@ -24,112 +25,96 @@ import com.typesafe.config.ConfigFactory;
  * Any sort of issue is to report with a non-zero exit code.
  */
 public class Tool {
-	
-	private static EventBusChangeRecorder eventRecorder;
-	
-	public static EventBusChangeRecorder getEvents(){
-		return eventRecorder;
-	}
-	
-	static {
-		eventRecorder = new EventBusChangeRecorder();
-	}
-	
-	public static void parse(String input) {
-		try {
-			try {
-				FileInputStream stream = new FileInputStream(input);
-				ANTLRInputStream antlr = new ANTLRInputStream(stream);
-				MegaLMyLexer lexer = new MegaLMyLexer(antlr);
-				CommonTokenStream tokens = new CommonTokenStream(lexer);
-				MegaLParser parser = new MegaLParser(tokens);
-				parser.root = Context.model;
-				Context.register(eventRecorder);
-				parser.model();
-				Context.log.lexerErrors += lexer.getNumberOfErrors();
-				Context.log.parserErrors += parser.getNumberOfSyntaxErrors();
-			} catch (IOException e) {
-				e.printStackTrace();
-				log.fatalErrors++;
-			}
+
+    private static EventBusChangeRecorder eventRecorder;
+
+    public static EventBusChangeRecorder getEvents() {
+        return eventRecorder;
+    }
+
+    static {
+        eventRecorder = new EventBusChangeRecorder();
+    }
+
+    public static void parse(String input) {
+        try {
+            try {
+                FileInputStream stream = new FileInputStream(input);
+                ANTLRInputStream antlr = new ANTLRInputStream(stream);
+                MegaLMyLexer lexer = new MegaLMyLexer(antlr);
+                CommonTokenStream tokens = new CommonTokenStream(lexer);
+                MegaLParser parser = new MegaLParser(tokens);
+                parser.root = Context.model;
+                Context.register(eventRecorder);
+                parser.model();
+                Context.log.lexerErrors += lexer.getNumberOfErrors();
+                Context.log.parserErrors += parser.getNumberOfSyntaxErrors();
+            } catch (IOException e) {
+                e.printStackTrace();
+                log.fatalErrors++;
+            }
 //			Definedness.check(model,log);
-		} catch (Exception e) {
-			e.printStackTrace();
-			log.fatalErrors++;
-		}
-	}
-	
-	public static void link(){
-		new Linking();
-	}
-	
-	public static void check(){
-		new Checking();
-	}
-	
-	/*
-	 * After prelude was parsed, we need to extend MegaL, i.e. register all plugins and add custom relationships
-	 */
-	public static void extend(){ 
-		List<RTypeDecl> customRDecls = Context.runtime.getCustomRDecls();
-		for(RTypeDecl decl: customRDecls){
-			Context.model.addDecl(decl);
-		}
-	}
-	
-	public static void analyze(){
-		// Run various analyses
-		new EDecls();
-		new ETypeDecls();
-		new ERefs();
-		new ETypeRefs();
-		new RDecls();
-		new RTypeDecls();
-		new FunAppDecls();
-	}
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.fatalErrors++;
+        }
+    }
 
-	public static void main(String[] args) throws IOException {
-		
-		if (args.length < 1){
-			System.out.print("Please provide the following arguments: a megamodel file");
-			System.exit(-1);
-		}
-		
-		Context.config = ConfigFactory.load("mega").withFallback(Context.config);
-		
-		String input = args[0];
-				
-		parse(input);
+    public static void link() {
+        new Linking();
+    }
 
-		extend();
-		
-		analyze();
-		
-		parse(input);
+    public static void check() {
+        new Checking();
+    }
 
-		link();
-		
-		// Write event log back next to input file
-		 String output = input.replaceFirst(".megal", ".json");
-		 PrintStream ps = new PrintStream(output);
-	     ps.println(Tool.getEvents().getJson());
-		 ps.close();
-		
-		
-		// Write log back next to input file
-		/*String output = input.replaceFirst(".megal", ".log");
-		if (input!=output) {
-			PrintStream ps = new PrintStream(output);
-			Gson gson = new Gson();
-			ps.println(gson.toJson(Context.log));
-			ps.close();
-		}*/
-				
-		// Exit with a non-zero exit code if there were any problems
-		/*if (log.fatalErrors > 0 
-			|| log.lexerErrors > 0 
-			|| log.parserErrors > 0
-			|| log.problems.size() > 0)
-		System.exit(1);*/
-	}
+    /*
+     * After prelude was parsed, we need to extend MegaL, i.e. register all plugins and add custom relationships
+     */
+    public static void extend() {
+        List<RTypeDecl> customRDecls = Context.runtime.getCustomRDecls();
+        for (RTypeDecl decl : customRDecls) {
+            Context.model.addDecl(decl);
+        }
+    }
+
+    public static void analyze() {
+        // Run various analyses
+        new EDecls();
+        new ETypeDecls();
+        new ERefs();
+        new ETypeRefs();
+        new RDecls();
+        new RTypeDecls();
+        new FunAppDecls();
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        if (args.length < 2) {
+            System.out.print("Please provide the following arguments: a config file| a megamodel file");
+            System.exit(-1);
+        }
+
+        Context.config = ConfigFactory.parseFile(new File(args[0])).withFallback(Context.config);
+                    ConfigFactory.load();
+        String input = args[1];
+
+        parse(input);
+
+        extend();
+
+        analyze();
+
+        parse(input);
+
+        link();
+        check();
+
+        // Write event log back next to input file
+        String output = input.substring(0, input.lastIndexOf('.')) + ".json";
+        PrintStream ps = new PrintStream(output);
+        ps.println(Tool.getEvents().getJson());
+        ps.close();
+    }
 }

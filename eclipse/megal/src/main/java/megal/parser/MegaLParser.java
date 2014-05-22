@@ -24,7 +24,7 @@ public class MegaLParser extends Parser {
 		T__8=9, T__7=10, T__6=11, T__5=12, T__4=13, T__3=14, T__2=15, T__1=16, 
 		T__0=17, ID=18, NEWLINE=19, STRING=20, WS=21, COMMENT=22;
 	public static final String[] tokenNames = {
-		"<INVALID>", "']'", "'->'", "')'", "'extern'", "'.'", "'+'", "'['", "'*'", 
+		"<INVALID>", "']'", "'->'", "'extern'", "')'", "'.'", "'+'", "'['", "'*'", 
 		"'('", "':'", "'@'", "'<'", "'?'", "'#'", "'intern'", "'|'", "'!'", "ID", 
 		"NEWLINE", "STRING", "WS", "COMMENT"
 	};
@@ -90,7 +90,7 @@ public class MegaLParser extends Parser {
 			setState(41);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 4) | (1L << 13) | (1L << 15) | (1L << 17) | (1L << ID))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 3) | (1L << 13) | (1L << 15) | (1L << 17) | (1L << ID))) != 0)) {
 				{
 				{
 				setState(36); ((ModelContext)_localctx).decl = decl();
@@ -256,7 +256,7 @@ public class MegaLParser extends Parser {
 			 Modifier m = null; 
 			setState(67);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 4) | (1L << 13) | (1L << 15) | (1L << 17))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 3) | (1L << 13) | (1L << 15) | (1L << 17))) != 0)) {
 				{
 				setState(64); ((EdeclContext)_localctx).modifier = modifier();
 				 m = ((EdeclContext)_localctx).modifier.m; 
@@ -411,10 +411,10 @@ public class MegaLParser extends Parser {
 		try {
 			setState(97);
 			switch (_input.LA(1)) {
-			case 4:
+			case 3:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(89); match(4);
+				setState(89); match(3);
 				 ((ModifierContext)_localctx).m =  Modifier.Extern; 
 				}
 				break;
@@ -614,7 +614,7 @@ public class MegaLParser extends Parser {
 			setState(126); match(9);
 			setState(127); ((FunappdeclContext)_localctx).ename = ename();
 			 arg = ((FunappdeclContext)_localctx).ename.n; 
-			setState(129); match(3);
+			setState(129); match(4);
 			setState(130); match(16);
 			setState(131); match(2);
 			setState(132); ((FunappdeclContext)_localctx).ename = ename();
@@ -1082,7 +1082,7 @@ public class MegaLParser extends Parser {
 		"\2DF\3\2\2\2EB\3\2\2\2EF\3\2\2\2FG\3\2\2\2GH\5\24\13\2HI\5\34\17\2IJ\5"+
 		"\36\20\2JK\7\f\2\2KL\5\16\b\2LM\b\4\1\2M\7\3\2\2\2NO\5\24\13\2OP\5\26"+
 		"\f\2PQ\5\24\13\2QR\5\n\6\2RS\b\5\1\2S\t\3\2\2\2TY\b\6\1\2UV\7\20\2\2V"+
-		"W\5\24\13\2WX\b\6\1\2XZ\3\2\2\2YU\3\2\2\2YZ\3\2\2\2Z\13\3\2\2\2[\\\7\6"+
+		"W\5\24\13\2WX\b\6\1\2XZ\3\2\2\2YU\3\2\2\2YZ\3\2\2\2Z\13\3\2\2\2[\\\7\5"+
 		"\2\2\\d\b\7\1\2]^\7\21\2\2^d\b\7\1\2_`\7\17\2\2`d\b\7\1\2ab\7\23\2\2b"+
 		"d\b\7\1\2c[\3\2\2\2c]\3\2\2\2c_\3\2\2\2ca\3\2\2\2d\r\3\2\2\2ef\b\b\1\2"+
 		"fg\5\32\16\2gl\5\20\t\2hi\7\b\2\2im\b\b\1\2jk\7\n\2\2km\b\b\1\2lh\3\2"+
@@ -1090,7 +1090,7 @@ public class MegaLParser extends Parser {
 		"\t\2\2rs\5\32\16\2st\b\t\1\2tu\7\4\2\2uv\5\32\16\2vw\b\t\1\2wx\7\3\2\2"+
 		"xz\3\2\2\2yq\3\2\2\2yz\3\2\2\2z{\3\2\2\2{|\b\t\1\2|\21\3\2\2\2}~\b\n\1"+
 		"\2~\177\5\24\13\2\177\u0080\b\n\1\2\u0080\u0081\7\13\2\2\u0081\u0082\5"+
-		"\24\13\2\u0082\u0083\b\n\1\2\u0083\u0084\7\5\2\2\u0084\u0085\7\22\2\2"+
+		"\24\13\2\u0082\u0083\b\n\1\2\u0083\u0084\7\6\2\2\u0084\u0085\7\22\2\2"+
 		"\u0085\u0086\7\4\2\2\u0086\u0087\5\24\13\2\u0087\u0088\b\n\1\2\u0088\u0089"+
 		"\b\n\1\2\u0089\23\3\2\2\2\u008a\u008b\5\30\r\2\u008b\u008c\b\13\1\2\u008c"+
 		"\25\3\2\2\2\u008d\u008e\7\24\2\2\u008e\u008f\b\f\1\2\u008f\27\3\2\2\2"+

@@ -89,6 +89,12 @@
             <artifactId>guava</artifactId>
             <version>14.0.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -206,6 +212,13 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <targetPath>../target/</targetPath>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>*.conf</include>
+                    <include>*.megal</include>
+                </includes>
             </resource>
         </resources>
 

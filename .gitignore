@@ -4,3 +4,4 @@ bin
 dist
 /eclipse/JastAddMegal/target
 *.log
+eclipse/megal/megal.iml
