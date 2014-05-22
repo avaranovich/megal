@@ -1,0 +1,123 @@
+Ruby : Language
+Rails : Technology
+Rack : Technology
+
+// Application folder structure
+appFolder : Folder
+	viewsFolder @ appFolder : Folder
+		layoutsFolder @ viewsFolder : Folder
+	modelsFolder @ appFolder : Folder
+		modelsConcernsFolder @ modelsFolder : Folder
+	controllersFolder @ appFolder : Folder
+ 		controllerConcernsFolder @ controllersFolder : Folder
+	assetsFolder @ appFolder : Folder
+		imagesFolder @ assetsFolder : Folder
+		javaScriptsFolder @ assetsFolder : Folder
+		styleSheetsFolder @ assetsFolder : Folder
+	helpersFolder @ appFolder : Folder
+	mailersFolder @ appFolder : Folder
+
+// Application file structure
+viewFiles @ viewsFolder : File+
+applicationLayoutFiles @ layoutsFolder : File+
+modelFiles @ modelsFolder : File+
+modelConcernFiles @ modelsConcernsFolder : File+
+controllerFiles @ controllersFolder : File+
+controllerConcernFiles @ controllerConcernsFolder : File+
+imageFiles @ imagesFolder : File+
+javaScriptFiles @ javaScriptsFolder : File+
+styleSheetFiles @ styleSheetsFolder : File+
+helperFiles @ helpersFolder : File+
+mailerFiles @ mailersFolder : File+
+
+// Application folder relationships
+viewsFolder partOf appFolder
+layoutsFolder partOf appFolder
+layoutsFolder partOf viewsFolder
+modelsFolder partOf appFolder
+controllersFolder partOf appFolder
+concernsFolder partOf appFolder
+concernsFolder partOf controllersFolder
+assetsFolder partOf appFolder
+imagesFolder partOf appFolder
+imagesFolder partOf assetsFolder
+javaScriptsFolder partOf appFolder
+javaScriptsFolder partOf assetsFolder
+styleSheetsFolder partOf appFolder
+styleSheetsFolder partOf assetsFolder
+helpersFolder partOf appFolder
+mailersFolder partOf appFolder
+
+// Application file relationships
+viewFiles elementOf Ruby
+applicationLayoutFiles elementOf Ruby
+modelFiles elementOf Ruby
+modelConcernFiles elementOf Ruby
+controllerFiles elementOf Ruby
+controllerConcernFiles elementOf Ruby
+javaScriptFiles elementOf JavaScript
+styleSheetFiles elementOf CSS
+helperFiles elementOf Ruby
+mailerFiles elementOf Ruby
+
+//Configuration folder structure
+extern configsFolder : Folder
+	extern environmentsFolder @ configsFolder : Folder
+	extern initializersFolder @ configsFolder : Folder
+	extern localesFolder @ configsFolder : Folder
+
+// Configuration file structure
+configFiles @ configsFolder : File+
+environmentFiles @ environmentsFolder : File+
+initializerFiles @ initializersFolder : File+
+localeFiles @ localesFolder : File+
+// Configuration folder relationships
+environmentsFolder partOf configsFolder 
+initializersFolder partOf configsFolder
+localesFolder partOf configsFolder
+// Configuration file relationships
+configFiles elementOf Ruby
+initializerFiles elementOf Ruby
+environmentFiles elementOf Ruby
+localeFiles elementOf YML
+
+// Database folder structure 
+dbFolder : Folder
+
+// Library folder structure
+libFolder : Folder
+
+// Assets folder structure 
+assetsFolder @ libFolder : Folder
+
+// Tasks folder structure
+tasksFolder @ libFolder : Folder
+
+// Log folder structure
+logFolder : Folder
+
+// Public folder structure
+publicFolder : Folder
+
+// Test folder structure
+testFolder : Folder
+	controllerTestFolder @ testFolder : Folder
+	fixturesTestFolder @ testFolder: Folder 
+	helpersTestFolder @ testFolder : Folder
+	integrationTestFolder @ testFolder : Folder
+	mailersTestFolder @ testFolder : Folder
+	modelsTestFolder @ testFolder : Folder
+// Test folder relationships
+controllersFolder partOf testFolder
+fixturesTestFolder partOf testFolder
+helpersTestFolder partOf testFolder
+integrationTestFolder partOf testFolder
+mailersTestFolder partOf testFolder
+modelsTestFolder partOf testFolder
+
+// Vendor folder structure
+vendorFolder : Folder
+assetsVendorFolder @ vendorFolder  : Folder
+// Vendor folder relationships
+assetsVendorFolder partOf vendorFolder
+

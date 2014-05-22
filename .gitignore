@@ -5,3 +5,4 @@ dist
 /eclipse/JastAddMegal/target
 *.log
 eclipse/megal/megal.iml
+rails/rails.iml
