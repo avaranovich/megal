@@ -19,7 +19,7 @@ public class FolderPartOfFolder extends partOf<Folder, Folder> {
         }
         boolean firstPartOfSecond;
 
-        if (first.getResource().getPath().contains(second.getResource().getPath())) {
+        if (second.getResource().getPath().contains(first.getResource().getPath())) {
             firstPartOfSecond = true;
         } else {
             firstPartOfSecond = false;
