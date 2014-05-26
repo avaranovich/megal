@@ -6,6 +6,8 @@ import megal.Tool;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+
 import static org.junit.Assert.assertEquals;
 
 
@@ -25,7 +27,7 @@ public class BasicMegamodelsTest extends BaseTest {
     public void testRailsMegaModel(){
         String resourcePath = getResorucePath("/rails.megal");
         Tool.parse(resourcePath);
-        Context.config = ConfigFactory.load(getResorucePath("/rails.conf")).withFallback(Context.config);
+        Context.config = ConfigFactory.parseFile(new File(getResorucePath("/rails.conf"))).withFallback(Context.config);
         Tool.extend();
         Tool.analyze();
         Tool.link();

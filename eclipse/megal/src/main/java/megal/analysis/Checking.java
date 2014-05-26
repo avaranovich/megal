@@ -1,6 +1,7 @@
 package megal.analysis;
 
 import static megal.Context.eventBus;
+import static megal.Context.rDecls;
 
 import megal.events.NotWellFormedRelationshipDetected;
 import megal.events.RelationshipEvaluationFailed;
@@ -18,6 +19,10 @@ public class Checking extends Visitor {
     public void visit(RDecl decl) {
         Relationship<?, ?> rel = decl.getRelationship();
 
+        if (rel == null){
+            System.out.println("Did not get a relationship for RDecl " + decl.getAnnotation());
+        }
+
         if (rel != null && !rel.wellFormed()) {
             eventBus.post(new NotWellFormedRelationshipDetected(decl));
             return;
@@ -34,7 +39,7 @@ public class Checking extends Visitor {
 
                 eventBus.post(new RelationshipEvaluationStarted(rel.getLeft(), rel.getRight(), rel));
                 boolean res = rel.evaluate();
-                if (res == false) {
+                if (!res) {
                     eventBus.post(new RelationshipEvaluationFailed(rel.getLeft(), rel.getRight(), rel));
                 }
             }

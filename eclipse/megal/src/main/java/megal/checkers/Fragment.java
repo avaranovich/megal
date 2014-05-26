@@ -3,10 +3,10 @@ package megal.checkers;
 public class Fragment {
 	private String source;
 	private String path;
-	private String name;
+	private String classifier;
 	
-	public Fragment(String name, String source, String path){
-		this.name   = name;
+	public Fragment(String classifier, String source, String path){
+		this.classifier   = classifier;
 		this.source = source;
 		this.path   = path;
 	}
@@ -20,6 +20,6 @@ public class Fragment {
 	}
 	
 	public String getName(){
-		return this.name;
+		return this.classifier;
 	}
 }

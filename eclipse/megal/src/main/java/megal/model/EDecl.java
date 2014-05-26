@@ -55,12 +55,14 @@ public class EDecl<T> extends megal.model.Decl {
 			try {
 				this.entity = (Entity)Class.forName("megal.entities." + type.getName()).getConstructor(types).newInstance(params);
 			} catch (Exception e) {
+                System.out.println("Entity no found: " + this.getName());
 				eventBus.post(new EntityNotFound(e, this));
 				return null;
 			}
 		} catch (Exception e) {
 			eventBus.post(new EntityNotFound(e, this));
-			return null;
+            System.out.println("Entity no found: " + this.getName());
+            return null;
 		} 
 		
 		if (this.entity == null){

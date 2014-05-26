@@ -7,7 +7,10 @@ import java.util.List;
 import megal.entities.Entity;
 import megal.events.AmbiguousRelationshipDetected;
 import megal.events.RelationshipLookupStarted;
+import megal.events.RelationshipNotConfigured;
 import megal.relationships.core.Relationship;
+
+import javax.management.relation.RelationNotFoundException;
 
 import static megal.Context.*;
 
@@ -23,6 +26,10 @@ public class RDecl extends Decl {
 		this.right = new ERef(right);
 		this.annotation = annotation;
 	}
+
+    public String toString() {
+        return "(" + this.left.getName() + ") -- " + this.rel.getName() + "(" + this.right.getName() + ")";
+    }
 		
 	public RTypeRef getRel() { return rel; }
 	public ERef getLeft() { return left; }
@@ -35,7 +42,8 @@ public class RDecl extends Decl {
 	 */
 	public Relationship<?,?> getRelationship(){
 		eventBus.post(new RelationshipLookupStarted(this));
-		
+
+        System.out.println(this.toString());
 		// get the left entity from the entity declaration, assosicated with the relationship
 		Entity first = this.left.getDecl().getEntity();
 		
@@ -79,7 +87,8 @@ public class RDecl extends Decl {
 						try {
 							return r.newInstance(first, second, rType);
 						} catch (Exception e) {
-							return null;	
+                            eventBus.post(new RelationshipNotConfigured(this));
+							return null;
 					}
 				}
 			}
