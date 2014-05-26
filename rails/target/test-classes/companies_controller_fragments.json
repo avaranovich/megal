@@ -1,0 +1,22 @@
+[
+    {
+        "resource": "http://101companies.org/resources/contributions/rubyonrails/app/controllers/companies_controller.rb",
+        "name": "companies",
+        "classifier": "class",
+        "fragments": [
+            {
+                "resource": "http://101companies.org/resources/contributions/rubyonrails/app/controllers/companies_controller.rb/method/index",
+                "name": "index",
+                "classifier": "method",
+                "fragments": [],
+                "source":"def index end"
+            },
+            {
+                "resource": "http://101companies.org/resources/contributions/rubyonrails/app/controllers/companies_controller.rb/method/show",
+                "name": "show",
+                "classifier": "method",
+                "fragments": []
+            }
+        ]
+    }
+]

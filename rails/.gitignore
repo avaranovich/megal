@@ -1,4 +1,3 @@
-target/
-bin/
-.idea/
-bin.483508072.timestamp
+rails/target/
+rails/.idea/
+rails/rails.iml
