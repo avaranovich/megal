@@ -1,13 +1,13 @@
 package megal.relationships;
 
 import megal.entities.Artifact;
-import megal.entities.Language;
+import megal.entities.File;
 import megal.model.RTypeDecl;
 import megal.relationships.core.correspondsTo;
 
-public class ArtifactCorrespondsToFile extends correspondsTo<Artifact, Language> {
+public class ArtifactCorrespondsToFile extends correspondsTo<Artifact, File> {
 
-    protected ArtifactCorrespondsToFile(Artifact first, Language second, RTypeDecl rTypeDecl) {
+    protected ArtifactCorrespondsToFile(Artifact first, File second, RTypeDecl rTypeDecl) {
         super(first, second, rTypeDecl);
     }
 
