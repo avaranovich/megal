@@ -13,6 +13,6 @@ public class EDecls extends Visitor {
 		if (eDecls.containsKey(name))
 			log.problems.add(new ProblemWithName(ProblemCode.doubleDeclaration, name));
 		else
-			eDecls.put(name,decl);
+			eDecls.put(name, decl);
 	}
 }

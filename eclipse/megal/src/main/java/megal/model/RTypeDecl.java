@@ -26,4 +26,8 @@ public class RTypeDecl extends Decl {
 	public boolean isCore() {
 		return isCore;
 	}
+
+    public String toString(){
+        return "(" + this.getLeft() + ") -- " + this.getName() + "(" + this.getRight() + ")";
+    }
 }

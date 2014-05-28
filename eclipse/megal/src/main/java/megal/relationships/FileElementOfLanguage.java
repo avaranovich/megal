@@ -8,11 +8,13 @@ import com.typesafe.config.Config;
 import megal.checkers.Checker;
 import megal.entities.File;
 import megal.entities.Language;
+import megal.events.RelationshipEvaluationFailed;
 import megal.events.RelationshipEvaluationSucceeded;
 import megal.model.RTypeDecl;
 
 import static megal.Context.*;
 import megal.providers.GitHubProvider;
+import megal.providers.IVCSProvider;
 import megal.providers.ProviderFactory;
 import megal.relationships.core.elementOf;
 
@@ -39,6 +41,7 @@ public class FileElementOfLanguage extends elementOf<File, Language> {
             try {
                 resource = new URI(conf.getString("resource"));
             } catch (URISyntaxException e) {
+                e.printStackTrace();
                 return false;
             }
                 if (resource.equals(second.getResource())) {
@@ -50,14 +53,21 @@ public class FileElementOfLanguage extends elementOf<File, Language> {
                         try {
                             clazz = Class.forName(checker);
                         } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
                             return false;
                         }
                         try {
                             Checker<URI> tool = (Checker<URI>) clazz.newInstance();
-                            success = tool.check(ProviderFactory.getForUrl(first.getResource()).getUris());
+                            IVCSProvider provider = ProviderFactory.getForUrl(first.getResource());
+                            if (provider == null){
+                                System.out.println("Were not able to get a provider, perhaps the URL for the resource is not configured");
+                                return false;
+                            }
+                            success = tool.check(provider.getUris());
                             eventBus.post(new RelationshipEvaluationSucceeded(first, second, this, success));
 
                         } catch (Exception e) {
+                            e.printStackTrace();
                             success = false;
                         }
                     }

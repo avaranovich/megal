@@ -95,4 +95,8 @@ public class EDecl<T> extends megal.model.Decl {
 		
 		return expanded;
 	}
+
+    public String toString(){
+        return this.getName() + " : " + this.type + ": ";
+    }
 }

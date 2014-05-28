@@ -27,10 +27,6 @@ public class RDecl extends Decl {
 		this.annotation = annotation;
 	}
 
-    public String toString() {
-        return "(" + this.left.getName() + ") -- " + this.rel.getName() + "(" + this.right.getName() + ")";
-    }
-		
 	public RTypeRef getRel() { return rel; }
 	public ERef getLeft() { return left; }
 	public ERef getRight() { return right; }
@@ -61,7 +57,8 @@ public class RDecl extends Decl {
 				// we do probing, by relying on Java typesystem to try to create an instance of the relation
 				candidates.add(r.newInstance(first, second, rType));
 			}
-			catch(Exception _){}	
+			catch(Exception _){
+            }
 		}
 		
 		// if we were able to create many relationships for the same set of arguments
@@ -96,4 +93,8 @@ public class RDecl extends Decl {
 		
 		return null;
 	}
+
+    public String toString() {
+        return "(" + this.left.getName() + ") -- " + this.rel.getName() + "(" + this.right.getName() + ")";
+    }
 }
