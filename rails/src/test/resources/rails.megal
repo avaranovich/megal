@@ -1,3 +1,27 @@
+<<<<<<< HEAD
 request : Artifact+
 controller : File+
+=======
+Ruby : Language
+Rails : Technology
+
+app : Folder
+    assets : Folder
+    controllers : Folder
+    helpers : Folder
+    mailers : Folder
+    models : Folder
+    views : Folder
+
+request : Artifact+
+controller : File+
+
+assets partOf app
+controllers partOf app
+helpers partOf app
+mailers partOf app
+models partOf app
+views partOf app
+
+>>>>>>> f1c9a147af9ee0fed15fcb1d6200f7cb1b2ae091
 request correspondsTo controller

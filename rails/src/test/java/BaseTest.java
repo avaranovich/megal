@@ -1,4 +1,3 @@
-package org.softlang.rails.test;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,7 +14,7 @@ import megal.model.Model;
 public class BaseTest {
 
     @Before
-    public void setUp(){
+    public void setUp() {
         //
         // This code needs to be factored/abstracted.
         //
@@ -27,11 +26,11 @@ public class BaseTest {
         Tool.parse(getResorucePath("/prelude.megal"));
     }
 
-    protected String getResorucePath(String relPath){
+    protected String getResorucePath(String relPath) {
         return this.getClass().getResource(relPath).getPath();
     }
 
-    protected String getResourceContent(String relPath){
+    protected String getResourceContent(String relPath) {
         String pprintSrcPath = getResorucePath(relPath);
         FileInputStream inputStream = null;
         try {
@@ -47,7 +46,7 @@ public class BaseTest {
                 e.printStackTrace();
             }
         } finally {
-            if (inputStream != null){
+            if (inputStream != null) {
                 try {
                     inputStream.close();
                 } catch (IOException e) {

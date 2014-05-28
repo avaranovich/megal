@@ -1,30 +1,20 @@
-package org.softlang.rails.test;
-
 import com.typesafe.config.ConfigFactory;
 import megal.Context;
 import megal.Tool;
+import megal.checkers.RequestControllerChecker;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
 
-import static org.junit.Assert.assertEquals;
-
-
-public class BasicMegamodelsTest extends BaseTest {
-
+public class RailsMegamodelTest extends BaseTest {
     @Before
     public void setUp() {
         super.setUp();
     }
 
     @Test
-    public void Foo(){
-        assertEquals(true, true);
-    }
-
-    @Test
-    public void testRailsMegaModel(){
+    public void testRailsMegaModel() {
         String resourcePath = getResorucePath("/rails.megal");
         Tool.parse(resourcePath);
         Context.config = ConfigFactory.parseFile(new File(getResorucePath("/rails.conf"))).withFallback(Context.config);
@@ -35,4 +25,5 @@ public class BasicMegamodelsTest extends BaseTest {
 
         System.out.println("JSON:" + Tool.getEvents().getJson());
     }
+    
 }

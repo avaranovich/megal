@@ -1,0 +1,15 @@
+[
+    {
+        "resource": "https://github.com/ndea/megal-rails/blob/master/rails_project/app/controllers/companies_controller.rb",
+        "name": "companies",
+        "classifier": "class",
+        "fragments": [
+            {
+                "resource": "https://github.com/ndea/megal-rails/blob/master/rails_project/app/controllers/companies_controller.rb/method/index",
+                "name": "index",
+                "classifier": "method",
+                "source":"def index end"
+            } 
+        ]
+    }
+]

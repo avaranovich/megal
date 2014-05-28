@@ -7,10 +7,7 @@ import java.util.List;
 import megal.entities.Entity;
 import megal.events.AmbiguousRelationshipDetected;
 import megal.events.RelationshipLookupStarted;
-import megal.events.RelationshipNotConfigured;
 import megal.relationships.core.Relationship;
-
-import javax.management.relation.RelationNotFoundException;
 
 import static megal.Context.*;
 
@@ -84,7 +81,6 @@ public class RDecl extends Decl {
 						try {
 							return r.newInstance(first, second, rType);
 						} catch (Exception e) {
-                            eventBus.post(new RelationshipNotConfigured(this));
 							return null;
 					}
 				}
