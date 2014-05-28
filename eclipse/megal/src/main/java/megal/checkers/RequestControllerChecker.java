@@ -1,6 +1,8 @@
 package megal.checkers;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -23,18 +25,18 @@ import org.json.simple.parser.ParseException;
 
 public class RequestControllerChecker implements CorrespondanceChecker<URI, URI> {
 
-    private String fragmentExtractor;
+    private String controllerExtractedFragments;
     private String serializedRoutes;
 
-    public RequestControllerChecker(String pathToFragmentExtractor, String pathToSerializedRoutes) {
-        this.fragmentExtractor = pathToFragmentExtractor;
+    public RequestControllerChecker(String pathToControllerFragment, String pathToSerializedRoutes) {
+        this.controllerExtractedFragments = pathToControllerFragment;
         this.serializedRoutes = pathToSerializedRoutes;
     }
 
     @Override
     public Pair<Boolean, List<Pair<Fragment, Fragment>>> check(URI source, URI target) {
         JSONParser parser = new JSONParser();
-        List<Pair<Fragment, Fragment>> correspondanceList = null;
+        List<Pair<Fragment, Fragment>> correspondanceList = new ArrayList<Pair<Fragment, Fragment>>();
         try {
             JSONArray requestsFolder = (JSONArray) parser.parse(getJsonContentFromURI(source));
             JSONArray controllersFolder = (JSONArray) parser.parse(getJsonContentFromURI(target));
@@ -43,20 +45,23 @@ public class RequestControllerChecker implements CorrespondanceChecker<URI, URI>
             // get all requests
             for (JSONObject request : requests) {
                 String requestURI = getRequestURI(request);
-                //check if requestURI matches to a route given
-                if (checkRequestURIIsInRoutes(requestURI)) {
-                    //locate controller action from request uri with help of routes
-                    correspondanceList.add(buildFragmentPair(requestURI));
+                //locate controller action from request uri with help of routes
+                Pair<Fragment, Fragment> correspondancePair = findCorrespondance(requestURI);
+                if (correspondancePair != null) {
+                    correspondanceList.add(correspondancePair);
                 }
+
             }
             if (correspondanceList.size() > 0) {
                 return new Pair<Boolean, List<Pair<Fragment, Fragment>>>(true, correspondanceList);
             } else {
-                return new Pair<Boolean, List<Pair<Fragment, Fragment>>>(false, correspondanceList);
+                return new Pair<Boolean, List<Pair<Fragment, Fragment>>>(false, null);
             }
         } catch (ParseException ex) {
             Logger.getLogger(RequestControllerChecker.class.getName()).log(Level.SEVERE, null, ex);
         } catch (URISyntaxException ex) {
+            Logger.getLogger(RequestControllerChecker.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(RequestControllerChecker.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
@@ -120,12 +125,44 @@ public class RequestControllerChecker implements CorrespondanceChecker<URI, URI>
         }
         return null;
     }
-    
-    public boolean checkRequestURIIsInRoutes(String requestUri){
-        return true;
+
+    public Pair<Fragment, Fragment> findCorrespondance(String requestUri) throws FileNotFoundException, IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        JSONArray routes = (JSONArray) parser.parse(new FileReader(serializedRoutes));
+        JSONArray controllerFragments = (JSONArray) parser.parse(new FileReader(controllerExtractedFragments));
+
+        //iterate over all routes and see if request uri is contained in it
+        Iterator<JSONObject> routesIterator = routes.iterator();
+        while (routesIterator.hasNext()) {
+            JSONObject route = routesIterator.next();
+            if (requestUri.contains((String) route.get("path"))) {
+                String controller = (String) route.get("controller");
+                String action = (String) route.get("action");
+                //search in controller fragments for this controller with this action
+                Iterator<JSONObject> controllerIterator = controllerFragments.iterator();
+                while (controllerIterator.hasNext()) {
+                    JSONObject c = controllerIterator.next();
+                    if (((String) c.get("name")).equals(controller) && ((String) c.get("classifier")).equals("class")) {
+                        JSONArray methods = (JSONArray) c.get("fragments");
+                        Iterator<JSONObject> methodIterator = methods.iterator();
+                        while (methodIterator.hasNext()) {
+                            JSONObject m = methodIterator.next();
+                            if (((String) m.get("name")).equals(action) && ((String) m.get("classifier")).equals("method")) {
+                                //correspondance found
+                                Fragment requestFragment = new Fragment("request", "", requestUri);
+                                Fragment controllerFragment = new Fragment("method", (String) m.get("source"), (String) m.get("name"));
+                                return new Pair<Fragment, Fragment>(requestFragment, controllerFragment);
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+        return null;
     }
-    
-    public Pair<Fragment, Fragment> buildFragmentPair(String requestUri){
+
+    public Pair<Fragment, Fragment> buildFragmentPair(String requestUri) {
         return null;
     }
 

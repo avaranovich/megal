@@ -1,9 +1,0 @@
-[
-    {
-        "name": "companies_path",
-        "verb": "GET",
-        "path": "/companies",
-        "action": "index",
-        "controller": "companies"
-    }
-]
