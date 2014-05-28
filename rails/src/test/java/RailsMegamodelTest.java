@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.io.File;
 
-public class CorrespondanceTest extends BaseTest {
+public class RailsMegamodelTest extends BaseTest {
     @Before
     public void setUp() {
         super.setUp();

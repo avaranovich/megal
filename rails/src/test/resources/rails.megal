@@ -1,3 +1,22 @@
-request : Artifact
-controller : File
+Ruby : Language
+Rails : Technology
+
+app : Folder
+    assets : Folder
+    controllers : Folder
+    helpers : Folder
+    mailers : Folder
+    models : Folder
+    views : Folder
+
+request : Artifact+
+controller : File+
+
+assets partOf app
+controllers partOf app
+helpers partOf app
+mailers partOf app
+models partOf app
+views partOf app
+
 request correspondsTo controller
