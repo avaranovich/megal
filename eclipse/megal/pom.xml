@@ -95,6 +95,11 @@
             <artifactId>commons-codec</artifactId>
             <version>1.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -181,7 +186,9 @@
                     <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
                     <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
                     <branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
-                    <includes><include>**/*</include></includes>
+                    <includes>
+                        <include>**/*</include>
+                    </includes>
                     <repositoryName>megal</repositoryName>      <!-- github repo name -->
                     <repositoryOwner>avaranovich</repositoryOwner>    <!-- github username  -->
                 </configuration>
@@ -225,7 +232,7 @@
         <pluginManagement>
             <plugins>
                 <!--This plugin's configuration is used to store Eclipse m2e settings
-                  only. It has no influence on the Maven build itself. -->
+                only. It has no influence on the Maven build itself. -->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
                     <artifactId>lifecycle-mapping</artifactId>

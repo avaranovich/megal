@@ -8,3 +8,5 @@ eclipse/megal/megal.iml
 rails/rails-megal.iml
 rails/.idea
 rails/.idea/*
+rails/target
+rails/target/*
