@@ -1,0 +1,265 @@
+{
+   "events":[
+      {
+         "event":"EntityLookupStarted",
+         "source":"Ruby: Language",
+         "entity":"Ruby"
+      },
+      {
+         "event":"EntityLinkingSucceeded",
+         "source":"Ruby: Language",
+         "entity":"Ruby",
+         "resource":"https://github.com/ruby/ruby"
+      },
+      {
+         "event":"EntityLookupStarted",
+         "source":"Rails: Technology",
+         "entity":"Rails"
+      },
+      {
+         "event":"EntityLinkingSucceeded",
+         "source":"Rails: Technology",
+         "entity":"Rails",
+         "resource":"https://github.com/rails/rails"
+      },
+      {
+         "event":"EntityLookupStarted",
+         "source":"app: Folder",
+         "entity":"app"
+      },
+      {
+         "event":"EntityLinkingSucceeded",
+         "source":"app: Folder",
+         "entity":"app",
+         "resource":"https://api.github.com/repos/ndea/megal-rails/contents/rails_project/app"
+      },
+      {
+         "event":"EntityLookupStarted",
+         "source":"assets: Folder",
+         "entity":"assets"
+      },
+      {
+         "event":"EntityLinkingSucceeded",
+         "source":"assets: Folder",
+         "entity":"assets",
+         "resource":"https://api.github.com/repos/ndea/megal-rails/contents/rails_project/app/assets"
+      },
+      {
+         "event":"EntityLookupStarted",
+         "source":"controllers: Folder",
+         "entity":"controllers"
+      },
+      {
+         "event":"EntityLinkingSucceeded",
+         "source":"controllers: Folder",
+         "entity":"controllers",
+         "resource":"https://api.github.com/repos/ndea/megal-rails/contents/rails_project/app/controllers"
+      },
+      {
+         "event":"EntityLookupStarted",
+         "source":"helpers: Folder",
+         "entity":"helpers"
+      },
+      {
+         "event":"EntityLinkingSucceeded",
+         "source":"helpers: Folder",
+         "entity":"helpers",
+         "resource":"https://api.github.com/repos/ndea/megal-rails/contents/rails_project/app/helpers"
+      },
+      {
+         "event":"EntityLookupStarted",
+         "source":"mailers: Folder",
+         "entity":"mailers"
+      },
+      {
+         "event":"EntityLinkingSucceeded",
+         "source":"mailers: Folder",
+         "entity":"mailers",
+         "resource":"https://api.github.com/repos/ndea/megal-rails/contents/rails_project/app/helpers"
+      },
+      {
+         "event":"EntityLookupStarted",
+         "source":"models: Folder",
+         "entity":"models"
+      },
+      {
+         "event":"EntityLinkingSucceeded",
+         "source":"models: Folder",
+         "entity":"models",
+         "resource":"https://api.github.com/repos/ndea/megal-rails/contents/rails_project/app/models"
+      },
+      {
+         "event":"EntityLookupStarted",
+         "source":"views: Folder",
+         "entity":"views"
+      },
+      {
+         "event":"EntityLinkingSucceeded",
+         "source":"views: Folder",
+         "entity":"views",
+         "resource":"https://api.github.com/repos/ndea/megal-rails/contents/rails_project/app/views"
+      },
+      {
+         "event":"EntityLookupStarted",
+         "source":"request: Artifact",
+         "entity":"request"
+      },
+      {
+         "event":"EntityLinkingSucceeded",
+         "source":"request: Artifact",
+         "entity":"request",
+         "resource":"https://api.github.com/repos/ndea/megal-rails/contents/rails_project/test/fixtures/requests"
+      },
+      {
+         "event":"EntityLookupStarted",
+         "source":"controller: File",
+         "entity":"controller"
+      },
+      {
+         "event":"EntityLinkingSucceeded",
+         "source":"controller: File",
+         "entity":"controller",
+         "resource":"https://api.github.com/repos/ndea/megal-rails/contents/rails_project/app/controllers"
+      },
+      {
+         "event":"RelationshipEvaluationStarted",
+         "source":"assets partOf: app",
+         "left":"assets",
+         "rel":"megal.relationships.FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationSucceeded",
+         "source":"assets partOf: app",
+         "left":"assets",
+         "rel":"FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationFailed",
+         "source":"assets partOf: app",
+         "left":"assets",
+         "rel":"megal.relationships.FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationStarted",
+         "source":"controllers partOf: app",
+         "left":"controllers",
+         "rel":"megal.relationships.FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationSucceeded",
+         "source":"controllers partOf: app",
+         "left":"controllers",
+         "rel":"FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationFailed",
+         "source":"controllers partOf: app",
+         "left":"controllers",
+         "rel":"megal.relationships.FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationStarted",
+         "source":"helpers partOf: app",
+         "left":"helpers",
+         "rel":"megal.relationships.FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationSucceeded",
+         "source":"helpers partOf: app",
+         "left":"helpers",
+         "rel":"FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationFailed",
+         "source":"helpers partOf: app",
+         "left":"helpers",
+         "rel":"megal.relationships.FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationStarted",
+         "source":"mailers partOf: app",
+         "left":"mailers",
+         "rel":"megal.relationships.FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationSucceeded",
+         "source":"mailers partOf: app",
+         "left":"mailers",
+         "rel":"FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationFailed",
+         "source":"mailers partOf: app",
+         "left":"mailers",
+         "rel":"megal.relationships.FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationStarted",
+         "source":"models partOf: app",
+         "left":"models",
+         "rel":"megal.relationships.FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationSucceeded",
+         "source":"models partOf: app",
+         "left":"models",
+         "rel":"FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationFailed",
+         "source":"models partOf: app",
+         "left":"models",
+         "rel":"megal.relationships.FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationStarted",
+         "source":"views partOf: app",
+         "left":"views",
+         "rel":"megal.relationships.FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationSucceeded",
+         "source":"views partOf: app",
+         "left":"views",
+         "rel":"FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationFailed",
+         "source":"views partOf: app",
+         "left":"views",
+         "rel":"megal.relationships.FolderPartOfFolder",
+         "right":"app"
+      },
+      {
+         "event":"RelationshipEvaluationStarted",
+         "source":"request correspondsTo: controller",
+         "left":"request",
+         "rel":"megal.relationships.ArtifactCorrespondsToFile",
+         "right":"controller"
+      },
+      {
+         "event":"RelationshipEvaluationSucceeded",
+         "source":"request correspondsTo: controller",
+         "left":"request",
+         "rel":"megal.relationships.ArtifactCorrespondsToFile",
+         "right":"controller"
+      }
+   ]
+}
