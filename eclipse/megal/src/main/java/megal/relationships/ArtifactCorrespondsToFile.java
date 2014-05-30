@@ -11,7 +11,7 @@ import megal.trivia.Pair;
 
 public class ArtifactCorrespondsToFile extends correspondsTo<Artifact, File> {
 
-    protected ArtifactCorrespondsToFile(Artifact first, File second, RTypeDecl rTypeDecl) {
+    public ArtifactCorrespondsToFile(Artifact first, File second, RTypeDecl rTypeDecl) {
         super(first, second, rTypeDecl);
     }
 
